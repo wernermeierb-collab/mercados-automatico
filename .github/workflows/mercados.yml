@@ -2,9 +2,9 @@ name: Publicar Reporte de Mercados
 
 on:
   schedule:
-    - cron: '0 13 * * 1-5'  # 8:00 AM Lima (UTC-5) lunes a viernes
-  workflow_dispatch:          # manual desde GitHub
-  repository_dispatch:        # webhook desde Cowork
+    - cron: '0 13 * * 1-5'  # 8:00 AM Lima (UTC-5)
+  workflow_dispatch:
+  repository_dispatch:
     types: [publicar-mercados]
 
 jobs:
@@ -21,9 +21,19 @@ jobs:
       - name: Instalar dependencias
         run: pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib requests
 
-      - name: Publicar reporte
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar Wrangler
+        run: npm install -g wrangler
+
+      - name: Publicar reporte y sitio completo
         env:
           CF_TOKEN: ${{ secrets.CF_TOKEN }}
           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
           GOOGLE_TOKEN_B64: ${{ secrets.GOOGLE_TOKEN_B64 }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
         run: python publicar_mercados_v4.py
