@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bancos — Grupo Estrategika</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:#1A1814;--warm:#F7F3EE;--gold:#B89A6A;--gold-light:#D4B896;
+  --muted:#7A7063;--border:#E2D9CE;--white:#FFFFFF;--accent:#2C4A3E;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--warm);color:var(--ink);}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.4rem 4rem;background:rgba(247,243,238,.95);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:500;
+  letter-spacing:.04em;color:var(--ink);text-decoration:none;
+}
+.nav-logo span{color:var(--gold);}
+.nav-back{
+  font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:.4rem;
+  transition:color .2s;
+}
+.nav-back:hover{color:var(--gold);}
+
+.page-hero{
+  min-height:46vh;background:var(--accent);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:8rem 4rem 4rem;position:relative;overflow:hidden;
+}
+.page-hero::before{
+  content:'';position:absolute;right:-4rem;top:-4rem;
+  width:24rem;height:24rem;border:1px solid rgba(184,154,106,.1);border-radius:50%;
+}
+.page-hero::after{
+  content:'';position:absolute;left:-3rem;bottom:-5rem;
+  width:16rem;height:16rem;border:1px solid rgba(184,154,106,.07);border-radius:50%;
+}
+.hero-eyebrow{
+  font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold-light);display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem;
+  position:relative;z-index:1;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:2rem;height:1px;background:rgba(212,184,150,.35);}
+.page-hero h1{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,3.8rem);
+  font-weight:400;color:var(--white);line-height:1.1;margin-bottom:1rem;
+  position:relative;z-index:1;
+}
+.page-hero h1 em{font-style:italic;color:var(--gold-light);}
+.page-hero p{
+  font-size:.95rem;color:rgba(255,255,255,.55);font-weight:300;
+  max-width:520px;line-height:1.7;position:relative;z-index:1;
+}
+
+.selector-section{
+  padding:5rem 4rem 0;max-width:1100px;margin:0 auto;
+}
+.selector-label{
+  text-align:center;font-size:.7rem;font-weight:500;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:2rem;
+}
+.selector-cards{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+.sel-card{
+  border:1px solid var(--border);background:var(--white);
+  border-radius:2px;cursor:pointer;transition:all .25s;overflow:hidden;position:relative;
+}
+.sel-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s ease;
+}
+.sel-card:hover{border-color:var(--gold-light);box-shadow:0 8px 32px rgba(26,24,20,.06);}
+.sel-card:hover::after,.sel-card.selected::after{transform:scaleX(1);}
+.sel-card.selected{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,154,106,.1);}
+.sel-card-top{padding:2.5rem 2.5rem 2rem;}
+.sel-num{
+  font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;
+  color:var(--border);line-height:1;margin-bottom:1rem;transition:color .25s;
+}
+.sel-card.selected .sel-num,.sel-card:hover .sel-num{color:var(--gold-light);}
+.sel-icon{font-size:1.8rem;margin-bottom:1rem;display:block;}
+.sel-title{
+  font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;
+  color:var(--ink);margin-bottom:.5rem;line-height:1.2;
+}
+.sel-title em{font-style:italic;color:var(--gold);display:block;font-size:1.25rem;}
+.sel-desc{font-size:.82rem;color:var(--muted);line-height:1.65;font-weight:300;}
+.sel-card-bottom{
+  padding:1.2rem 2.5rem;border-top:1px solid var(--border);
+  background:var(--warm);display:flex;align-items:center;justify-content:space-between;
+  transition:background .2s;
+}
+.sel-card:hover .sel-card-bottom,.sel-card.selected .sel-card-bottom{background:#ece6dc;}
+.sel-cta-text{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);}
+.sel-arrow{font-size:1.1rem;color:var(--muted);transition:color .2s;}
+.sel-card:hover .sel-arrow,.sel-card.selected .sel-arrow{color:var(--gold);}
+
+.content-panel{display:none;padding:4rem 4rem 6rem;max-width:1100px;margin:0 auto;}
+.content-panel.active{display:block;animation:fadeUp .35s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+.panel-top-rule{
+  height:1px;
+  background:linear-gradient(to right,transparent,var(--border) 25%,var(--border) 75%,transparent);
+  margin-bottom:4rem;
+}
+.two-col{display:grid;grid-template-columns:1fr 1.55fr;gap:6rem;align-items:start;}
+
+.panel-tag{
+  font-size:.68rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem;
+}
+.panel-tag::before{content:'';width:1.5rem;height:1px;background:var(--gold-light);}
+.panel-heading{
+  font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:400;
+  color:var(--ink);line-height:1.15;margin-bottom:1.2rem;
+}
+.panel-heading em{font-style:italic;color:var(--gold);}
+.panel-intro{
+  font-size:.88rem;color:var(--muted);font-weight:300;line-height:1.8;
+  border-left:2px solid var(--gold-light);padding-left:1.2rem;margin-bottom:2rem;
+}
+
+.cred-list{display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem;}
+.cred-badge{
+  display:flex;align-items:flex-start;gap:.75rem;
+  padding:.75rem 1rem;background:var(--warm);border:1px solid var(--border);border-radius:1px;
+}
+.cred-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:.3rem;}
+.cred-badge span{font-size:.78rem;color:var(--ink);font-weight:300;line-height:1.5;}
+.cred-badge strong{font-weight:500;}
+
+/* Experience block */
+.exp-block{
+  background:var(--accent);padding:1.5rem;border-radius:1px;
+}
+.exp-block p{
+  font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;
+  color:rgba(255,255,255,.85);line-height:1.65;font-weight:300;
+}
+.exp-block p::before{
+  content:'"';font-size:2rem;color:var(--gold-light);line-height:0;
+  vertical-align:-.4rem;margin-right:.2rem;font-style:normal;
+}
+
+.section-label{
+  font-size:.68rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border);}
+
+.benefit-items{display:flex;flex-direction:column;gap:0;margin-bottom:3rem;}
+.benefit-item{padding:1.6rem 0;border-bottom:1px solid var(--border);}
+.benefit-item:first-child{padding-top:0;}
+.benefit-item:last-child{border-bottom:none;}
+.benefit-headline{
+  font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:500;
+  color:var(--ink);margin-bottom:.4rem;line-height:1.3;
+}
+.benefit-body{font-size:.82rem;color:var(--muted);font-weight:300;line-height:1.7;}
+
+.cta-block{
+  background:var(--warm);border:1px solid var(--border);
+  padding:2rem;display:flex;align-items:center;justify-content:space-between;
+  gap:1.5rem;flex-wrap:wrap;
+}
+.cta-block-text{
+  font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:400;
+  color:var(--ink);font-style:italic;line-height:1.4;
+}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2.2rem;
+  background:var(--gold);color:var(--white);font-family:'DM Sans',sans-serif;
+  font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  border:none;cursor:pointer;border-radius:1px;transition:background .2s;
+  text-decoration:none;white-space:nowrap;flex-shrink:0;
+}
+.btn-gold:hover{background:#a0864d;}
+
+.bottom-strip{
+  background:var(--ink);padding:4rem;text-align:center;position:relative;overflow:hidden;
+}
+.bottom-strip::before{
+  content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:40rem;height:40rem;border:1px solid rgba(184,154,106,.06);border-radius:50%;
+}
+.bottom-strip::after{
+  content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:24rem;height:24rem;border:1px solid rgba(184,154,106,.06);border-radius:50%;
+}
+.bottom-strip h3{
+  font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;
+  color:var(--white);margin-bottom:.6rem;position:relative;z-index:1;
+}
+.bottom-strip h3 em{font-style:italic;color:var(--gold-light);}
+.bottom-strip p{
+  font-size:.85rem;color:rgba(255,255,255,.45);font-weight:300;
+  max-width:460px;margin:0 auto 2rem;line-height:1.7;position:relative;z-index:1;
+}
+.btn-white{
+  display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2.4rem;
+  background:transparent;color:var(--white);font-family:'DM Sans',sans-serif;
+  font-size:.75rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.25);cursor:pointer;border-radius:1px;
+  transition:all .2s;text-decoration:none;position:relative;z-index:1;
+}
+.btn-white:hover{background:rgba(255,255,255,.08);border-color:var(--gold-light);}
+
+@media(max-width:860px){
+  nav{padding:1.2rem 1.5rem;}
+  .page-hero{padding:7rem 1.5rem 3rem;}
+  .selector-section{padding:3rem 1.5rem 0;}
+  .selector-cards{grid-template-columns:1fr;}
+  .content-panel{padding:3rem 1.5rem 4rem;}
+  .two-col{grid-template-columns:1fr;gap:3rem;}
+  .bottom-strip{padding:3rem 1.5rem;}
+  .cta-block{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Grupo <span>Estrategika</span></a>
+  <a href="index.html#institucional" class="nav-back">← Volver</a>
+</nav>
+
+<div class="page-hero">
+  <div class="hero-eyebrow">Alianzas con Bancos</div>
+  <h1>Dos formas de crear<br><em>valor juntos</em></h1>
+  <p>Soluciones internacionales para complementar tu propuesta al cliente premium o proteger a tus equipos de alto nivel.</p>
+</div>
+
+<div class="selector-section">
+  <div class="selector-label">¿Qué te interesa explorar?</div>
+  <div class="selector-cards">
+
+    <div class="sel-card" id="sel-1" onclick="showPanel('panel-mss','sel-1')">
+      <div class="sel-card-top">
+        <div class="sel-num">01</div>
+        <span class="sel-icon">📈</span>
+        <div class="sel-title">Cartera Premium<em>Una ventaja competitiva para tus clientes premium</em></div>
+        <p class="sel-desc">Un producto que complementa lo que tu banco ya ofrece — administrado profesionalmente, con tecnología que lo hace funcionar solo.</p>
+      </div>
+      <div class="sel-card-bottom">
+        <span class="sel-cta-text">Ver propuesta</span>
+        <span class="sel-arrow">→</span>
+      </div>
+    </div>
+
+    <div class="sel-card" id="sel-2" onclick="showPanel('panel-seguros','sel-2')">
+      <div class="sel-card-top">
+        <div class="sel-num">02</div>
+        <span class="sel-icon">🌍</span>
+        <div class="sel-title">Ejecutivos<em>Cobertura médica internacional</em></div>
+        <p class="sel-desc">Un beneficio que atrae y retiene al talento directivo que más le importa al banco. Sin fronteras, sin límites.</p>
+      </div>
+      <div class="sel-card-bottom">
+        <span class="sel-cta-text">Ver propuesta</span>
+        <span class="sel-arrow">→</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     PANEL 1 — CARTERA PREMIUM
+══════════════════════════ -->
+<div class="content-panel" id="panel-mss">
+  <div class="panel-top-rule"></div>
+  <div class="two-col">
+
+    <div>
+      <div class="panel-tag">Opción 01</div>
+      <h2 class="panel-heading">El banco no pone nada.<br><em>El banco gana todo.</em></h2>
+      <p class="panel-intro">
+        Tu banco ya tiene la relación con el cliente. Nosotros traemos el producto que complementa lo que ofreces. Juntos construimos algo que ninguno puede dar por separado.
+      </p>
+      <div class="cred-list">
+        <div class="cred-badge">
+          <div class="cred-dot"></div>
+          <span><strong>Custodia internacional</strong> — uno de los bancos más grandes del mundo, con más de USD 40 trillones bajo custodia</span>
+        </div>
+        <div class="cred-badge">
+          <div class="cred-dot"></div>
+          <span><strong>Gestión profesional</strong> — firma regulada por la FCA de Londres, con más de USD 20 mil millones bajo administración</span>
+        </div>
+        <div class="cred-badge">
+          <div class="cred-dot"></div>
+          <span><strong>Tecnología fintech</strong> — automatización total vía tarjeta de crédito o débito, sin intervención del cliente ni del banco</span>
+        </div>
+        <div class="cred-badge">
+          <div class="cred-dot"></div>
+          <span><strong>Producto regulado</strong> en jurisdicción de primer mundo</span>
+        </div>
+      </div>
+      <div class="exp-block">
+        <p>Llevamos más de dos décadas trabajando con clientes en la región. El equipo detrás de los productos que distribuimos tiene una larga trayectoria en planificación financiera internacional en América Latina. No somos nuevos en esto.</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Por qué le importa a tu banco</div>
+      <div class="benefit-items">
+
+        <div class="benefit-item">
+          <div class="benefit-headline">Cero costos, cero riesgos</div>
+          <div class="benefit-body">
+            Sin inversión de capital, sin infraestructura, sin riesgo de custodia ni responsabilidad regulatoria. El banco no opera nada — solo se beneficia.
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-headline">No compite — complementa</div>
+          <div class="benefit-body">
+            No toca los productos actuales del banco. Se integra naturalmente a lo que ya existe, lo fortalece y amplía la propuesta de valor para el cliente premium.
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-headline">Retiene al cliente que ya se está yendo</div>
+          <div class="benefit-body">
+            El segmento premium diversifica offshore de todas formas. Esta solución lo mantiene dentro del ecosistema del banco — con una relación más profunda y de más largo plazo.
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-headline">Activa productos que el banco ya tiene</div>
+          <div class="benefit-body">
+            Las transacciones se ejecutan con la tarjeta de crédito del cliente. El banco genera uso de tarjeta e ingresos adicionales sobre productos que ya ofrece.
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-headline">Lealtad real, no superficial</div>
+          <div class="benefit-body">
+            Un cliente con un compromiso de largo plazo no se va. La relación deja de ser transaccional y se convierte en estructural — el banco pasa a ser parte de su proyecto de vida.
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-headline">Cero carga operativa</div>
+          <div class="benefit-body">
+            El producto funciona solo. Sin llamadas de clientes al banco, sin gestión de cartera, sin soporte postventa. El banco cobra — sin administrar nada.
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-headline">Genera comisiones importantes</div>
+          <div class="benefit-body">
+            Una línea de ingresos nueva, recurrente, sobre una base de clientes que el banco ya tiene. Sin esfuerzo adicional de captación.
+          </div>
+        </div>
+
+      </div>
+      <div class="cta-block">
+        <div class="cta-block-text">"En 30 minutos te mostramos<br>cómo funciona para tu banco."</div>
+        <a href="index.html#contacto" class="btn-gold">Agendar reunión →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════
+     PANEL 2 — SEGUROS MÉDICOS
+══════════════════════════ -->
+<div class="content-panel" id="panel-seguros">
+  <div class="panel-top-rule"></div>
+  <div class="two-col">
+
+    <div>
+      <div class="panel-tag">Opción 02</div>
+      <h2 class="panel-heading">Los mejores ejecutivos<br>evalúan el paquete<br><em>completo.</em></h2>
+      <p class="panel-intro">
+        No solo el salario. El talento directivo mira qué tan bien lo cuida la institución cuando más lo necesita — aquí y en cualquier parte del mundo.
+      </p>
+      <div class="cred-list">
+        <div class="cred-badge">
+          <div class="cred-dot"></div>
+          <span><strong>Respaldado por una aseguradora líder mundial</strong> con presencia en más de 180 países</span>
+        </div>
+        <div class="cred-badge">
+          <div class="cred-dot"></div>
+          <span><strong>Cobertura en más de 180 países</strong> — sin restricciones geográficas</span>
+        </div>
+        <div class="cred-badge">
+          <div class="cred-dot"></div>
+          <span><strong>Asistencia 24/7</strong> — coordinación directa con centros médicos</span>
+        </div>
+      </div>
+      <div class="exp-block">
+        <p>Protegemos a ejecutivos de algunas de las organizaciones más importantes del mercado local. Sabemos lo que necesitan y cómo estructurar la cobertura para cada perfil.</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Por qué le importa a tu banco</div>
+      <div class="benefit-items">
+
+        <div class="benefit-item">
+          <div class="benefit-headline">Atracción de talento directivo</div>
+          <div class="benefit-body">
+            En un mercado competitivo por liderazgo, un seguro médico internacional es un argumento que muy pocos empleadores en la región pueden hacer. Y hace la diferencia en la negociación.
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-headline">Retención de quienes mueven el negocio</div>
+          <div class="benefit-body">
+            No es un gasto. Es una señal de que el banco cuida a las personas de las que más depende. Eso construye lealtad que el salario solo no compra.
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-headline">Cobertura donde el seguro local no llega</div>
+          <div class="benefit-body">
+            Tratamientos en el extranjero, especialistas internacionales, evacuación médica. Para ejecutivos que viajan, deciden y no pueden darse el lujo de estar desprotegidos.
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-headline">Experiencia con las empresas más grandes de la región</div>
+          <div class="benefit-body">
+            Trabajamos con ejecutivos de algunas de las organizaciones más importantes del mercado local. Sabemos lo que necesitan y cómo estructurar la cobertura para cada perfil.
+          </div>
+        </div>
+
+      </div>
+      <div class="cta-block">
+        <div class="cta-block-text">"Te mostramos las opciones<br>y diseñamos la cobertura."</div>
+        <a href="index.html#contacto" class="btn-gold">Solicitar información →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="bottom-strip">
+  <h3>Una conversación de 30 minutos.<br><em>Sin compromiso.</em></h3>
+  <p>Te mostramos cómo otras instituciones lo están haciendo y qué implicaría para la tuya.</p>
+  <a href="index.html#contacto" class="btn-white">Hablar con un asesor →</a>
+</div>
+
+<script>
+function showPanel(panelId, selId){
+  document.querySelectorAll('.content-panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.sel-card').forEach(function(c){c.classList.remove('selected');});
+  document.getElementById(panelId).classList.add('active');
+  document.getElementById(selId).classList.add('selected');
+  setTimeout(function(){
+    document.getElementById(panelId).scrollIntoView({behavior:'smooth',block:'start'});
+  },60);
+}
+</script>
+
+</body>
+</html>
