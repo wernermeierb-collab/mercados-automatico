@@ -2,8 +2,10 @@ name: Publicar Reporte de Mercados
 
 on:
   schedule:
-    - cron: '0 13 * * 1-5'  # 8:00 AM Lima (UTC-5) = 13:00 UTC
-  workflow_dispatch:  # permite correrlo manualmente desde GitHub
+    - cron: '0 13 * * 1-5'  # 8:00 AM Lima (UTC-5) lunes a viernes
+  workflow_dispatch:          # manual desde GitHub
+  repository_dispatch:        # webhook desde Cowork
+    types: [publicar-mercados]
 
 jobs:
   publicar:
@@ -18,14 +20,6 @@ jobs:
 
       - name: Instalar dependencias
         run: pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib requests
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Instalar Wrangler
-        run: npm install -g wrangler
 
       - name: Publicar reporte
         env:
