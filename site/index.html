@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Grupo Estrategika — Soluciones Financieras Internacionales</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:#1A1814;--warm:#F7F3EE;--gold:#B89A6A;--gold-light:#D4B896;
+  --muted:#7A7063;--border:#E2D9CE;--white:#FFFFFF;--accent:#2C4A3E;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:"DM Sans",sans-serif;background:var(--warm);color:var(--ink);}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.4rem 4rem;background:rgba(26,24,20,.97);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.nav-logo{
+  font-family:"Cormorant Garamond",serif;font-size:1.45rem;font-weight:500;
+  color:#fff;text-decoration:none;letter-spacing:.04em;
+}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center;}
+.nav-links a{
+  font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;
+}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{
+  font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold) !important;border:1px solid rgba(184,154,106,.4);
+  padding:.5rem 1.2rem;transition:all .2s !important;
+}
+.nav-cta:hover{background:rgba(184,154,106,.1) !important;}
+
+/* HERO */
+.hero{
+  min-height:100vh;background:var(--ink);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:8rem 4rem 5rem;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:"";position:absolute;right:-6rem;top:-6rem;
+  width:32rem;height:32rem;border:1px solid rgba(184,154,106,.08);border-radius:50%;
+}
+.hero::after{
+  content:"";position:absolute;right:2rem;top:2rem;
+  width:20rem;height:20rem;border:1px solid rgba(184,154,106,.05);border-radius:50%;
+}
+.hero-eyebrow{
+  font-size:.68rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);display:flex;align-items:center;gap:.8rem;margin-bottom:1.5rem;
+}
+.hero-eyebrow::before{content:"";width:2rem;height:1px;background:var(--gold-light);}
+.hero h1{
+  font-family:"Cormorant Garamond",serif;font-size:clamp(3rem,6vw,5rem);
+  font-weight:300;color:#fff;line-height:1.1;margin-bottom:1.5rem;
+  max-width:700px;position:relative;z-index:1;
+}
+.hero h1 em{font-style:italic;color:var(--gold-light);}
+.hero-sub{
+  font-size:1rem;color:rgba(255,255,255,.5);font-weight:300;
+  max-width:520px;line-height:1.75;margin-bottom:3rem;position:relative;z-index:1;
+}
+.hero-pills{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:3rem;position:relative;z-index:1;}
+.hero-pill{
+  font-size:.65rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.12);
+  padding:.35rem .9rem;border-radius:1px;
+}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;position:relative;z-index:1;}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2.2rem;
+  background:var(--gold);color:#fff;font-family:"DM Sans",sans-serif;
+  font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  border:none;cursor:pointer;border-radius:1px;transition:background .2s;text-decoration:none;
+}
+.btn-gold:hover{background:#a0864d;}
+.btn-outline-white{
+  display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;
+  background:transparent;color:rgba(255,255,255,.7);font-family:"DM Sans",sans-serif;
+  font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.2);cursor:pointer;border-radius:1px;
+  transition:all .2s;text-decoration:none;
+}
+.btn-outline-white:hover{color:#fff;border-color:rgba(255,255,255,.4);}
+
+/* SECTION BASE */
+section{padding:6rem 4rem;}
+.section-eyebrow{
+  font-size:.68rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem;
+}
+.section-eyebrow::before,.section-eyebrow::after{content:"";width:2rem;height:1px;background:var(--gold-light);}
+.section-eyebrow.centered{justify-content:center;}
+.section-title{
+  font-family:"Cormorant Garamond",serif;font-size:clamp(2rem,4vw,3rem);
+  font-weight:400;color:var(--ink);line-height:1.15;margin-bottom:1rem;
+}
+.section-title em{font-style:italic;color:var(--gold);}
+.section-title.centered{text-align:center;}
+.section-subtitle{
+  font-size:.92rem;color:var(--muted);font-weight:300;line-height:1.75;
+  max-width:560px;
+}
+.section-subtitle.centered{text-align:center;margin:0 auto;}
+
+/* NOSOTROS */
+#nosotros{background:var(--white);}
+.nosotros-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:5rem;
+  max-width:1100px;margin:0 auto;align-items:start;
+}
+.nosotros-left{}
+.nosotros-right{padding-top:1rem;}
+.nosotros-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem;}
+.nosotros-stat{padding:1.5rem;border:1px solid var(--border);background:var(--warm);}
+.stat-num{
+  font-family:"Cormorant Garamond",serif;font-size:2.2rem;font-weight:300;
+  color:var(--accent);display:block;line-height:1;margin-bottom:.3rem;
+}
+.stat-label{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.nosotros-text{font-size:.88rem;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:1.2rem;}
+.como-trabajamos{margin-top:2rem;}
+.ctw-item{
+  padding:1.2rem 0;border-bottom:1px solid var(--border);
+  display:grid;grid-template-columns:2rem 1fr;gap:1rem;align-items:start;
+}
+.ctw-num{
+  font-family:"Cormorant Garamond",serif;font-size:1.5rem;font-weight:300;
+  color:var(--gold-light);line-height:1;
+}
+.ctw-item h4{font-size:.85rem;font-weight:500;color:var(--ink);margin-bottom:.25rem;}
+.ctw-item p{font-size:.8rem;color:var(--muted);font-weight:300;line-height:1.6;}
+
+/* SERVICIOS */
+#servicios{background:var(--warm);}
+.servicios-intro{max-width:1100px;margin:0 auto 3.5rem;}
+.servicios-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;
+  max-width:1100px;margin:0 auto;
+}
+.service-card{
+  background:var(--white);border:1px solid var(--border);
+  padding:2.5rem 2rem;border-radius:1px;transition:all .25s;
+  position:relative;overflow:hidden;cursor:pointer;text-decoration:none;display:block;
+}
+.service-card::after{
+  content:"";position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s;
+}
+.service-card:hover{border-color:var(--gold-light);box-shadow:0 8px 32px rgba(26,24,20,.06);}
+.service-card:hover::after{transform:scaleX(1);}
+.service-icon{font-size:1.8rem;margin-bottom:1.5rem;display:block;}
+.service-title{
+  font-family:"Cormorant Garamond",serif;font-size:1.4rem;font-weight:400;
+  color:var(--ink);margin-bottom:.5rem;line-height:1.2;
+}
+.service-title em{font-style:italic;color:var(--gold);display:block;font-size:1.1rem;}
+.service-desc{font-size:.8rem;color:var(--muted);line-height:1.65;font-weight:300;margin-bottom:1.5rem;}
+.service-link{
+  font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);display:flex;align-items:center;gap:.4rem;
+}
+
+/* MERCADOS */
+#mercados{background:var(--accent);position:relative;overflow:hidden;}
+#mercados::before{
+  content:"";position:absolute;right:-4rem;top:-4rem;
+  width:24rem;height:24rem;border:1px solid rgba(184,154,106,.1);border-radius:50%;
+}
+.mercados-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.mercados-left .section-eyebrow{color:var(--gold-light);}
+.mercados-left .section-eyebrow::before,.mercados-left .section-eyebrow::after{background:rgba(184,154,106,.4);}
+.mercados-title{
+  font-family:"Cormorant Garamond",serif;font-size:clamp(2rem,4vw,3rem);
+  font-weight:400;color:#fff;line-height:1.15;margin-bottom:1rem;
+}
+.mercados-title em{font-style:italic;color:var(--gold-light);}
+.mercados-sub{font-size:.9rem;color:rgba(255,255,255,.6);font-weight:300;line-height:1.75;margin-bottom:2rem;}
+.mercados-right{position:relative;z-index:1;}
+.mercados-preview{
+  background:rgba(26,24,20,.5);border:1px solid rgba(184,154,106,.2);
+  padding:2rem;border-radius:1px;
+}
+.mp-date{font-size:.65rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-light);margin-bottom:.8rem;}
+.mp-title{font-family:"Cormorant Garamond",serif;font-size:1.4rem;font-weight:400;color:#fff;margin-bottom:1rem;}
+.mp-items{display:flex;flex-direction:column;gap:.5rem;}
+.mp-item{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.mp-item:last-child{border-bottom:none;}
+.mp-item-label{font-size:.75rem;color:rgba(255,255,255,.5);font-weight:300;}
+.mp-item-val{font-size:.78rem;font-weight:500;color:#fff;}
+.mp-item-val.up{color:#4ade80;}
+.mp-item-val.down{color:#f87171;}
+
+/* INSTITUCIONAL */
+#institucional{background:var(--white);}
+.inst-inner{max-width:1100px;margin:0 auto;}
+.inst-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.inst-card{
+  border:1px solid var(--border);background:var(--warm);padding:2.5rem 2rem;
+  border-radius:1px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;
+  text-decoration:none;display:block;
+}
+.inst-card::after{
+  content:"";position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s;
+}
+.inst-card:hover{border-color:var(--gold-light);box-shadow:0 8px 32px rgba(26,24,20,.06);}
+.inst-card:hover::after{transform:scaleX(1);}
+.inst-icon{font-size:2rem;margin-bottom:1.5rem;display:block;}
+.inst-title{font-family:"Cormorant Garamond",serif;font-size:1.5rem;font-weight:400;color:var(--ink);margin-bottom:.5rem;line-height:1.2;}
+.inst-title em{font-style:italic;color:var(--gold);display:block;font-size:1.2rem;}
+.inst-desc{font-size:.82rem;color:var(--muted);line-height:1.65;font-weight:300;margin-bottom:1.8rem;}
+.inst-cta{display:flex;align-items:center;justify-content:space-between;padding-top:1.2rem;border-top:1px solid var(--border);}
+.inst-cta-text{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);}
+
+/* CONTACTO */
+#contacto{background:var(--warm);}
+.contacto-inner{max-width:800px;margin:0 auto;}
+.contacto-header{text-align:center;margin-bottom:3rem;}
+.contact-form{background:var(--white);border:1px solid var(--border);padding:3rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;}
+.form-group{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem;}
+.form-group label{
+  font-size:.68rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+}
+.form-group input,.form-group select,.form-group textarea{
+  padding:.8rem 1rem;border:1px solid var(--border);background:var(--warm);
+  font-family:"DM Sans",sans-serif;font-size:.88rem;color:var(--ink);
+  outline:none;transition:border-color .2s;border-radius:1px;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold);}
+.form-group textarea{resize:vertical;min-height:100px;}
+.form-submit{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:1.5rem;border-top:1px solid var(--border);
+}
+.form-note{font-size:.75rem;color:var(--muted);font-weight:300;}
+#form-success{display:none;text-align:center;padding:2rem;color:var(--accent);font-family:"Cormorant Garamond",serif;font-size:1.2rem;}
+
+/* FOOTER */
+footer{background:var(--ink);padding:3rem 4rem;}
+.footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem;}
+.footer-brand .nav-logo{font-size:1.3rem;}
+.footer-brand p{font-size:.78rem;color:rgba(255,255,255,.35);font-weight:300;line-height:1.6;margin-top:.8rem;}
+.footer-col h4{font-size:.68rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1rem;}
+.footer-col ul{list-style:none;}
+.footer-col li{margin-bottom:.5rem;}
+.footer-col a{font-size:.8rem;color:rgba(255,255,255,.45);text-decoration:none;font-weight:300;transition:color .2s;}
+.footer-col a:hover{color:var(--gold);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:0 auto;}
+.footer-copy{font-size:.68rem;color:rgba(255,255,255,.2);font-weight:300;}
+.footer-legal{font-size:.65rem;color:rgba(255,255,255,.15);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:1.2rem 1.5rem;}
+  .nav-links{display:none;}
+  section{padding:4rem 1.5rem;}
+  .hero{padding:7rem 1.5rem 4rem;}
+  .nosotros-grid,.servicios-grid,.inst-cards{grid-template-columns:1fr;}
+  .mercados-inner{grid-template-columns:1fr;gap:2.5rem;}
+  .form-row{grid-template-columns:1fr;}
+  .footer-inner{grid-template-columns:1fr;}
+  footer{padding:2.5rem 1.5rem;}
+  .footer-bottom{flex-direction:column;gap:.5rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#inicio" class="nav-logo">Grupo <span>Estrategika</span></a>
+  <ul class="nav-links">
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#institucional">Institucional</a></li>
+    <li><a href="mercados.html">Mercados</a></li>
+    <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-eyebrow">Lima, Perú · LATAM</div>
+  <h1>Soluciones financieras<br><em>internacionales</em><br>para personas, familias<br>e instituciones</h1>
+  <p class="hero-sub">Planificación patrimonial, ahorro e inversión en USD con respaldo internacional. Regulación de primer mundo, custodia en los bancos más grandes del mundo.</p>
+  <div class="hero-pills">
+    <span class="hero-pill">Private Wealth</span>
+    <span class="hero-pill">Savings Plans</span>
+    <span class="hero-pill">Education Planning</span>
+    <span class="hero-pill">Life &amp; Care</span>
+    <span class="hero-pill">Institutional</span>
+  </div>
+  <div class="hero-btns">
+    <a href="#servicios" class="btn-gold">Ver soluciones →</a>
+    <a href="#contacto" class="btn-outline-white">Hablar con un asesor</a>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<section id="nosotros">
+  <div class="nosotros-grid">
+    <div class="nosotros-left">
+      <div class="section-eyebrow">Quiénes somos</div>
+      <h2 class="section-title">Más de dos décadas<br>en planificación financiera<br><em>internacional</em></h2>
+      <div class="nosotros-stat-grid">
+        <div class="nosotros-stat">
+          <span class="stat-num">25+</span>
+          <div class="stat-label">Años de experiencia</div>
+        </div>
+        <div class="nosotros-stat">
+          <span class="stat-num">USD</span>
+          <div class="stat-label">Soluciones en dólares</div>
+        </div>
+        <div class="nosotros-stat">
+          <span class="stat-num">180+</span>
+          <div class="stat-label">Países con cobertura</div>
+        </div>
+        <div class="nosotros-stat">
+          <span class="stat-num">A+</span>
+          <div class="stat-label">Rating socios</div>
+        </div>
+      </div>
+    </div>
+    <div class="nosotros-right">
+      <p class="nosotros-text">Grupo Estrategika es una firma de asesoría financiera independiente con base en Lima, representando productos de inversión y protección regulados en jurisdicciones de primer mundo — Guernsey, Londres, y otros centros financieros internacionales.</p>
+      <p class="nosotros-text">Trabajamos con clientes individuales, familias y grandes instituciones financieras para estructurar soluciones en USD que van más allá de lo que los productos locales pueden ofrecer.</p>
+      <div class="como-trabajamos">
+        <div class="ctw-item">
+          <div class="ctw-num">01</div>
+          <div>
+            <h4>Diagnóstico financiero</h4>
+            <p>Entendemos tu situación, objetivos y horizonte antes de recomendar cualquier producto.</p>
+          </div>
+        </div>
+        <div class="ctw-item">
+          <div class="ctw-num">02</div>
+          <div>
+            <h4>Diseño de estrategia</h4>
+            <p>Estructuramos una propuesta personalizada con productos regulados internacionalmente.</p>
+          </div>
+        </div>
+        <div class="ctw-item">
+          <div class="ctw-num">03</div>
+          <div>
+            <h4>Implementación y seguimiento</h4>
+            <p>Acompañamos cada paso del proceso y hacemos seguimiento continuo de tu portafolio.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="servicios-intro">
+    <div class="section-eyebrow">Nuestras soluciones</div>
+    <h2 class="section-title">Todo lo que necesitas<br>en un solo <em>asesor</em></h2>
+  </div>
+  <div class="servicios-grid">
+    <a href="wealth.html" class="service-card">
+      <span class="service-icon">💼</span>
+      <div class="service-title">Private Wealth<em>Gestión patrimonial</em></div>
+      <p class="service-desc">Portafolios de inversión en USD con gestión activa internacional. Acceso a fondos de Vanguard, BlackRock, JPMorgan, Fidelity y más.</p>
+      <div class="service-link">Ver más →</div>
+    </a>
+    <a href="simulador.html" class="service-card">
+      <span class="service-icon">📈</span>
+      <div class="service-title">Savings Plans<em>Ahorro disciplinado en USD</em></div>
+      <p class="service-desc">Planes de ahorro mensual automatizado con tecnología fintech. Custodia internacional, gestión profesional, 0% penalidad en rescates.</p>
+      <div class="service-link">Simular mi plan →</div>
+    </a>
+    <a href="simulador-educacion.html" class="service-card">
+      <span class="service-icon">🎓</span>
+      <div class="service-title">Education Planning<em>Plan universitario</em></div>
+      <p class="service-desc">Prepara el futuro universitario de tus hijos con un plan en USD que crece con los mercados internacionales — empieza hoy, paga menos.</p>
+      <div class="service-link">Calcular ahorro →</div>
+    </a>
+    <a href="simulador-jubilacion.html" class="service-card">
+      <span class="service-icon">🌿</span>
+      <div class="service-title">Retirement Planning<em>Jubilación independiente</em></div>
+      <p class="service-desc">Construye un fondo de retiro en USD independiente de la AFP. Empieza hoy con lo que puedes y escala con el tiempo.</p>
+      <div class="service-link">Ver simulador →</div>
+    </a>
+    <a href="life.html" class="service-card">
+      <span class="service-icon">🛡️</span>
+      <div class="service-title">Life &amp; Protection<em>Seguro de vida internacional</em></div>
+      <p class="service-desc">Protección de vida con cobertura internacional. Planes que combinan protección y ahorro para ti y tu familia.</p>
+      <div class="service-link">Ver opciones →</div>
+    </a>
+    <a href="#contacto" class="service-card">
+      <span class="service-icon">🌍</span>
+      <div class="service-title">Global Care<em>Seguros médicos internacionales</em></div>
+      <p class="service-desc">Cobertura médica internacional en más de 180 países. Respaldado por una aseguradora líder mundial con rating A+.</p>
+      <div class="service-link">Solicitar cotización →</div>
+    </a>
+  </div>
+</section>
+
+<!-- MERCADOS -->
+<section id="mercados">
+  <div class="mercados-inner">
+    <div class="mercados-left">
+      <div class="section-eyebrow">Daily Market Report</div>
+      <h2 class="mercados-title">Mercados globales<br>cada mañana —<br><em>para tus decisiones</em></h2>
+      <p class="mercados-sub">Reporte diario exclusivo para clientes: equities, tasas, crypto, FX y análisis macroeconómico. Publicado cada día hábil antes de las 9am Lima.</p>
+      <a href="mercados.html" class="btn-gold">Ver reporte de hoy →</a>
+    </div>
+    <div class="mercados-right">
+      <div class="mercados-preview">
+        <div class="mp-date" id="mp-date">Cargando...</div>
+        <div class="mp-title">Daily Market Report</div>
+        <div class="mp-items">
+          <div class="mp-item">
+            <span class="mp-item-label">S&amp;P 500</span>
+            <span class="mp-item-val up">7,520 ↑</span>
+          </div>
+          <div class="mp-item">
+            <span class="mp-item-label">NASDAQ</span>
+            <span class="mp-item-val up">26,675 ↑</span>
+          </div>
+          <div class="mp-item">
+            <span class="mp-item-label">BTC/USD</span>
+            <span class="mp-item-val down">71,923 ↓</span>
+          </div>
+          <div class="mp-item">
+            <span class="mp-item-label">10Y Yield</span>
+            <span class="mp-item-val">4.45%</span>
+          </div>
+          <div class="mp-item">
+            <span class="mp-item-label">USD/JPY</span>
+            <span class="mp-item-val">159.5</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTITUCIONAL -->
+<section id="institucional">
+  <div class="inst-inner">
+    <div class="section-eyebrow centered">Alianzas Institucionales</div>
+    <h2 class="section-title centered">Soluciones para<br>instituciones <em>líderes</em></h2>
+    <p class="section-subtitle centered" style="margin-bottom:0;">Llevamos productos internacionales directamente a los clientes de bancos, colegios y aseguradoras en Perú y LATAM.</p>
+    <div class="inst-cards">
+      <a href="institucional-colegios.html" class="inst-card">
+        <span class="inst-icon">🏫</span>
+        <div class="inst-title">Colegios<em>Plan universitario familiar</em></div>
+        <p class="inst-desc">Una alianza que ofrece a las familias de tu colegio un plan de ahorro en USD para la universidad. Sin costo para la institución.</p>
+        <div class="inst-cta">
+          <span class="inst-cta-text">Ver propuesta</span>
+          <span>→</span>
+        </div>
+      </a>
+      <a href="institucional-bancos.html" class="inst-card">
+        <span class="inst-icon">🏦</span>
+        <div class="inst-title">Bancos<em>Dos soluciones</em></div>
+        <p class="inst-desc">Amplía tu cartera premium o protege a tus ejecutivos con cobertura médica internacional. Cero costos, cero riesgos para el banco.</p>
+        <div class="inst-cta">
+          <span class="inst-cta-text">Explorar opciones</span>
+          <span>→</span>
+        </div>
+      </a>
+      <div class="inst-card" style="opacity:.5;pointer-events:none;">
+        <span class="inst-icon">🛡️</span>
+        <div class="inst-title">Aseguradoras<em>Segunda capa</em></div>
+        <p class="inst-desc">Complementa la póliza de tus asegurados con un plan de inversión en USD. Más fidelización, más valor por cliente.</p>
+        <div class="inst-cta">
+          <span class="inst-cta-text">Próximamente</span>
+          <span>→</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="contacto-inner">
+    <div class="contacto-header">
+      <div class="section-eyebrow centered">Conversemos</div>
+      <h2 class="section-title centered">¿Por dónde<br><em>empezamos?</em></h2>
+      <p class="section-subtitle centered">Sin compromiso. En 30 minutos te mostramos qué solución se adapta mejor a tu situación.</p>
+    </div>
+    <div class="contact-form">
+      <form action="https://formspree.io/f/xzzbbpqr" method="POST" id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre completo</label>
+            <input type="text" name="nombre" placeholder="Tu nombre" required/>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="tu@email.com" required/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Teléfono / WhatsApp</label>
+            <input type="tel" name="telefono" placeholder="+51 999 000 000"/>
+          </div>
+          <div class="form-group">
+            <label>Me interesa</label>
+            <select name="solucion">
+              <option value="">Selecciona una solución</option>
+              <option>Savings Plan (ahorro mensual en USD)</option>
+              <option>Education Planning (plan universitario)</option>
+              <option>Retirement Planning (jubilación)</option>
+              <option>Private Wealth (inversión)</option>
+              <option>Life &amp; Protection (seguro de vida)</option>
+              <option>Global Care (seguro médico internacional)</option>
+              <option>Alianza Institucional (banco / colegio)</option>
+              <option>Otro / No sé aún</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Mensaje (opcional)</label>
+          <textarea name="mensaje" placeholder="Cuéntame brevemente tu situación o pregunta..."></textarea>
+        </div>
+        <div class="form-submit">
+          <span class="form-note">Respuesta en menos de 24 horas.</span>
+          <button type="submit" class="btn-gold">Enviar mensaje →</button>
+        </div>
+      </form>
+      <div id="form-success">
+        <p style="font-size:1.5rem;margin-bottom:.5rem;">Mensaje recibido ✓</p>
+        <p style="font-size:.88rem;color:var(--muted);font-weight:300;">Te responderé en menos de 24 horas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#inicio" class="nav-logo">Grupo <span>Estrategika</span></a>
+      <p>Asesoría financiera internacional. Lima, Perú — atendemos clientes en toda la región.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Soluciones</h4>
+      <ul>
+        <li><a href="simulador.html">Savings Plans</a></li>
+        <li><a href="simulador-educacion.html">Education Planning</a></li>
+        <li><a href="simulador-jubilacion.html">Retirement Planning</a></li>
+        <li><a href="wealth.html">Private Wealth</a></li>
+        <li><a href="life.html">Life &amp; Protection</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="mailto:werner@grupoestrategika.com">werner@grupoestrategika.com</a></li>
+        <li><a href="mercados.html">Daily Market Report</a></li>
+        <li><a href="#contacto">Agendar reunión</a></li>
+        <li><a href="institucional-bancos.html">Alianzas bancarias</a></li>
+        <li><a href="institucional-colegios.html">Alianzas colegios</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Grupo Estrategika · Lima, Perú</div>
+    <div class="footer-legal">Regulado bajo jurisdicciones internacionales · No constituye asesoría de inversión</div>
+  </div>
+</footer>
+
+<script>
+// Date in hero market preview
+var days = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+var months = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+var d = new Date();
+document.getElementById('mp-date').textContent = days[d.getDay()] + ' ' + d.getDate() + ' de ' + months[d.getMonth()] + ' de ' + d.getFullYear();
+
+// Contact form
+document.getElementById('contactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var form = this;
+  fetch(form.action, {method:'POST', body:new FormData(form), headers:{'Accept':'application/json'}})
+    .then(function(r){
+      if(r.ok){
+        form.style.display='none';
+        document.getElementById('form-success').style.display='block';
+      }
+    });
+});
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    var target = document.querySelector(this.getAttribute('href'));
+    if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); }
+  });
+});
+</script>
+</body>
+</html>
