@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Colegios — Grupo Estrategika</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:#1A1814;--warm:#F7F3EE;--gold:#B89A6A;--gold-light:#D4B896;
+  --muted:#7A7063;--border:#E2D9CE;--white:#FFFFFF;--accent:#2C4A3E;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--warm);color:var(--ink);}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.4rem 4rem;background:rgba(247,243,238,.95);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:500;
+  letter-spacing:.04em;color:var(--ink);text-decoration:none;
+}
+.nav-logo span{color:var(--gold);}
+.nav-back{
+  font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:.4rem;
+  transition:color .2s;
+}
+.nav-back:hover{color:var(--gold);}
+
+/* ── HERO ── */
+.page-hero{
+  min-height:46vh;background:var(--accent);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:8rem 4rem 4rem;position:relative;overflow:hidden;
+}
+.page-hero::before{
+  content:'';position:absolute;right:-4rem;top:-4rem;
+  width:24rem;height:24rem;border:1px solid rgba(184,154,106,.1);border-radius:50%;
+}
+.page-hero::after{
+  content:'';position:absolute;left:-3rem;bottom:-5rem;
+  width:16rem;height:16rem;border:1px solid rgba(184,154,106,.07);border-radius:50%;
+}
+.hero-eyebrow{
+  font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold-light);display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem;
+  position:relative;z-index:1;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:2rem;height:1px;background:rgba(212,184,150,.35);}
+.page-hero h1{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,3.8rem);
+  font-weight:400;color:var(--white);line-height:1.1;margin-bottom:1rem;
+  position:relative;z-index:1;
+}
+.page-hero h1 em{font-style:italic;color:var(--gold-light);}
+.page-hero p{
+  font-size:.95rem;color:rgba(255,255,255,.55);font-weight:300;
+  max-width:520px;line-height:1.7;position:relative;z-index:1;
+}
+
+/* ── MAIN CONTENT ── */
+.main-section{
+  padding:6rem 4rem;max-width:1100px;margin:0 auto;
+}
+.two-col{display:grid;grid-template-columns:1fr 1.55fr;gap:6rem;align-items:start;}
+
+/* Left col */
+.panel-tag{
+  font-size:.68rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem;
+}
+.panel-tag::before{content:'';width:1.5rem;height:1px;background:var(--gold-light);}
+.panel-heading{
+  font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:400;
+  color:var(--ink);line-height:1.15;margin-bottom:1.2rem;
+}
+.panel-heading em{font-style:italic;color:var(--gold);}
+.panel-intro{
+  font-size:.88rem;color:var(--muted);font-weight:300;line-height:1.8;
+  border-left:2px solid var(--gold-light);padding-left:1.2rem;margin-bottom:2rem;
+}
+
+.cred-list{display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem;}
+.cred-badge{
+  display:flex;align-items:flex-start;gap:.75rem;
+  padding:.75rem 1rem;background:var(--white);border:1px solid var(--border);border-radius:1px;
+}
+.cred-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:.3rem;}
+.cred-badge span{font-size:.78rem;color:var(--ink);font-weight:300;line-height:1.5;}
+.cred-badge strong{font-weight:500;}
+
+/* Simulator CTA card */
+.sim-card{
+  background:var(--ink);padding:2rem;border-radius:1px;position:relative;overflow:hidden;
+}
+.sim-card::before{
+  content:'';position:absolute;right:-2rem;top:-2rem;
+  width:10rem;height:10rem;border:1px solid rgba(184,154,106,.12);border-radius:50%;
+}
+.sim-card::after{
+  content:'';position:absolute;right:1rem;bottom:-3rem;
+  width:7rem;height:7rem;border:1px solid rgba(184,154,106,.08);border-radius:50%;
+}
+.sim-eyebrow{
+  font-size:.65rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold-light);margin-bottom:.6rem;position:relative;z-index:1;
+}
+.sim-card h4{
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;
+  color:var(--white);line-height:1.3;margin-bottom:.5rem;position:relative;z-index:1;
+}
+.sim-card h4 em{font-style:italic;color:var(--gold-light);}
+.sim-card p{
+  font-size:.78rem;color:rgba(255,255,255,.5);font-weight:300;
+  line-height:1.6;margin-bottom:1.2rem;position:relative;z-index:1;
+}
+.btn-gold-outline{
+  display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.8rem;
+  background:transparent;color:var(--gold-light);font-family:'DM Sans',sans-serif;
+  font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid rgba(184,154,106,.4);cursor:pointer;border-radius:1px;
+  transition:all .2s;text-decoration:none;position:relative;z-index:1;
+}
+.btn-gold-outline:hover{background:rgba(184,154,106,.1);border-color:var(--gold-light);}
+
+/* Right col — benefits */
+.section-label{
+  font-size:.68rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border);}
+
+.benefit-items{display:flex;flex-direction:column;gap:0;margin-bottom:3rem;}
+.benefit-item{padding:1.6rem 0;border-bottom:1px solid var(--border);}
+.benefit-item:first-child{padding-top:0;}
+.benefit-item:last-child{border-bottom:none;}
+.benefit-headline{
+  font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:500;
+  color:var(--ink);margin-bottom:.4rem;line-height:1.3;
+}
+.benefit-body{font-size:.82rem;color:var(--muted);font-weight:300;line-height:1.7;}
+
+/* CTA block */
+.cta-block{
+  background:var(--warm);border:1px solid var(--border);
+  padding:2rem;display:flex;align-items:center;justify-content:space-between;
+  gap:1.5rem;flex-wrap:wrap;
+}
+.cta-block-text{
+  font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:400;
+  color:var(--ink);font-style:italic;line-height:1.4;
+}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2.2rem;
+  background:var(--gold);color:var(--white);font-family:'DM Sans',sans-serif;
+  font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  border:none;cursor:pointer;border-radius:1px;transition:background .2s;
+  text-decoration:none;white-space:nowrap;flex-shrink:0;
+}
+.btn-gold:hover{background:#a0864d;}
+
+/* ── EXPERIENCE BLOCK ── */
+.exp-block{
+  background:var(--accent);padding:1.5rem;border-radius:1px;margin-bottom:2rem;
+}
+.exp-block p{
+  font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;
+  color:rgba(255,255,255,.85);line-height:1.65;font-weight:300;
+}
+.exp-block p::before{
+  content:'"';font-size:2rem;color:var(--gold-light);line-height:0;
+  vertical-align:-.4rem;margin-right:.2rem;font-style:normal;
+}
+
+/* ── BOTTOM STRIP ── */
+.bottom-strip{
+  background:var(--ink);padding:4rem;text-align:center;position:relative;overflow:hidden;
+}
+.bottom-strip::before{
+  content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:40rem;height:40rem;border:1px solid rgba(184,154,106,.06);border-radius:50%;
+}
+.bottom-strip::after{
+  content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:24rem;height:24rem;border:1px solid rgba(184,154,106,.06);border-radius:50%;
+}
+.bottom-strip h3{
+  font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;
+  color:var(--white);margin-bottom:.6rem;position:relative;z-index:1;
+}
+.bottom-strip h3 em{font-style:italic;color:var(--gold-light);}
+.bottom-strip p{
+  font-size:.85rem;color:rgba(255,255,255,.45);font-weight:300;
+  max-width:460px;margin:0 auto 2rem;line-height:1.7;position:relative;z-index:1;
+}
+.btn-row{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;position:relative;z-index:1;}
+.btn-white{
+  display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2.4rem;
+  background:transparent;color:var(--white);font-family:'DM Sans',sans-serif;
+  font-size:.75rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.25);cursor:pointer;border-radius:1px;
+  transition:all .2s;text-decoration:none;
+}
+.btn-white:hover{background:rgba(255,255,255,.08);border-color:var(--gold-light);}
+.btn-white-filled{
+  display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2.4rem;
+  background:var(--gold);color:var(--white);font-family:'DM Sans',sans-serif;
+  font-size:.75rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  border:none;cursor:pointer;border-radius:1px;
+  transition:all .2s;text-decoration:none;
+}
+.btn-white-filled:hover{background:#a0864d;}
+
+@media(max-width:860px){
+  nav{padding:1.2rem 1.5rem;}
+  .page-hero{padding:7rem 1.5rem 3rem;}
+  .main-section{padding:4rem 1.5rem;}
+  .two-col{grid-template-columns:1fr;gap:3rem;}
+  .bottom-strip{padding:3rem 1.5rem;}
+  .cta-block{flex-direction:column;align-items:flex-start;}
+  .btn-row{flex-direction:column;align-items:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Grupo <span>Estrategika</span></a>
+  <a href="index.html#institucional" class="nav-back">← Volver</a>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-eyebrow">Alianzas con Colegios</div>
+  <h1>El colegio que cuida<br>el futuro de <em>sus familias</em></h1>
+  <p>Una alianza que no le cuesta nada al colegio — y que puede cambiar el futuro financiero de cientos de familias.</p>
+</div>
+
+<!-- MAIN -->
+<div class="main-section">
+  <div class="two-col">
+
+    <!-- LEFT -->
+    <div>
+      <div class="panel-tag">Alianza Institucional</div>
+      <h2 class="panel-heading">Tu colegio ya forma<br>a los mejores.<br><em>Ayúdalos a prosperar.</em></h2>
+      <p class="panel-intro">
+        Las familias de tu colegio ya confían en ti para lo más importante. Esta alianza extiende ese vínculo al futuro financiero de sus hijos — sin costo para el colegio, sin riesgo, sin operación adicional.
+      </p>
+
+      <div class="cred-list">
+        <div class="cred-badge">
+          <div class="cred-dot"></div>
+          <span><strong>Custodia internacional</strong> — uno de los bancos más grandes del mundo, con más de USD 40 trillones bajo custodia</span>
+        </div>
+        <div class="cred-badge">
+          <div class="cred-dot"></div>
+          <span><strong>Gestión profesional</strong> — firma regulada por la FCA de Londres, con más de USD 20 mil millones bajo administración</span>
+        </div>
+        <div class="cred-badge">
+          <div class="cred-dot"></div>
+          <span><strong>Tecnología fintech</strong> — automatización total, sin gestión adicional para la familia ni el colegio</span>
+        </div>
+        <div class="cred-badge">
+          <div class="cred-dot"></div>
+          <span><strong>Producto regulado</strong> en jurisdicción de primer mundo</span>
+        </div>
+      </div>
+
+      <div class="exp-block">
+        <p>Llevamos más de dos décadas trabajando con familias en la región. El equipo detrás de los productos que distribuimos tiene una larga trayectoria en planificación financiera internacional en América Latina. No somos nuevos en esto.</p>
+      </div>
+
+      <!-- Simulator card -->
+      <div class="sim-card">
+        <div class="sim-eyebrow">Herramienta exclusiva</div>
+        <h4>Simula el futuro<br><em>de cada familia</em></h4>
+        <p>Nuestro simulador muestra en segundos cómo crece el patrimonio de una familia en el tiempo — una herramienta poderosa para presentar en reuniones de padres.</p>
+        <a href="simulador-educacion.html" class="btn-gold-outline">Abrir simulador →</a>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div>
+      <div class="section-label">Por qué le importa a tu colegio</div>
+      <div class="benefit-items">
+
+        <div class="benefit-item">
+          <div class="benefit-headline">Cero costos, cero riesgos para el colegio</div>
+          <div class="benefit-body">
+            El colegio no invierte nada, no opera nada y no asume ninguna responsabilidad. Solo abre la puerta a sus familias — nosotros hacemos el resto.
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-headline">Un beneficio exclusivo que ningún otro colegio ofrece</div>
+          <div class="benefit-body">
+            En un mercado educativo cada vez más competitivo, esta alianza se convierte en un diferenciador real — algo que las familias valoran y recuerdan al momento de elegir colegio.
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-headline">Fidelización de las mejores familias</div>
+          <div class="benefit-body">
+            Una familia con un compromiso de largo plazo vinculado al colegio no se va. La relación se profundiza más allá del año escolar y se convierte en algo estructural.
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-headline">Atracción de nuevas familias</div>
+          <div class="benefit-body">
+            Un colegio que cuida el futuro financiero de sus alumnos se posiciona diferente. Es un argumento concreto en el proceso de admisión — y uno que muy pocos pueden hacer.
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-headline">Educación financiera para la comunidad</div>
+          <div class="benefit-body">
+            Como parte de la alianza, Grupo Estrategika ofrece talleres y charlas de planificación financiera para padres de familia — sin costo adicional para el colegio.
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-headline">Cero carga operativa</div>
+          <div class="benefit-body">
+            La solución funciona de forma completamente automatizada. Sin llamadas de padres al colegio, sin gestión de ningún tipo. El colegio presenta — nosotros asesoramos, gestionamos y damos soporte.
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-headline">Posicionamiento como institución de vanguardia</div>
+          <div class="benefit-body">
+            Un colegio que ofrece esto no es solo académicamente excelente — es una institución que piensa en el futuro completo de sus alumnos y sus familias.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="cta-block">
+        <div class="cta-block-text">"En 30 minutos te mostramos<br>cómo funciona para tu colegio."</div>
+        <a href="index.html#contacto" class="btn-gold">Agendar reunión →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- BOTTOM STRIP -->
+<div class="bottom-strip">
+  <h3>Una conversación de 30 minutos.<br><em>Sin compromiso.</em></h3>
+  <p>Te mostramos cómo otras instituciones lo están haciendo y qué implicaría para tu colegio.</p>
+  <div class="btn-row">
+    <a href="simulador-educacion.html" class="btn-white-filled">Ver simulador →</a>
+    <a href="index.html#contacto" class="btn-white">Hablar con un asesor →</a>
+  </div>
+</div>
+
+</body>
+</html>
