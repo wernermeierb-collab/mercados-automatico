@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Estrategika Life · Protección Patrimonial Familiar</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink:#1A1814; --warm:#F7F3EE; --white:#FFFFFF;
+  --gold:#B89A6A; --gold-light:#D4B896;
+  --muted:#7A7063; --border:#E2D9CE;
+  --care:#5C3A5F; --care2:#7A5A7A; --care-light:#EDE6EE;
+  --teal:#1A7A6E; --teal-light:#E6F4F2;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--warm);color:var(--ink);overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 4rem;background:rgba(247,243,238,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{text-decoration:none;}
+.nav-logo-top{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);display:block;font-family:'DM Sans',sans-serif;}
+.nav-logo-main{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500;color:var(--ink);}
+.nav-logo-main span{color:var(--care);}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{font-size:0.75rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--care);}
+.nav-cta{background:var(--care);color:var(--white);padding:0.6rem 1.4rem;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;transition:background 0.25s;}
+.nav-cta:hover{background:var(--gold);}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:8rem 4rem 4rem;gap:4rem;background:var(--white);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:0;right:0;width:50%;height:100%;background:linear-gradient(135deg,rgba(92,58,95,0.05) 0%,transparent 70%);}
+.hero-tag{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--care);display:block;margin-bottom:1.5rem;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,4.5vw,4.5rem);font-weight:400;line-height:1.1;margin-bottom:1.5rem;}
+.hero h1 em{font-style:italic;color:var(--care);}
+.hero-desc{font-size:0.95rem;line-height:1.8;color:var(--muted);max-width:440px;margin-bottom:2.5rem;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-primary{background:var(--care);color:var(--white);padding:1rem 2.5rem;font-size:0.78rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;transition:all 0.25s;display:inline-block;}
+.btn-primary:hover{background:var(--gold);transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--ink);padding:1rem 2rem;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;border:1px solid var(--border);text-decoration:none;transition:all 0.25s;display:inline-block;}
+.btn-outline:hover{border-color:var(--care);color:var(--care);}
+
+/* HERO RIGHT */
+.hero-right{display:flex;flex-direction:column;gap:1rem;}
+.protection-card{background:var(--warm);border:1px solid var(--border);padding:1.8rem 2rem;position:relative;overflow:hidden;transition:transform 0.2s;}
+.protection-card:hover{transform:translateY(-3px);}
+.protection-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--care);}
+.card-icon{font-size:1.4rem;margin-bottom:0.8rem;}
+.protection-card h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;margin-bottom:0.4rem;}
+.protection-card p{font-size:0.8rem;color:var(--muted);line-height:1.6;}
+
+/* STATS */
+.stats-bar{background:var(--care);padding:2.5rem 4rem;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center;}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;color:var(--gold-light);display:block;}
+.stat-label{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:0.3rem;display:block;}
+
+/* SECTIONS */
+section{padding:6rem 4rem;}
+.section-tag{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--care);display:block;margin-bottom:1rem;}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3vw,2.8rem);font-weight:400;line-height:1.2;margin-bottom:1.5rem;}
+.section-title em{font-style:italic;color:var(--care);}
+.section-sub{font-size:0.9rem;line-height:1.8;color:var(--muted);max-width:560px;margin-bottom:3rem;}
+
+/* PORQUE */
+#porque{background:var(--warm);}
+.porque-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.porque-items{display:flex;flex-direction:column;gap:1.5rem;}
+.porque-item{display:flex;gap:1.5rem;align-items:flex-start;padding:1.5rem;background:var(--white);border:1px solid var(--border);}
+.porque-icon{font-size:1.5rem;flex-shrink:0;}
+.porque-item h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;margin-bottom:0.4rem;}
+.porque-item p{font-size:0.82rem;color:var(--muted);line-height:1.65;}
+.ole-card{background:var(--ink);padding:3rem;color:var(--white);}
+.ole-badge{display:inline-flex;align-items:center;gap:0.8rem;margin-bottom:1.5rem;}
+.ole-badge span{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold-light);}
+.ole-card h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;margin-bottom:1rem;}
+.ole-card p{font-size:0.85rem;color:rgba(255,255,255,0.55);line-height:1.75;margin-bottom:1.5rem;}
+.ole-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.06);margin-top:1.5rem;}
+.ole-stat{background:var(--ink);padding:1.2rem;}
+.ole-stat .num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold-light);display:block;}
+.ole-stat .lbl{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+
+/* PRODUCTOS */
+#productos{background:var(--white);}
+.productos-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem;}
+.producto-card{border:1px solid var(--border);padding:2.5rem;position:relative;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;}
+.producto-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.08);}
+.producto-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--care);transform:scaleX(0);transition:transform 0.3s;transform-origin:left;}
+.producto-card:hover::after{transform:scaleX(1);}
+.prod-badge{display:inline-block;font-size:0.68rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--white);background:var(--care);padding:0.3rem 0.8rem;margin-bottom:1.2rem;}
+.producto-card h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:500;margin-bottom:0.6rem;}
+.producto-card .prod-sub{font-size:0.8rem;color:var(--muted);margin-bottom:1.2rem;font-style:italic;}
+.prod-features{list-style:none;border-top:1px solid var(--border);padding-top:1.2rem;}
+.prod-features li{font-size:0.82rem;color:var(--muted);padding:0.5rem 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:0.8rem;line-height:1.5;}
+.prod-features li:last-child{border-bottom:none;}
+.prod-features li::before{content:'✓';color:var(--care);font-weight:600;flex-shrink:0;margin-top:0.05rem;}
+
+/* BENEFICIOS */
+#beneficios{background:var(--warm);}
+.ben-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.ben-card{background:var(--white);border:1px solid var(--border);padding:2rem;}
+.ben-cat{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--care);display:block;margin-bottom:1rem;}
+.ben-card h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:500;margin-bottom:1rem;}
+.ben-list{list-style:none;}
+.ben-list li{font-size:0.82rem;color:var(--muted);padding:0.4rem 0;border-bottom:1px solid var(--border);display:flex;gap:0.6rem;line-height:1.5;}
+.ben-list li:last-child{border-bottom:none;}
+.ben-list li::before{content:'—';color:var(--gold);flex-shrink:0;}
+
+/* DIGITAL */
+#digital{background:var(--care);}
+#digital .section-tag{color:var(--gold-light);}
+#digital .section-title{color:var(--white);}
+#digital .section-sub{color:rgba(255,255,255,0.55);}
+.digital-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.08);margin-top:3rem;}
+.digital-step{background:var(--care);padding:2.5rem 2rem;text-align:center;}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:rgba(255,255,255,0.15);line-height:1;margin-bottom:1rem;}
+.digital-step h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:var(--white);margin-bottom:0.6rem;}
+.digital-step p{font-size:0.8rem;color:rgba(255,255,255,0.5);line-height:1.7;}
+
+/* ECOSISTEMA */
+#ecosistema{background:var(--white);}
+.eco-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.eco-card{border:1px solid var(--border);padding:2rem;position:relative;}
+.eco-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-bottom:1rem;}
+.eco-card h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:500;margin-bottom:0.5rem;}
+.eco-card p{font-size:0.82rem;color:var(--muted);line-height:1.65;}
+.eco-link{display:inline-block;margin-top:1rem;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding-bottom:0.2rem;border-bottom:1px solid;}
+
+/* CONTACTO */
+#contacto-life{background:var(--warm);}
+.contacto-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:5rem;align-items:start;}
+.contacto-left h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:400;line-height:1.15;margin-bottom:1.2rem;}
+.contacto-left h2 em{font-style:italic;color:var(--care);}
+.contacto-left p{font-size:0.88rem;color:var(--muted);line-height:1.8;margin-bottom:2rem;}
+.c-detail{padding:0.8rem 0;border-bottom:1px solid var(--border);}
+.c-detail:last-child{border-bottom:none;}
+.c-label{font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--care);display:block;margin-bottom:0.2rem;}
+.c-val{font-size:0.85rem;color:var(--ink);}
+.life-form{display:flex;flex-direction:column;gap:1.2rem;}
+.form-group{display:flex;flex-direction:column;gap:0.4rem;}
+.form-group label{font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);}
+.form-group input,.form-group select,.form-group textarea{padding:0.9rem 1rem;background:var(--white);border:1px solid var(--border);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s;-webkit-appearance:none;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--care);}
+.form-group textarea{resize:vertical;min-height:90px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+.form-submit{background:var(--care);color:var(--white);border:none;padding:1rem 2.5rem;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all 0.25s;align-self:flex-start;}
+.form-submit:hover{background:var(--gold);}
+.form-success{display:none;background:#EAF4EE;border:1px solid #A8D5B5;padding:1rem 1.5rem;font-size:0.85rem;color:#2C5E3A;}
+
+footer{background:var(--ink);padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.06);}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--white);}
+.footer-logo span{color:var(--care2);}
+.footer-copy{font-size:0.72rem;color:rgba(255,255,255,0.25);}
+.footer-link{font-size:0.75rem;color:rgba(255,255,255,0.4);text-decoration:none;}
+.footer-link:hover{color:var(--gold);}
+
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-top">Grupo Estrategika</span>
+    <span class="nav-logo-main">Estrategika <span>Life</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#porque">Por qué protegerse</a></li>
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#digital">100% Digital</a></li>
+    <li><a href="#contacto-life" class="nav-cta">Cotizar ahora</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <span class="hero-tag">Estrategika Life · Protección Patrimonial Familiar</span>
+    <h1>Proteja a su familia.<br>Hoy, no <em>mañana</em>.</h1>
+    <p class="hero-desc">Una herramienta financiera con dos usos distintos. Para quien construye patrimonio: protección familiar mientras Savings hace crecer su capital. Para el cliente HNW: amplificador de herencia, liquidez sucesoria y protección del negocio familiar — todo en dólares, 100% digital.</p>
+    <div class="hero-actions">
+      <a href="#contacto-life" class="btn-primary">Cotizar ahora →</a>
+      <a href="#productos" class="btn-outline">Ver productos</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="protection-card">
+      <div class="card-icon">🏠</div>
+      <h4>Protección familiar completa</h4>
+      <p>Si algo le ocurre, su familia recibe el capital para mantener su estilo de vida — sin depender de nadie.</p>
+    </div>
+    <div class="protection-card">
+      <div class="card-icon">💵</div>
+      <h4>En dólares · desde Miami</h4>
+      <p>Prima fija en USD. Sin riesgo cambiario. Respaldado por OLÉ — primera aseguradora 100% digital en LATAM.</p>
+    </div>
+    <div class="protection-card">
+      <div class="card-icon">🌎</div>
+      <h4>Cobertura en +30 países</h4>
+      <p>LATAM y el Caribe. Sin importar dónde esté usted o su familia, la cobertura viaja con usted.</p>
+    </div>
+    <div class="protection-card">
+      <div class="card-icon">💻</div>
+      <h4>100% digital · sin papeles</h4>
+      <p>Cotice, contrate y gestione su póliza completamente en línea. Evaluación simplificada — sin exámenes médicos en la mayoría de casos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div><span class="stat-num">+30</span><span class="stat-label">Países de cobertura</span></div>
+  <div><span class="stat-num">+30</span><span class="stat-label">Años de experiencia OLÉ</span></div>
+  <div><span class="stat-num">USD</span><span class="stat-label">Prima fija en dólares</span></div>
+  <div><span class="stat-num">100%</span><span class="stat-label">Digital · sin papeles</span></div>
+</div>
+
+<!-- POR QUÉ -->
+<section id="porque">
+  <div class="porque-grid fade-in">
+    <div>
+      <span class="section-tag">Por qué protegerse hoy</span>
+      <h2 class="section-title">Su familia no puede <em>esperar</em></h2>
+      <p class="section-sub">Construir patrimonio es fundamental. Pero proteger a su familia mientras lo construye es igual de importante — o más.</p>
+      <div class="porque-items">
+        <div class="porque-item">
+          <span class="porque-icon">👨‍👩‍👧‍👦</span>
+          <div>
+            <h4>Si algo le ocurre, ¿quién sostiene a su familia?</h4>
+            <p>Un seguro de vida garantiza que su familia mantenga su nivel de vida — sin liquidar activos, sin deudas, sin depender de terceros.</p>
+          </div>
+        </div>
+        <div class="porque-item">
+          <span class="porque-icon">📈</span>
+          <div>
+            <h4>Para quien construye: protección pura</h4>
+            <p>Si tiene Savings, no necesita un seguro con componente de ahorro — ese ahorro ya lo hace Savings más eficientemente. Un término puro le da máxima cobertura con prima mínima.</p>
+          </div>
+        </div>
+        <div class="porque-item">
+          <span class="porque-icon">🏛️</span>
+          <div>
+            <h4>Para el HNW: herramienta patrimonial</h4>
+            <p>El seguro de vida amplifica la herencia — su familia recibe más de lo que usted aportó. Crea liquidez inmediata para pagar impuestos sucesorios sin liquidar activos como el negocio o los inmuebles.</p>
+          </div>
+        </div>
+        <div class="porque-item">
+          <span class="porque-icon">🏢</span>
+          <div>
+            <h4>Protección del negocio familiar</h4>
+            <p>Si usted falta, ¿qué pasa con su empresa? Life puede financiar la compra de su participación por los socios restantes, protegiendo la continuidad del negocio y la estabilidad de su familia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ole-card fade-in">
+      <div class="ole-badge">
+        <span>Powered by OLÉ · Miami, FL</span>
+      </div>
+      <h3>La primera aseguradora 100% digital de LATAM</h3>
+      <p>OLÉ nació en 2022 como evolución de más de 30 años de experiencia en seguros internacionales para América Latina. Fundada por Michael Carricarte — ex presidente de Pan-American Life para LATAM — es la única aseguradora digital nativa de la región.</p>
+      <div class="ole-stats">
+        <div class="ole-stat"><span class="num">1986</span><span class="lbl">Fundación Amedex</span></div>
+        <div class="ole-stat"><span class="num">+30</span><span class="lbl">Años de experiencia</span></div>
+        <div class="ole-stat"><span class="num">+30</span><span class="lbl">Países LATAM</span></div>
+        <div class="ole-stat"><span class="num">2022</span><span class="lbl">Lanzamiento OLÉ</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTOS -->
+<section id="productos">
+  <div class="fade-in" style="text-align:center;max-width:580px;margin:0 auto 0.5rem;">
+    <span class="section-tag">Nuestros productos</span>
+    <h2 class="section-title" style="margin:0 auto;">Dos soluciones para <em>cada etapa</em></h2>
+    <p class="section-sub" style="margin:1rem auto 0;">Ambas en dólares, 100% digitales, con cobertura en +30 países de LATAM.</p>
+  </div>
+  <div class="productos-grid fade-in">
+    <div class="producto-card">
+      <span class="prod-badge">Para clientes Savings · Affluent</span>
+      <h3>Easy Term</h3>
+      <div class="prod-sub">Protección pura · máxima cobertura · prima mínima</div>
+      <ul class="prod-features">
+        <li>Cobertura de vida en caso de fallecimiento</li>
+        <li>Prima fija en dólares — sin sorpresas</li>
+        <li>Sin componente de ahorro — su Savings es más eficiente para eso</li>
+        <li>Contratación 100% digital · sin exámenes en la mayoría de casos</li>
+        <li>Cobertura en +30 países de LATAM y Caribe</li>
+        <li>Ideal mientras construye su patrimonio con Savings</li>
+      </ul>
+    </div>
+    <div class="producto-card">
+      <span class="prod-badge">Para clientes HNW · Wealth</span>
+      <h3>Master Term</h3>
+      <div class="prod-sub">Herramienta patrimonial · herencia · planificación sucesoria</div>
+      <ul class="prod-features">
+        <li>Amplifica la herencia — su familia recibe más de lo aportado</li>
+        <li>Liquidez inmediata para impuestos sucesorios sin liquidar activos</li>
+        <li>Protección del negocio familiar ante fallecimiento del socio</li>
+        <li>Devolución de prima al vencimiento</li>
+        <li>Anticipo por enfermedad terminal · cáncer · enfermedades críticas</li>
+        <li>Equalización entre herederos con activos ilíquidos</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section id="beneficios">
+  <div class="fade-in" style="max-width:580px;margin:0 auto 0.5rem;text-align:center;">
+    <span class="section-tag">Beneficios opcionales</span>
+    <h2 class="section-title" style="margin:0 auto;">Protección <em>a medida</em></h2>
+    <p class="section-sub" style="margin:1rem auto 0;">Personalice su póliza con beneficios adicionales según su situación y necesidades.</p>
+  </div>
+  <div class="ben-grid fade-in">
+    <div class="ben-card">
+      <span class="ben-cat">Beneficios de ahorro</span>
+      <h4>Su prima no se pierde</h4>
+      <ul class="ben-list">
+        <li>Devolución de prima al vencimiento de la póliza</li>
+        <li>Si no usa el seguro, recupera lo pagado</li>
+      </ul>
+    </div>
+    <div class="ben-card">
+      <span class="ben-cat">Beneficios de salud</span>
+      <h4>Protección ante enfermedades graves</h4>
+      <ul class="ben-list">
+        <li>Anticipo por diagnóstico de enfermedad terminal</li>
+        <li>Protección específica para cáncer</li>
+        <li>Cobertura para enfermedades críticas</li>
+      </ul>
+    </div>
+    <div class="ben-card">
+      <span class="ben-cat">Beneficios de incapacidad</span>
+      <h4>Si no puede trabajar</h4>
+      <ul class="ben-list">
+        <li>Cobertura por muerte o incapacidad accidental</li>
+        <li>Protección de ingreso por incapacidad</li>
+        <li>Su familia no pierde su nivel de vida</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- DIGITAL -->
+<section id="digital">
+  <div class="fade-in" style="text-align:center;max-width:580px;margin:0 auto 0.5rem;">
+    <span class="section-tag">Proceso 100% digital</span>
+    <h2 class="section-title" style="margin:0 auto;color:var(--white);">De la cotización a la <em style="color:var(--gold-light)">póliza</em> en minutos</h2>
+    <p class="section-sub" style="margin:1rem auto 0;">Sin papeles, sin filas, sin esperas. Todo desde su computadora o celular.</p>
+  </div>
+  <div class="digital-steps fade-in">
+    <div class="digital-step">
+      <div class="step-num">01</div>
+      <h4>Solicite su cotización</h4>
+      <p>Complete el formulario con sus datos básicos y reciba una cotización personalizada en minutos.</p>
+    </div>
+    <div class="digital-step">
+      <div class="step-num">02</div>
+      <h4>Evaluación simplificada</h4>
+      <p>Sin exámenes médicos en la mayoría de casos. Solo responda algunas preguntas de salud en línea.</p>
+    </div>
+    <div class="digital-step">
+      <div class="step-num">03</div>
+      <h4>Firma digital</h4>
+      <p>Firme su póliza digitalmente desde cualquier dispositivo. Sin notarías, sin trámites presenciales.</p>
+    </div>
+    <div class="digital-step">
+      <div class="step-num">04</div>
+      <h4>Cobertura activa</h4>
+      <p>Su póliza entra en vigencia y su familia queda protegida. Gestione todo desde su portal en línea.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ECOSISTEMA -->
+<section id="ecosistema">
+  <div class="fade-in" style="text-align:center;max-width:580px;margin:0 auto 2rem;">
+    <span class="section-tag">Ecosistema Grupo Estrategika</span>
+    <h2 class="section-title" style="margin:0 auto;">Life es parte de un <em>plan completo</em></h2>
+    <p class="section-sub" style="margin:1rem auto 0;">Estrategika Life complementa naturalmente el resto de soluciones de Grupo Estrategika — juntas forman el plan patrimonial más completo para su familia.</p>
+  </div>
+  <div class="eco-grid fade-in">
+    <div class="eco-card">
+      <span class="eco-dot" style="background:#2C4A3E;"></span>
+      <h4>Estrategika Savings</h4>
+      <p>Mientras su familia crece su capital mes a mes con Dominion MSS, Life garantiza que ese plan no se interrumpa si usted falta.</p>
+      <a href="simulador.html" class="eco-link" style="color:#2C4A3E;border-color:#2C4A3E;">Simular plan de ahorro →</a>
+    </div>
+    <div class="eco-card">
+      <span class="eco-dot" style="background:#1E3A5F;"></span>
+      <h4>Estrategika Wealth</h4>
+      <p>Su patrimonio está protegido internacionalmente. Life asegura que ese patrimonio llegue íntegro a su familia cuando lo necesiten.</p>
+      <a href="wealth.html" class="eco-link" style="color:#1E3A5F;border-color:#1E3A5F;">Conocer Wealth →</a>
+    </div>
+    <div class="eco-card">
+      <span class="eco-dot" style="background:#5C3A5F;"></span>
+      <h4>Estrategika Global Care</h4>
+      <p>Cobertura médica internacional para que usted y su familia accedan a la mejor medicina en cualquier país del mundo.</p>
+      <a href="index.html#ecosystem" class="eco-link" style="color:#5C3A5F;border-color:#5C3A5F;">Conocer Global Care →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto-life">
+  <div class="contacto-grid fade-in">
+    <div class="contacto-left">
+      <span class="section-tag">Cotice ahora</span>
+      <h2>Proteja a su familia <em>hoy</em></h2>
+      <p>Cada día que pasa sin seguro de vida es un día que su familia está expuesta. El proceso es simple, rápido y 100% digital.</p>
+      <div class="c-detail">
+        <span class="c-label">Email</span>
+        <span class="c-val">werner@grupoestrategika.com</span>
+      </div>
+      <div class="c-detail">
+        <span class="c-label">WhatsApp</span>
+        <span class="c-val">+51 998 288 962</span>
+      </div>
+      <div class="c-detail">
+        <span class="c-label">Cobertura</span>
+        <span class="c-val">+30 países · LATAM y Caribe</span>
+      </div>
+      <div class="c-detail">
+        <span class="c-label">Producto</span>
+        <span class="c-val">OLÉ · Miami, FL</span>
+      </div>
+    </div>
+    <form class="life-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <input type="text" placeholder="Juan Pérez" required/>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="juan@email.com" required/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>WhatsApp</label>
+          <input type="tel" placeholder="+51 9XX XXX XXX"/>
+        </div>
+        <div class="form-group">
+          <label>Edad</label>
+          <select>
+            <option value="">Seleccione...</option>
+            <option>18 – 30 años</option>
+            <option>31 – 40 años</option>
+            <option>41 – 50 años</option>
+            <option>51 – 60 años</option>
+            <option>61+ años</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Producto de interés</label>
+          <select>
+            <option value="">Seleccione...</option>
+            <option>Easy Term</option>
+            <option>Master Term</option>
+            <option>No sé — necesito orientación</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>País de residencia</label>
+          <select>
+            <option value="">Seleccione...</option>
+            <option>Perú</option>
+            <option>Colombia</option>
+            <option>México</option>
+            <option>Chile</option>
+            <option>Argentina</option>
+            <option>Ecuador</option>
+            <option>Otro LATAM</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>¿Cuánto capital quiere proteger? (opcional)</label>
+        <select>
+          <option value="">Seleccione...</option>
+          <option>USD 50,000 – 100,000</option>
+          <option>USD 100,000 – 250,000</option>
+          <option>USD 250,000 – 500,000</option>
+          <option>USD 500,000+</option>
+          <option>Prefiero no indicar</option>
+        </select>
+      </div>
+      <div class="form-success" id="formSuccess">✓ Solicitud recibida. Le contactaremos dentro de las próximas 24 horas con su cotización.</div>
+      <button type="submit" class="form-submit">Solicitar cotización →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Estrategika <span>Life</span></div>
+  <div class="footer-copy">© 2026 Grupo Estrategika · Powered by OLÉ · Miami, FL</div>
+  <a href="index.html" class="footer-link">← Sitio principal</a>
+</footer>
+
+<script>
+window.addEventListener('load', function() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+});
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = 'Enviando...';
+  btn.disabled = true;
+  setTimeout(() => {
+    document.getElementById('formSuccess').style.display = 'block';
+    btn.style.display = 'none';
+  }, 800);
+}
+</script>
+</body>
+</html>
