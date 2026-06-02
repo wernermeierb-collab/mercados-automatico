@@ -63,49 +63,82 @@ def get_latest_report():
     return text, file['name']
 
 def md_to_html(text):
-    def bold(t): return re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', t)
-    def italic(t): return re.sub(r'\*(.+?)\*', r'<em>\1</em>', t)
-    def clean(t): return italic(bold(t))
+    def clean(t):
+        t = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', t)
+        t = re.sub(r'\*(.+?)\*', r'<em>\1</em>', t)
+        t = re.sub(r'\\([|&])', r'\1', t)  # unescape Google Docs escapes
+        t = t.replace('\\+', '+').replace('\\-', '-')
+        return t
+
     lines = text.split('\n')
-    html = ''
-    in_table = False
-    in_list = False
+    html = ''; in_table = False; in_list = False
+    table_rows = []
+
+    def flush_table():
+        if not table_rows: return ''
+        out = '<table>\n'
+        # Find first non-empty row as header
+        header_idx = 0
+        for i, row in enumerate(table_rows):
+            cells = [c.strip() for c in row.split('|') if c.strip()]
+            # Skip separator rows and empty rows
+            if cells and not all(re.match(r'^[:\-\s]+$', c) for c in cells):
+                header_idx = i
+                break
+        for i, row in enumerate(table_rows):
+            cells = [c.strip() for c in row.split('|') if c.strip()]
+            if not cells: continue
+            # Skip separator rows
+            if all(re.match(r'^[:\-\s]+$', c) for c in cells): continue
+            if i == header_idx:
+                out += '<thead><tr>' + ''.join(f'<td>{clean(c)}</td>' for c in cells) + '</tr></thead>\n<tbody>\n'
+            else:
+                out += '<tr>' + ''.join(f'<td>{clean(c)}</td>' for c in cells) + '</tr>\n'
+        out += '</tbody></table>\n'
+        return out
+
     for line in lines:
         line = line.rstrip()
         if not line.strip():
-            if in_table: html += '</table>\n'; in_table = False
+            if in_table:
+                html += flush_table(); table_rows = []; in_table = False
             if in_list: html += '</ul>\n'; in_list = False
             continue
         if line.startswith('### '):
-            if in_table: html += '</table>\n'; in_table = False
+            if in_table: html += flush_table(); table_rows = []; in_table = False
             if in_list: html += '</ul>\n'; in_list = False
             html += f'<h3>{clean(line[4:])}</h3>\n'
         elif line.startswith('## '):
-            if in_table: html += '</table>\n'; in_table = False
+            if in_table: html += flush_table(); table_rows = []; in_table = False
             if in_list: html += '</ul>\n'; in_list = False
             html += f'<h2>{clean(line[3:])}</h2>\n'
         elif line.startswith('# '):
-            if in_table: html += '</table>\n'; in_table = False
+            if in_table: html += flush_table(); table_rows = []; in_table = False
             if in_list: html += '</ul>\n'; in_list = False
             html += f'<h1>{clean(line[2:])}</h1>\n'
-        elif re.match(r'^[\s|:\-]+$', line) and '|' in line:
-            continue
         elif line.startswith('|'):
-            if not in_table: html += '<table>\n'; in_table = True
-            cells = [c.strip() for c in line.split('|') if c.strip()]
-            html += '<tr>' + ''.join(f'<td>{clean(c)}</td>' for c in cells) + '</tr>\n'
-        elif line.startswith('- ') or line.startswith('* '):
-            if in_table: html += '</table>\n'; in_table = False
+            if in_list: html += '</ul>\n'; in_list = False
+            in_table = True
+            table_rows.append(line)
+        elif line.startswith('- ') or line.startswith('* ') or line.startswith('  - '):
+            if in_table: html += flush_table(); table_rows = []; in_table = False
             if not in_list: html += '<ul>\n'; in_list = True
-            html += f'<li>{clean(line[2:])}</li>\n'
+            clean_line = line.lstrip('- *').lstrip()
+            html += f'<li>{clean(clean_line)}</li>\n'
+        elif re.match(r'^[-_]{3,}$', line.strip()):
+            if in_table: html += flush_table(); table_rows = []; in_table = False
+            if in_list: html += '</ul>\n'; in_list = False
+            html += '<hr/>\n'
         else:
-            if in_table: html += '</table>\n'; in_table = False
+            if in_table: html += flush_table(); table_rows = []; in_table = False
             if in_list: html += '</ul>\n'; in_list = False
             cleaned = clean(line)
             if cleaned.strip(): html += f'<p>{cleaned}</p>\n'
-    if in_table: html += '</table>\n'
+
+    if in_table: html += flush_table()
     if in_list: html += '</ul>\n'
     return html
+
 
 def build_html(report_text):
     today = datetime.now()
