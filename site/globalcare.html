@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Estrategika Global Care · Salud Internacional Allianz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink:#1A1814; --warm:#F7F3EE; --white:#FFFFFF;
+  --gold:#B89A6A; --gold-light:#D4B896;
+  --muted:#7A7063; --border:#E2D9CE;
+  --care:#5C3A5F; --care2:#7A5A7A; --care-light:#F2EDF3;
+  --teal:#1A6B8A; --teal-light:#E6F2F6;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--warm);color:var(--ink);overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 4rem;background:rgba(247,243,238,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{text-decoration:none;}
+.nav-logo-top{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);display:block;}
+.nav-logo-main{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500;color:var(--ink);}
+.nav-logo-main span{color:var(--care);}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{font-size:0.75rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--care);}
+.nav-cta{background:var(--care);color:var(--white);padding:0.6rem 1.4rem;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;transition:background 0.25s;}
+.nav-cta:hover{background:var(--gold);}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:8rem 4rem 4rem;gap:4rem;background:var(--white);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:0;right:0;width:50%;height:100%;background:linear-gradient(135deg,rgba(92,58,95,0.04) 0%,transparent 70%);}
+.hero-tag{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--care);display:block;margin-bottom:1.5rem;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,4.5vw,4.5rem);font-weight:400;line-height:1.1;margin-bottom:1.5rem;}
+.hero h1 em{font-style:italic;color:var(--care);}
+.hero-desc{font-size:0.95rem;line-height:1.8;color:var(--muted);max-width:440px;margin-bottom:2.5rem;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-primary{background:var(--care);color:var(--white);padding:1rem 2.5rem;font-size:0.78rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;transition:all 0.25s;display:inline-block;}
+.btn-primary:hover{background:var(--gold);transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--ink);padding:1rem 2rem;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;border:1px solid var(--border);text-decoration:none;transition:all 0.25s;display:inline-block;}
+.btn-outline:hover{border-color:var(--care);color:var(--care);}
+
+.hero-right{display:flex;flex-direction:column;gap:1rem;}
+.hero-card{background:var(--warm);border:1px solid var(--border);padding:1.8rem 2rem;position:relative;overflow:hidden;transition:transform 0.2s;}
+.hero-card:hover{transform:translateY(-3px);}
+.hero-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--care);}
+.card-icon{font-size:1.4rem;margin-bottom:0.8rem;}
+.hero-card h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;margin-bottom:0.4rem;}
+.hero-card p{font-size:0.8rem;color:var(--muted);line-height:1.6;}
+
+/* STATS */
+.stats-bar{background:var(--care);padding:2.5rem 4rem;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center;}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;color:var(--gold-light);display:block;}
+.stat-label{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:0.3rem;display:block;}
+
+/* SECTIONS */
+section{padding:6rem 4rem;}
+.section-tag{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--care);display:block;margin-bottom:1rem;}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3vw,2.8rem);font-weight:400;line-height:1.2;margin-bottom:1.5rem;}
+.section-title em{font-style:italic;color:var(--care);}
+.section-sub{font-size:0.9rem;line-height:1.8;color:var(--muted);max-width:560px;margin-bottom:3rem;}
+
+/* PORQUE */
+#porque{background:var(--warm);}
+.porque-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.porque-items{display:flex;flex-direction:column;gap:1.2rem;}
+.porque-item{background:var(--white);border:1px solid var(--border);padding:1.5rem 2rem;display:flex;gap:1.5rem;align-items:flex-start;}
+.porque-icon{font-size:1.5rem;flex-shrink:0;}
+.porque-item h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;margin-bottom:0.4rem;}
+.porque-item p{font-size:0.82rem;color:var(--muted);line-height:1.65;}
+.allianz-card{background:var(--ink);padding:3rem;color:var(--white);}
+.allianz-card h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;margin-bottom:1rem;}
+.allianz-card p{font-size:0.85rem;color:rgba(255,255,255,0.55);line-height:1.75;margin-bottom:1.5rem;}
+.allianz-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.06);margin-top:1.5rem;}
+.allianz-stat{background:var(--ink);padding:1.2rem;}
+.allianz-stat .num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold-light);display:block;}
+.allianz-stat .lbl{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+
+/* PERFILES */
+#perfiles{background:var(--white);}
+.perfiles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:3rem;}
+.perfil-card{background:var(--white);padding:3rem 2.5rem;position:relative;overflow:hidden;transition:background 0.3s;}
+.perfil-card:hover{background:var(--care-light);}
+.perfil-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--care);transform:scaleX(0);transition:transform 0.3s;}
+.perfil-card:hover::after{transform:scaleX(1);}
+.perfil-icon{font-size:2rem;margin-bottom:1.5rem;display:block;}
+.perfil-card h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;margin-bottom:0.8rem;}
+.perfil-card p{font-size:0.82rem;color:var(--muted);line-height:1.75;margin-bottom:1.5rem;}
+.perfil-needs{list-style:none;}
+.perfil-needs li{font-size:0.8rem;color:var(--muted);padding:0.35rem 0;border-bottom:1px solid var(--border);display:flex;gap:0.6rem;}
+.perfil-needs li:last-child{border-bottom:none;}
+.perfil-needs li::before{content:'✓';color:var(--care);font-weight:600;flex-shrink:0;}
+
+/* COBERTURA */
+#cobertura{background:var(--warm);}
+.cobertura-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.cob-card{background:var(--white);border:1px solid var(--border);padding:2rem;position:relative;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;}
+.cob-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.08);}
+.cob-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--care);transform:scaleX(0);transition:transform 0.3s;transform-origin:left;}
+.cob-card:hover::after{transform:scaleX(1);}
+.cob-icon{font-size:1.8rem;margin-bottom:1rem;}
+.cob-card h4{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:500;margin-bottom:0.8rem;}
+.cob-list{list-style:none;}
+.cob-list li{font-size:0.8rem;color:var(--muted);padding:0.4rem 0;border-bottom:1px solid var(--border);display:flex;gap:0.6rem;line-height:1.5;}
+.cob-list li:last-child{border-bottom:none;}
+.cob-list li::before{content:'—';color:var(--gold);flex-shrink:0;}
+
+/* DIFERENCIADORES */
+#diferenciadores{background:var(--care);}
+#diferenciadores .section-title{color:var(--white);}
+#diferenciadores .section-tag{color:var(--gold-light);}
+#diferenciadores .section-sub{color:rgba(255,255,255,0.55);}
+.dif-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem;}
+.dif-card{padding:2rem;border:1px solid rgba(255,255,255,0.1);transition:border-color 0.3s;}
+.dif-card:hover{border-color:var(--gold);}
+.dif-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:rgba(255,255,255,0.1);line-height:1;margin-bottom:1rem;}
+.dif-card h4{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--white);margin-bottom:0.6rem;}
+.dif-card p{font-size:0.82rem;color:rgba(255,255,255,0.5);line-height:1.7;}
+
+/* ECOSISTEMA */
+#ecosistema{background:var(--white);}
+.eco-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.eco-card{border:1px solid var(--border);padding:2rem;}
+.eco-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-bottom:1rem;}
+.eco-card h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:500;margin-bottom:0.5rem;}
+.eco-card p{font-size:0.82rem;color:var(--muted);line-height:1.65;}
+.eco-link{display:inline-block;margin-top:1rem;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding-bottom:0.2rem;border-bottom:1px solid;}
+
+/* CONTACTO */
+#contacto-care{background:var(--warm);}
+.contacto-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:5rem;align-items:start;}
+.contacto-left h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:400;line-height:1.15;margin-bottom:1.2rem;}
+.contacto-left h2 em{font-style:italic;color:var(--care);}
+.contacto-left p{font-size:0.88rem;color:var(--muted);line-height:1.8;margin-bottom:2rem;}
+.c-detail{padding:0.8rem 0;border-bottom:1px solid var(--border);}
+.c-detail:last-child{border-bottom:none;}
+.c-label{font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--care);display:block;margin-bottom:0.2rem;}
+.c-val{font-size:0.85rem;color:var(--ink);}
+.care-form{display:flex;flex-direction:column;gap:1.2rem;}
+.form-group{display:flex;flex-direction:column;gap:0.4rem;}
+.form-group label{font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);}
+.form-group input,.form-group select,.form-group textarea{padding:0.9rem 1rem;background:var(--white);border:1px solid var(--border);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s;-webkit-appearance:none;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--care);}
+.form-group textarea{resize:vertical;min-height:90px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+.form-submit{background:var(--care);color:var(--white);border:none;padding:1rem 2.5rem;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all 0.25s;align-self:flex-start;}
+.form-submit:hover{background:var(--gold);}
+.form-success{display:none;background:#EAF4EE;border:1px solid #A8D5B5;padding:1rem 1.5rem;font-size:0.85rem;color:#2C5E3A;}
+
+footer{background:var(--ink);padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.06);}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--white);}
+.footer-logo span{color:var(--care2);}
+.footer-copy{font-size:0.72rem;color:rgba(255,255,255,0.25);}
+.footer-link{font-size:0.75rem;color:rgba(255,255,255,0.4);text-decoration:none;}
+.footer-link:hover{color:var(--gold);}
+
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-top">Grupo Estrategika</span>
+    <span class="nav-logo-main">Estrategika <span>Global Care</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#porque">Por qué Allianz</a></li>
+    <li><a href="#perfiles">Para quién</a></li>
+    <li><a href="#cobertura">Cobertura</a></li>
+    <li><a href="#contacto-care" class="nav-cta">Cotizar ahora</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <span class="hero-tag">Estrategika Global Care · Salud Internacional</span>
+    <h1>Su salud no tiene <em>fronteras</em>.<br>Su seguro tampoco.</h1>
+    <p class="hero-desc">Cobertura médica internacional con Allianz Care — una de las aseguradoras más grandes y sólidas del mundo. Acceso a la mejor medicina donde sea que esté usted o su familia.</p>
+    <div class="hero-actions">
+      <a href="#contacto-care" class="btn-primary">Cotizar ahora →</a>
+      <a href="#cobertura" class="btn-outline">Ver cobertura</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="card-icon">🌍</div>
+      <h4>Cobertura mundial</h4>
+      <p>Acceso a hospitales y especialistas en cualquier país del mundo — sin límites geográficos.</p>
+    </div>
+    <div class="hero-card">
+      <div class="card-icon">🏥</div>
+      <h4>Red global de prestadores</h4>
+      <p>Miles de clínicas y hospitales de primer nivel en toda América Latina, Europa, EE.UU. y Asia.</p>
+    </div>
+    <div class="hero-card">
+      <div class="card-icon">💼</div>
+      <h4>Respaldo Allianz Group</h4>
+      <p>Una de las aseguradoras más grandes del mundo. Solidez financiera y presencia en más de 70 países.</p>
+    </div>
+    <div class="hero-card">
+      <div class="card-icon">👨‍👩‍👧‍👦</div>
+      <h4>Individual, familiar y corporativo</h4>
+      <p>Planes para todas las necesidades — desde individuos hasta grupos corporativos y familias completas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div><span class="stat-num">70+</span><span class="stat-label">Países de presencia</span></div>
+  <div><span class="stat-num">Global</span><span class="stat-label">Cobertura sin fronteras</span></div>
+  <div><span class="stat-num">97M</span><span class="stat-label">Clientes en el mundo</span></div>
+  <div><span class="stat-num">#1</span><span class="stat-label">Marca global de seguros · Interbrand 2025</span></div>
+</div>
+
+<!-- POR QUÉ -->
+<section id="porque">
+  <div class="porque-grid fade-in">
+    <div>
+      <span class="section-tag">Por qué cobertura internacional</span>
+      <h2 class="section-title">La medicina local tiene <em>límites</em>. Su salud no.</h2>
+      <p class="section-sub">Un sistema de salud local puede no tener los especialistas, la tecnología o la capacidad que usted necesita en el momento más crítico. La cobertura internacional elimina esa limitación.</p>
+      <div class="porque-items">
+        <div class="porque-item">
+          <span class="porque-icon">✈️</span>
+          <div>
+            <h4>Usted viaja. Su cobertura también.</h4>
+            <p>Si viaja frecuentemente por negocios o placer, su seguro local no le cubre fuera del país. Con Allianz Care está protegido en cualquier lugar del mundo.</p>
+          </div>
+        </div>
+        <div class="porque-item">
+          <span class="porque-icon">🔬</span>
+          <div>
+            <h4>Acceso a los mejores especialistas</h4>
+            <p>Para enfermedades complejas, los mejores especialistas y centros de tratamiento están fuera de su país. Su cobertura internacional le da acceso sin barreras.</p>
+          </div>
+        </div>
+        <div class="porque-item">
+          <span class="porque-icon">💰</span>
+          <div>
+            <h4>Sin sorpresas financieras</h4>
+            <p>Una emergencia médica en el exterior sin cobertura internacional puede costar cientos de miles de dólares. Allianz Care elimina ese riesgo completamente.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="allianz-card fade-in">
+      <h3>Allianz Care — el respaldo que importa</h3>
+      <p>Allianz Group es la marca número uno de seguros a nivel global por séptimo año consecutivo según Interbrand. Con presencia en casi 70 países, 97 millones de clientes y €770 billones en activos bajo gestión, es sinónimo de solidez, confianza y capacidad de respuesta cuando más se necesita.</p>
+      <p style="margin-top:1rem;">A través de Estrategika Global Care, usted accede a los planes de Allianz Care International — diseñados específicamente para individuos, familias y empresas que necesitan cobertura más allá de sus fronteras.</p>
+      <div class="allianz-stats">
+        <div class="allianz-stat"><span class="num">97M</span><span class="lbl">Clientes en el mundo</span></div>
+        <div class="allianz-stat"><span class="num">70+</span><span class="lbl">Países de presencia</span></div>
+        <div class="allianz-stat"><span class="num">€770B</span><span class="lbl">Activos bajo gestión</span></div>
+        <div class="allianz-stat"><span class="num">#1</span><span class="lbl">Marca global · Interbrand 2025</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERFILES -->
+<section id="perfiles">
+  <div class="fade-in" style="text-align:center;max-width:580px;margin:0 auto 0.5rem;">
+    <span class="section-tag">Para quién es Global Care</span>
+    <h2 class="section-title" style="margin:0 auto;">Tres perfiles, <em>una solución</em></h2>
+    <p class="section-sub" style="margin:1rem auto 0;">Allianz Care tiene planes diseñados para cada situación — desde el profesional que viaja frecuentemente hasta la familia que vive entre países.</p>
+  </div>
+  <div class="perfiles-grid fade-in">
+    <div class="perfil-card">
+      <span class="perfil-icon">👤</span>
+      <h3>Individuos</h3>
+      <p>Profesionales, ejecutivos y personas que quieren acceso a la mejor medicina internacional sin depender del sistema local.</p>
+      <ul class="perfil-needs">
+        <li>Viajeros frecuentes de negocios o placer</li>
+        <li>Personas que buscan especialistas en el exterior</li>
+        <li>Expatriados viviendo fuera de su país</li>
+        <li>Quienes quieren una segunda opinión internacional</li>
+      </ul>
+    </div>
+    <div class="perfil-card">
+      <span class="perfil-icon">👨‍👩‍👧‍👦</span>
+      <h3>Familias</h3>
+      <p>Familias completas protegidas bajo un mismo plan — incluyendo hijos, con cobertura de maternidad y atención pediátrica internacional.</p>
+      <ul class="perfil-needs">
+        <li>Familias con hijos estudiando en el exterior</li>
+        <li>Familias que viajan juntas frecuentemente</li>
+        <li>Planificación familiar con cobertura de maternidad</li>
+        <li>Atención pediátrica internacional de primer nivel</li>
+      </ul>
+    </div>
+    <div class="perfil-card">
+      <span class="perfil-icon">🏢</span>
+      <h3>Empresas</h3>
+      <p>Planes corporativos para equipos ejecutivos y empleados clave — un beneficio que atrae y retiene talento de primer nivel.</p>
+      <ul class="perfil-needs">
+        <li>Ejecutivos y directivos con viajes frecuentes</li>
+        <li>Equipos internacionales distribuidos</li>
+        <li>Beneficio corporativo diferenciador</li>
+        <li>Planes grupales con condiciones especiales</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- COBERTURA -->
+<section id="cobertura">
+  <div class="fade-in" style="text-align:center;max-width:580px;margin:0 auto 0.5rem;">
+    <span class="section-tag">Qué cubre</span>
+    <h2 class="section-title" style="margin:0 auto;">Cobertura médica <em>integral</em></h2>
+    <p class="section-sub" style="margin:1rem auto 0;">Los planes de Allianz Care cubren las necesidades médicas más importantes — sin límites geográficos.</p>
+  </div>
+  <div class="cobertura-grid fade-in">
+    <div class="cob-card">
+      <div class="cob-icon">🏥</div>
+      <h4>Hospitalización</h4>
+      <ul class="cob-list">
+        <li>Internación en hospitales de primer nivel</li>
+        <li>Cirugías programadas y de emergencia</li>
+        <li>Unidad de cuidados intensivos</li>
+        <li>Medicamentos durante la hospitalización</li>
+      </ul>
+    </div>
+    <div class="cob-card">
+      <div class="cob-icon">🩺</div>
+      <h4>Atención ambulatoria</h4>
+      <ul class="cob-list">
+        <li>Consultas médicas y especialistas</li>
+        <li>Exámenes de diagnóstico y laboratorio</li>
+        <li>Imágenes médicas (MRI, TAC, rayos X)</li>
+        <li>Tratamientos ambulatorios</li>
+      </ul>
+    </div>
+    <div class="cob-card">
+      <div class="cob-icon">🚑</div>
+      <h4>Emergencias</h4>
+      <ul class="cob-list">
+        <li>Atención de emergencias 24/7</li>
+        <li>Evacuación médica internacional</li>
+        <li>Repatriación sanitaria</li>
+        <li>Línea de asistencia global en español</li>
+      </ul>
+    </div>
+    <div class="cob-card">
+      <div class="cob-icon">🦷</div>
+      <h4>Dental (opcional)</h4>
+      <ul class="cob-list">
+        <li>Consultas y tratamientos dentales</li>
+        <li>Urgencias dentales internacionales</li>
+        <li>Disponible como beneficio adicional</li>
+      </ul>
+    </div>
+    <div class="cob-card">
+      <div class="cob-icon">🤱</div>
+      <h4>Maternidad (opcional)</h4>
+      <ul class="cob-list">
+        <li>Control prenatal completo</li>
+        <li>Parto en centros internacionales</li>
+        <li>Atención del recién nacido</li>
+      </ul>
+    </div>
+    <div class="cob-card">
+      <div class="cob-icon">🧠</div>
+      <h4>Salud mental (opcional)</h4>
+      <ul class="cob-list">
+        <li>Consultas con psicólogos y psiquiatras</li>
+        <li>Tratamientos de salud mental</li>
+        <li>Disponible como beneficio adicional</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIADORES -->
+<section id="diferenciadores">
+  <div class="fade-in" style="max-width:600px;">
+    <span class="section-tag">Por qué Allianz Care con Estrategika</span>
+    <h2 class="section-title">Lo que nos hace <em>distintos</em></h2>
+    <p class="section-sub">No somos un comparador de seguros. Somos su asesor — le ayudamos a elegir el plan correcto para su situación específica.</p>
+  </div>
+  <div class="dif-grid fade-in">
+    <div class="dif-card">
+      <div class="dif-num">01</div>
+      <h4>Asesoría personalizada</h4>
+      <p>Analizamos su situación, sus necesidades y su presupuesto antes de recomendar un plan. No vendemos el plan más caro — vendemos el más adecuado.</p>
+    </div>
+    <div class="dif-card">
+      <div class="dif-num">02</div>
+      <h4>Respaldo Allianz Group</h4>
+      <p>Una de las aseguradoras más grandes del mundo. Cuando necesite usar su seguro, tendrá detrás una organización con capacidad de respuesta global.</p>
+    </div>
+    <div class="dif-card">
+      <div class="dif-num">03</div>
+      <h4>Sin fronteras</h4>
+      <p>Su cobertura viaja con usted. No importa si está en Lima, Miami, Madrid o Singapur — Allianz Care le cubre donde esté.</p>
+    </div>
+    <div class="dif-card">
+      <div class="dif-num">04</div>
+      <h4>Complementa su ecosistema</h4>
+      <p>Global Care trabaja en conjunto con Savings, Wealth y Life — para que su plan patrimonial y su protección familiar estén completamente integrados.</p>
+    </div>
+    <div class="dif-card">
+      <div class="dif-num">05</div>
+      <h4>Atención continua</h4>
+      <p>Somos su punto de contacto antes, durante y después de cualquier evento médico. No estará solo navegando el sistema de seguros internacionales.</p>
+    </div>
+    <div class="dif-card">
+      <div class="dif-num">06</div>
+      <h4>Planes a su medida</h4>
+      <p>Desde cobertura básica hasta planes premium con todas las coberturas. Ajustamos el plan a su presupuesto y necesidades reales.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ECOSISTEMA -->
+<section id="ecosistema">
+  <div class="fade-in" style="text-align:center;max-width:580px;margin:0 auto 2rem;">
+    <span class="section-tag">Ecosistema Grupo Estrategika</span>
+    <h2 class="section-title" style="margin:0 auto;">Global Care es parte de un <em>plan completo</em></h2>
+    <p class="section-sub" style="margin:1rem auto 0;">Su salud protegida. Su capital creciendo. Su familia asegurada. Todo integrado bajo Grupo Estrategika.</p>
+  </div>
+  <div class="eco-grid fade-in">
+    <div class="eco-card">
+      <span class="eco-dot" style="background:#2C4A3E;"></span>
+      <h4>Estrategika Savings</h4>
+      <p>Mientras su familia está protegida con Global Care, su capital crece disciplinadamente mes a mes con Dominion MSS.</p>
+      <a href="simulador.html" class="eco-link" style="color:#2C4A3E;border-color:#2C4A3E;">Simular plan de ahorro →</a>
+    </div>
+    <div class="eco-card">
+      <span class="eco-dot" style="background:#1E3A5F;"></span>
+      <h4>Estrategika Wealth</h4>
+      <p>Para clientes con mayor patrimonio, Global Care complementa su estrategia de protección patrimonial internacional.</p>
+      <a href="wealth.html" class="eco-link" style="color:#1E3A5F;border-color:#1E3A5F;">Conocer Wealth →</a>
+    </div>
+    <div class="eco-card">
+      <span class="eco-dot" style="background:#5C3A5F;"></span>
+      <h4>Estrategika Life</h4>
+      <p>Global Care cubre su salud en vida. Life protege a su familia si usted falta. Juntos forman la protección completa.</p>
+      <a href="life.html" class="eco-link" style="color:#5C3A5F;border-color:#5C3A5F;">Conocer Life →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto-care">
+  <div class="contacto-grid fade-in">
+    <div class="contacto-left">
+      <span class="section-tag">Cotice ahora</span>
+      <h2>Su salud merece la <em>mejor cobertura</em></h2>
+      <p>Cuéntenos su situación y le preparamos una cotización personalizada con los planes de Allianz Care más adecuados para usted.</p>
+      <div class="c-detail">
+        <span class="c-label">Email</span>
+        <span class="c-val">werner@grupoestrategika.com</span>
+      </div>
+      <div class="c-detail">
+        <span class="c-label">WhatsApp</span>
+        <span class="c-val">+51 998 288 962</span>
+      </div>
+      <div class="c-detail">
+        <span class="c-label">Aseguradora</span>
+        <span class="c-val">Allianz Care International</span>
+      </div>
+      <div class="c-detail">
+        <span class="c-label">Cobertura</span>
+        <span class="c-val">Mundial · sin fronteras</span>
+      </div>
+    </div>
+    <form class="care-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <input type="text" placeholder="Juan Pérez" required/>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="juan@email.com" required/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>WhatsApp</label>
+          <input type="tel" placeholder="+51 9XX XXX XXX"/>
+        </div>
+        <div class="form-group">
+          <label>Tipo de plan</label>
+          <select>
+            <option value="">Seleccione...</option>
+            <option>Individual</option>
+            <option>Familiar</option>
+            <option>Corporativo / Grupo</option>
+            <option>No sé — necesito orientación</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Número de personas a cubrir</label>
+          <select>
+            <option value="">Seleccione...</option>
+            <option>Solo yo</option>
+            <option>2 personas</option>
+            <option>3 – 4 personas (familia)</option>
+            <option>5+ personas (grupo/empresa)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>País de residencia</label>
+          <select>
+            <option value="">Seleccione...</option>
+            <option>Perú</option>
+            <option>Colombia</option>
+            <option>México</option>
+            <option>Chile</option>
+            <option>Argentina</option>
+            <option>Ecuador</option>
+            <option>Otro LATAM</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>¿Tiene alguna necesidad específica? (opcional)</label>
+        <textarea placeholder="Ej: viajo frecuentemente, tengo hijos estudiando en el exterior, busco cobertura para toda mi familia..."></textarea>
+      </div>
+      <div class="form-success" id="formSuccess">✓ Solicitud recibida. Le contactaremos dentro de las próximas 24 horas con su cotización personalizada.</div>
+      <button type="submit" class="form-submit">Solicitar cotización →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Estrategika <span>Global Care</span></div>
+  <div class="footer-copy">© 2026 Grupo Estrategika · Powered by Allianz Care International</div>
+  <a href="index.html" class="footer-link">← Sitio principal</a>
+</footer>
+
+<script>
+window.addEventListener('load', function() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+});
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = 'Enviando...';
+  btn.disabled = true;
+  setTimeout(() => {
+    document.getElementById('formSuccess').style.display = 'block';
+    btn.style.display = 'none';
+  }, 800);
+}
+</script>
+</body>
+</html>
