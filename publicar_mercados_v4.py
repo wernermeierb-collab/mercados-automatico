@@ -240,12 +240,13 @@ if __name__ == "__main__":
     print(f"Archivos del sitio: {len(SITE_FILES) + 1}")
     
     for fname in SITE_FILES:
-        if os.path.exists(fname):
-            with open(fname, 'rb') as f:
+        site_path = os.path.join('site', fname)
+        if os.path.exists(site_path):
+            with open(site_path, 'rb') as f:
                 files_dict[fname] = f.read()
             print(f"  + {fname}")
         else:
-            print(f"  ⚠️ No encontrado: {fname}")
+            print(f"  ⚠️ No encontrado: site/{fname}")
 
     files_dict['mercados.html'] = mercados_html.encode('utf-8')
     print(f"  + mercados.html (generado)")
