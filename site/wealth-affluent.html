@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Estrategika Wealth · Protección Patrimonial Internacional desde USD 100K</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink: #1A1814;
+  --warm: #F7F3EE;
+  --warm2: #EDE6DC;
+  --gold: #B89A6A;
+  --gold-light: #D4B896;
+  --muted: #7A7063;
+  --border: #E2D9CE;
+  --white: #FFFFFF;
+  --accent: #1E3A5F;
+  --accent2: #2C4A3E;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'DM Sans',sans-serif; background:var(--warm); color:var(--ink); overflow-x:hidden; }
+
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:1.4rem 4rem;
+  background:rgba(247,243,238,0.95);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo { text-decoration:none; }
+.nav-logo-top { font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); display:block; font-family:'DM Sans',sans-serif; }
+.nav-logo-main { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:500; color:var(--ink); }
+.nav-logo-main span { color:var(--gold); }
+.nav-links { display:flex; gap:2rem; list-style:none; align-items:center; }
+.nav-links a { font-size:0.75rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+.nav-links a:hover { color:var(--gold); }
+.nav-cta { background:var(--accent); color:var(--white); padding:0.6rem 1.4rem; font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; text-decoration:none; transition:background 0.25s; }
+.nav-cta:hover { background:var(--gold); }
+
+/* HERO */
+.hero {
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:8rem 4rem 4rem;
+  gap:4rem;
+  background:var(--white);
+  position:relative;
+  overflow:hidden;
+}
+.hero::before {
+  content:'';
+  position:absolute; top:0; right:0; width:50%; height:100%;
+  background:linear-gradient(135deg, rgba(30,58,95,0.04) 0%, transparent 70%);
+}
+.hero-eyebrow { font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:1.5rem; }
+.hero h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(2.8rem,4.5vw,4.5rem); font-weight:400; line-height:1.1; margin-bottom:1.5rem; }
+.hero h1 em { font-style:italic; color:var(--gold); }
+.hero-desc { font-size:0.95rem; line-height:1.8; color:var(--muted); max-width:440px; margin-bottom:2rem; }
+.hero-ticket { display:inline-flex; align-items:center; gap:0.8rem; background:var(--warm); border:1px solid var(--border); padding:0.8rem 1.5rem; margin-bottom:2.5rem; }
+.hero-ticket span { font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+.hero-ticket strong { font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:var(--ink); font-weight:500; }
+.hero-actions { display:flex; gap:1rem; align-items:center; flex-wrap:wrap; }
+.btn-primary { background:var(--accent); color:var(--white); padding:1rem 2.5rem; font-size:0.78rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; border:none; cursor:pointer; text-decoration:none; transition:all 0.25s; display:inline-block; }
+.btn-primary:hover { background:var(--gold); transform:translateY(-2px); }
+.btn-outline { background:transparent; color:var(--ink); padding:1rem 2rem; font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; border:1px solid var(--border); cursor:pointer; text-decoration:none; transition:all 0.25s; display:inline-block; }
+.btn-outline:hover { border-color:var(--gold); color:var(--gold); }
+
+/* HERO RIGHT */
+.hero-right { display:flex; flex-direction:column; gap:1.5rem; }
+.why-card { background:var(--warm); border:1px solid var(--border); padding:2rem; position:relative; overflow:hidden; }
+.why-card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--gold); }
+.why-num { font-family:'Cormorant Garamond',serif; font-size:2.5rem; font-weight:300; color:rgba(184,154,106,0.25); line-height:1; margin-bottom:0.5rem; }
+.why-card h4 { font-size:0.88rem; font-weight:500; color:var(--ink); margin-bottom:0.4rem; }
+.why-card p { font-size:0.8rem; color:var(--muted); line-height:1.65; }
+
+/* STATS BAR */
+.stats-bar { background:var(--accent); padding:2.5rem 4rem; display:grid; grid-template-columns:repeat(4,1fr); gap:2rem; text-align:center; }
+.stat-num { font-family:'Cormorant Garamond',serif; font-size:2.4rem; font-weight:300; color:var(--gold-light); display:block; }
+.stat-label { font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-top:0.3rem; display:block; }
+
+/* SECTIONS */
+section { padding:6rem 4rem; }
+.section-tag { font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:1rem; }
+.section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,3vw,2.8rem); font-weight:400; line-height:1.2; margin-bottom:1.5rem; }
+.section-title em { font-style:italic; color:var(--gold); }
+.section-sub { font-size:0.9rem; line-height:1.8; color:var(--muted); max-width:560px; margin-bottom:3rem; }
+
+/* PROBLEMA */
+#problema { background:var(--warm); }
+.problema-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+.problema-list { display:flex; flex-direction:column; gap:1rem; }
+.problema-item { background:var(--white); border:1px solid var(--border); padding:1.5rem 2rem; display:flex; gap:1.2rem; align-items:flex-start; }
+.problema-icon { font-size:1.2rem; flex-shrink:0; margin-top:0.1rem; }
+.problema-item h4 { font-size:0.88rem; font-weight:500; color:var(--ink); margin-bottom:0.3rem; }
+.problema-item p { font-size:0.8rem; color:var(--muted); line-height:1.6; }
+.solucion-card { background:var(--accent); padding:3rem; color:var(--white); }
+.solucion-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:300; margin-bottom:1.5rem; }
+.solucion-items { display:flex; flex-direction:column; gap:1rem; }
+.solucion-item { display:flex; gap:1rem; align-items:flex-start; padding:1rem 0; border-bottom:1px solid rgba(255,255,255,0.08); }
+.solucion-item:last-child { border-bottom:none; }
+.sol-check { color:var(--gold-light); flex-shrink:0; margin-top:0.1rem; }
+.solucion-item p { font-size:0.83rem; color:rgba(255,255,255,0.7); line-height:1.65; }
+.solucion-item strong { color:var(--white); }
+
+/* COMO FUNCIONA */
+#como-funciona { background:var(--white); }
+.pasos-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); margin-top:3rem; }
+.paso { background:var(--white); padding:2.5rem 2rem; }
+.paso-num { font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:300; color:rgba(30,58,95,0.1); line-height:1; margin-bottom:1rem; }
+.paso h4 { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:500; margin-bottom:0.6rem; }
+.paso p { font-size:0.8rem; color:var(--muted); line-height:1.7; }
+
+/* MERCADOS */
+#mercados-section { background:var(--warm); }
+.mercados-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
+.live-badge { display:inline-flex; align-items:center; gap:0.6rem; background:var(--white); border:1px solid var(--border); padding:0.5rem 1rem; margin-bottom:1.5rem; }
+.live-dot { width:6px; height:6px; border-radius:50%; background:#6BAA8A; animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+.live-badge span { font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); }
+.market-preview { background:var(--white); border:1px solid var(--border); }
+.market-header { background:var(--ink); padding:1.5rem 2rem; display:flex; justify-content:space-between; align-items:center; }
+.market-header h4 { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:400; color:var(--white); }
+.market-header span { font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.4); }
+.market-body { padding:1.5rem 2rem; }
+.mkt-row { display:flex; justify-content:space-between; align-items:center; padding:0.7rem 0; border-bottom:1px solid var(--border); }
+.mkt-row:last-child { border-bottom:none; }
+.mkt-name { font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); }
+.mkt-val { font-family:'Cormorant Garamond',serif; font-size:1.05rem; color:var(--ink); }
+.mkt-chg { font-size:0.74rem; font-weight:500; }
+.mkt-chg.up { color:#2C4A3E; }
+.mkt-chg.down { color:#C04040; }
+
+/* COMPARACION */
+#comparacion { background:var(--white); }
+.comp-table { width:100%; border-collapse:collapse; margin-top:2rem; }
+.comp-table th { font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); padding:1rem 1.5rem; text-align:left; border-bottom:2px solid var(--border); }
+.comp-table th.highlight { color:var(--white); background:var(--accent); }
+.comp-table td { padding:1rem 1.5rem; border-bottom:1px solid var(--border); font-size:0.85rem; color:var(--ink); }
+.comp-table td.highlight { background:rgba(30,58,95,0.04); font-weight:500; color:var(--accent); }
+.comp-table tr:hover td { background:var(--warm); }
+.comp-table tr:hover td.highlight { background:rgba(30,58,95,0.08); }
+.check { color:#2C4A3E; font-weight:600; }
+.cross { color:#C04040; }
+
+/* CONTACTO */
+#contacto-affluent { background:var(--accent); }
+.contacto-grid { display:grid; grid-template-columns:1fr 1.3fr; gap:5rem; align-items:start; }
+.contacto-left h2 { font-family:'Cormorant Garamond',serif; font-size:2.5rem; font-weight:300; color:var(--white); line-height:1.2; margin-bottom:1.2rem; }
+.contacto-left h2 em { font-style:italic; color:var(--gold-light); }
+.contacto-left p { font-size:0.88rem; color:rgba(255,255,255,0.55); line-height:1.8; margin-bottom:2rem; }
+.contact-detail { padding:0.8rem 0; border-bottom:1px solid rgba(255,255,255,0.08); }
+.contact-detail:last-child { border-bottom:none; }
+.c-label { font-size:0.65rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold-light); display:block; margin-bottom:0.2rem; }
+.c-val { font-size:0.85rem; color:rgba(255,255,255,0.8); }
+.affluent-form { display:flex; flex-direction:column; gap:1.2rem; }
+.form-group { display:flex; flex-direction:column; gap:0.4rem; }
+.form-group label { font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.4); }
+.form-group input, .form-group select, .form-group textarea { padding:0.9rem 1rem; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:var(--white); font-family:'DM Sans',sans-serif; font-size:0.88rem; outline:none; transition:border-color 0.2s; -webkit-appearance:none; }
+.form-group input::placeholder, .form-group textarea::placeholder { color:rgba(255,255,255,0.25); }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:rgba(184,154,106,0.5); }
+.form-group select option { background:var(--accent); color:var(--white); }
+.form-group textarea { resize:vertical; min-height:90px; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
+.form-submit { background:var(--gold); color:var(--ink); border:none; padding:1rem 2.5rem; font-family:'DM Sans',sans-serif; font-size:0.78rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; cursor:pointer; transition:all 0.25s; align-self:flex-start; }
+.form-submit:hover { background:var(--gold-light); }
+.form-success { display:none; background:rgba(107,170,138,0.15); border:1px solid rgba(107,170,138,0.3); padding:1rem 1.5rem; font-size:0.85rem; color:#8FCFB0; }
+
+footer { background:var(--ink); padding:2.5rem 4rem; display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.06); }
+.footer-logo { font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--white); }
+.footer-logo span { color:var(--gold); }
+.footer-copy { font-size:0.72rem; color:rgba(255,255,255,0.25); }
+.footer-link { font-size:0.75rem; color:rgba(255,255,255,0.4); text-decoration:none; }
+.footer-link:hover { color:var(--gold); }
+
+.fade-in { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-top">Grupo Estrategika</span>
+    <span class="nav-logo-main">Estrategika <span>Wealth</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#problema">Por qué proteger afuera</a></li>
+    <li><a href="#como-funciona">Cómo funciona</a></li>
+    <li><a href="#comparacion">Comparación</a></li>
+    <li><a href="wealth.html">USD 1M+ →</a></li>
+    <li><a href="#contacto-affluent" class="nav-cta">Empezar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <span class="hero-eyebrow">Estrategika Wealth · Protección Patrimonial Internacional</span>
+    <h1>"Mi casa está aquí.<br>Mi negocio está aquí.<br>Mis ahorros los quiero en un lugar <em>más seguro</em>."</h1>
+    <p class="hero-desc">Su casa está aquí. Su negocio está aquí. Mientras usted trabaja, su capital puede estar creciendo internacionalmente — en dólares, superando al banco local, con acceso a los mismos mercados que usan los grandes inversionistas del mundo.</p>
+    <div class="hero-ticket">
+      <span>Ticket de entrada</span>
+      <strong>USD 100,000</strong>
+    </div>
+    <div class="hero-actions">
+      <a href="#contacto-affluent" class="btn-primary">Agendar consulta →</a>
+      <a href="#problema" class="btn-outline">¿Por qué proteger afuera?</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="why-card">
+      <div class="why-num">1</div>
+      <h4>Su moneda local pierde valor cada año</h4>
+      <p>La inflación promedio en LATAM supera el 4% anual. En dólares, su poder adquisitivo se erosiona menos y tiene respaldo de la moneda de reserva global.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">2</div>
+      <h4>Su banco local no trabaja para usted</h4>
+      <p>Los depósitos bancarios en LATAM rinden entre 1-4% anual. Con acceso a mercados globales puede apuntar a retornos muy superiores con riesgo controlado.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">3</div>
+      <h4>Casa, negocio y ahorros en el mismo país</h4>
+      <p>Su casa está aquí. Su negocio está aquí. Si sus ahorros también están aquí, una sola crisis afecta todo al mismo tiempo. Separar el capital protege lo que ha construido.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div><span class="stat-num">USD 100K</span><span class="stat-label">Ticket de entrada</span></div>
+  <div><span class="stat-num">USD+</span><span class="stat-label">Capital creciendo en dólares</span></div>
+  <div><span class="stat-num">100%</span><span class="stat-label">En dólares · sin riesgo sol</span></div>
+  <div><span class="stat-num">Global</span><span class="stat-label">Acciones · ETFs · Divisas</span></div>
+</div>
+
+<!-- PROBLEMA / SOLUCIÓN -->
+<section id="problema">
+  <div class="problema-grid fade-in">
+    <div>
+      <span class="section-tag">Por qué proteger afuera</span>
+      <h2 class="section-title">Su país es su hogar.<br><em>Su capital</em> merece más protección.</h2>
+      <p class="section-sub">Mientras usted construye en su país, su capital puede estar creciendo en otro lugar — de forma segura, en dólares, superando lo que cualquier banco local puede ofrecerle.</p>
+      <div class="problema-list">
+        <div class="problema-item">
+          <span class="problema-icon">📉</span>
+          <div>
+            <h4>Inflación en soles</h4>
+            <p>A 4% anual, USD 100K de hoy equivalen a USD 67K de poder adquisitivo en 10 años si permanecen en moneda local.</p>
+          </div>
+        </div>
+        <div class="problema-item">
+          <span class="problema-icon">🏦</span>
+          <div>
+            <h4>Depósitos bancarios al 1-4%</h4>
+            <p>Su banco local invierte su dinero en instrumentos que rinden 8-12% y le paga 1-4%. La diferencia es su costo de oportunidad.</p>
+          </div>
+        </div>
+        <div class="problema-item">
+          <span class="problema-icon">🌍</span>
+          <div>
+            <h4>Casa, negocio y ahorros en el mismo lugar</h4>
+            <p>Negocio, inmuebles y ahorros en Perú: si el país enfrenta una crisis política o económica, todo se ve afectado al mismo tiempo.</p>
+          </div>
+        </div>
+        <div class="problema-item">
+          <span class="problema-icon">⚠️</span>
+          <div>
+            <h4>Riesgo cambiario sin cobertura</h4>
+            <p>La mayoría de monedas latinoamericanas han perdido entre 20-50% de su valor frente al dólar en los últimos 10 años.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="solucion-card fade-in">
+      <h3>La solución Estrategika Wealth</h3>
+      <div class="solucion-items">
+        <div class="solucion-item">
+          <span class="sol-check">✓</span>
+          <p><strong>100% en dólares.</strong> Su capital sale del riesgo cambiario desde el primer día. Sin exposición al sol.</p>
+        </div>
+        <div class="solucion-item">
+          <span class="sol-check">✓</span>
+          <p><strong>Mercados globales.</strong> Acceso a acciones, ETFs UCITS, divisas y commodities vía StoneX — plataforma institucional regulada.</p>
+        </div>
+        <div class="solucion-item">
+          <span class="sol-check">✓</span>
+          <p><strong>Supere al banco local.</strong> Acceso a instrumentos que históricamente han crecido muy por encima de lo que cualquier depósito local puede ofrecer — con riesgo controlado y cartera diversificada.</p>
+        </div>
+        <div class="solucion-item">
+          <span class="sol-check">✓</span>
+          <p><strong>Asesoría independiente.</strong> No trabajamos para ningún banco. Le recomendamos lo que es mejor para usted, no lo que nos da mayor comisión.</p>
+        </div>
+        <div class="solucion-item">
+          <span class="sol-check">✓</span>
+          <p><strong>Reporte diario de mercados.</strong> Cada mañana recibe contexto sobre sus posiciones — índices, divisas, macro y oportunidades.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section id="como-funciona">
+  <div class="fade-in" style="text-align:center;max-width:580px;margin:0 auto 0.5rem;">
+    <span class="section-tag">Proceso</span>
+    <h2 class="section-title" style="margin:0 auto;">Simple, transparente, <em>a su ritmo</em></h2>
+    <p class="section-sub" style="margin:1rem auto 0;">Sin presión, sin compromisos inmediatos. Empezamos por entender su situación.</p>
+  </div>
+  <div class="pasos-grid fade-in">
+    <div class="paso">
+      <div class="paso-num">01</div>
+      <h4>Consulta inicial gratuita</h4>
+      <p>30 minutos para entender su situación actual, objetivos y nivel de riesgo. Sin compromiso, sin presión de venta.</p>
+    </div>
+    <div class="paso">
+      <div class="paso-num">02</div>
+      <h4>Propuesta personalizada</h4>
+      <p>Analizamos su capital disponible y le presentamos una estrategia de inversión internacional a medida con costos transparentes.</p>
+    </div>
+    <div class="paso">
+      <div class="paso-num">03</div>
+      <h4>Apertura de cuenta</h4>
+      <p>Proceso 100% digital. Abrimos su cuenta en StoneX — plataforma regulada internacionalmente — y transferimos su capital.</p>
+    </div>
+    <div class="paso">
+      <div class="paso-num">04</div>
+      <h4>Seguimiento continuo</h4>
+      <p>Reporte de mercados diario, revisiones periódicas de su portafolio y acceso directo a su asesor cuando lo necesite.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MERCADOS -->
+<section id="mercados-section">
+  <div class="mercados-grid fade-in">
+    <div>
+      <div class="live-badge"><span class="live-dot"></span><span>Cobertura de mercados</span></div>
+      <span class="section-tag">Daily Market Report</span>
+      <h2 class="section-title">Cada mañana, el contexto que necesita para <em>decidir bien</em></h2>
+      <p class="section-sub">Como cliente Wealth recibe nuestro reporte diario con análisis de los mercados globales, noticias macro relevantes y contexto para sus posiciones.</p>
+      <a href="#contacto-affluent" class="btn-primary">Empezar ahora →</a>
+    </div>
+    <div class="market-preview fade-in">
+      <div class="market-header">
+        <h4>Mercados Globales</h4>
+        <span>Actualizado diariamente</span>
+      </div>
+      <div class="market-body">
+        <div class="mkt-row">
+          <span class="mkt-name">S&P 500</span>
+          <span class="mkt-val">5,842</span>
+          <span class="mkt-chg up">▲ +0.87%</span>
+        </div>
+        <div class="mkt-row">
+          <span class="mkt-name">Nasdaq</span>
+          <span class="mkt-val">18,963</span>
+          <span class="mkt-chg up">▲ +1.24%</span>
+        </div>
+        <div class="mkt-row">
+          <span class="mkt-name">BTC / USD</span>
+          <span class="mkt-val">106,450</span>
+          <span class="mkt-chg up">▲ +2.31%</span>
+        </div>
+        <div class="mkt-row">
+          <span class="mkt-name">Oro / XAU</span>
+          <span class="mkt-val">3,287</span>
+          <span class="mkt-chg down">▼ -0.42%</span>
+        </div>
+        <div class="mkt-row">
+          <span class="mkt-name">USD / PEN</span>
+          <span class="mkt-val">3.71</span>
+          <span class="mkt-chg down">▼ -0.18%</span>
+        </div>
+        <div class="mkt-row">
+          <span class="mkt-name">T-Bond 10Y</span>
+          <span class="mkt-val">4.52%</span>
+          <span class="mkt-chg up">▲ +0.04%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARACION -->
+<section id="comparacion">
+  <div class="fade-in" style="max-width:700px;margin:0 auto 0.5rem;">
+    <span class="section-tag">Comparación</span>
+    <h2 class="section-title">Estrategika Wealth vs las alternativas</h2>
+    <p class="section-sub">USD 100,000 durante 10 años — comparando las principales opciones disponibles en el mercado peruano.</p>
+  </div>
+  <div class="fade-in">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Criterio</th>
+          <th class="highlight">Estrategika Wealth</th>
+          <th>Banco local</th>
+          <th>AFP Fondo 2</th>
+          <th>Inmueble Lima</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Retorno anual estimado</td>
+          <td class="highlight">~8 – 10%</td>
+          <td>1 – 4%</td>
+          <td>~5%</td>
+          <td>~4 – 6%</td>
+        </tr>
+        <tr>
+          <td>Moneda</td>
+          <td class="highlight">USD</td>
+          <td>Soles / USD</td>
+          <td>Soles</td>
+          <td>USD / Soles</td>
+        </tr>
+        <tr>
+          <td>Liquidez</td>
+          <td class="highlight">Alta · T+2</td>
+          <td>Alta</td>
+          <td>Baja · hasta retiro</td>
+          <td>Muy baja</td>
+        </tr>
+        <tr>
+          <td>Diversificación global</td>
+          <td class="highlight"><span class="check">✓</span> Total</td>
+          <td><span class="cross">✗</span> Local</td>
+          <td><span class="cross">✗</span> Local</td>
+          <td><span class="cross">✗</span> Un activo</td>
+        </tr>
+        <tr>
+          <td>Riesgo político Perú</td>
+          <td class="highlight"><span class="check">✓</span> Bajo</td>
+          <td><span class="cross">✗</span> Alto</td>
+          <td><span class="cross">✗</span> Alto</td>
+          <td><span class="cross">✗</span> Alto</td>
+        </tr>
+        <tr>
+          <td>USD 100K en 10 años</td>
+          <td class="highlight">~USD 215K</td>
+          <td>~USD 122K</td>
+          <td>~USD 163K</td>
+          <td>~USD 149K</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto-affluent">
+  <div class="contacto-grid fade-in">
+    <div class="contacto-left">
+      <span class="section-tag" style="color:var(--gold-light)">Empezar es simple</span>
+      <h2>Una consulta de <em>30 minutos</em> puede cambiar el rumbo de su capital</h2>
+      <p>Sin compromiso. Sin presión. Solo una conversación honesta para entender si podemos ayudarle.</p>
+      <div class="contact-detail">
+        <span class="c-label">Email</span>
+        <span class="c-val">werner@grupoestrategika.com</span>
+      </div>
+      <div class="contact-detail">
+        <span class="c-label">WhatsApp</span>
+        <span class="c-val">+51 998 288 962</span>
+      </div>
+      <div class="contact-detail">
+        <span class="c-label">Ticket mínimo</span>
+        <span class="c-val">USD 100,000</span>
+      </div>
+    </div>
+    <form class="affluent-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <input type="text" placeholder="Juan Pérez" required/>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="juan@email.com" required/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>WhatsApp</label>
+          <input type="tel" placeholder="+51 9XX XXX XXX"/>
+        </div>
+        <div class="form-group">
+          <label>Capital disponible para invertir</label>
+          <select>
+            <option value="">Seleccione...</option>
+            <option>USD 100K – 250K</option>
+            <option>USD 250K – 500K</option>
+            <option>USD 500K – 1M</option>
+            <option>Prefiero no indicar</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>¿Cuál es su principal preocupación hoy?</label>
+        <textarea placeholder="Ej: tengo ahorros en el banco que no rinden nada, quiero proteger mi capital fuera de mi país, no sé cómo empezar..."></textarea>
+      </div>
+      <div class="form-success" id="formSuccess">✓ Recibido. Le contactaremos dentro de las próximas 24 horas hábiles.</div>
+      <button type="submit" class="form-submit">Agendar consulta gratuita →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Estrategika <span>Wealth</span></div>
+  <div class="footer-copy">© 2026 Grupo Estrategika · América Latina</div>
+  <a href="index.html" class="footer-link">← Sitio principal</a>
+</footer>
+
+<script>
+window.addEventListener('load', function() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+});
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = 'Enviando...';
+  btn.disabled = true;
+  setTimeout(() => {
+    document.getElementById('formSuccess').style.display = 'block';
+    btn.style.display = 'none';
+  }, 800);
+}
+</script>
+</body>
+</html>
