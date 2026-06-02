@@ -47,7 +47,7 @@ def get_latest_report():
     print(f"Usando: {file['name']}")
     mime = file.get('mimeType', '')
     if 'google-apps' in mime:
-        content = service.files().export(fileId=file['id'], mimeType='text/plain').execute()
+        content = service.files().export(fileId=file['id'], mimeType='text/markdown').execute()
     else:
         from googleapiclient.http import MediaIoBaseDownload
         import io
