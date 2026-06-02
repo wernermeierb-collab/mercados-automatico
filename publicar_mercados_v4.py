@@ -182,44 +182,43 @@ def sha256_hex(content: bytes) -> str:
     return hashlib.sha256(content).hexdigest()
 
 def deploy(files_dict):
-    """Deploy via Cloudflare Pages API with correct multipart/form-data and manifest"""
-    print("📤 Desplegando sitio completo...")
+    """Deploy via Wrangler — metodo oficial Cloudflare"""
+    import subprocess, tempfile, os, shutil
+    
+    print("📤 Desplegando sitio completo con Wrangler...")
     print(f"Archivos del sitio: {len(files_dict)}")
-    for name in files_dict:
-        print(f"  + {name}")
-
-    headers = {'Authorization': f'Bearer {CF_TOKEN}'}
-    base_url = f"https://api.cloudflare.com/client/v4/accounts/{CF_ACCOUNT_ID}/pages/projects/{CF_PROJECT}/deployments"
-
-    # Build manifest
-    manifest = {}
-    form_files = {}
-    for filename, content in files_dict.items():
-        if isinstance(content, str):
-            content = content.encode('utf-8')
-        h = sha256_hex(content)
-        manifest[f'/{filename}'] = h
-        form_files[h] = (filename, content, 'text/html')
-
-    # Add manifest to form
-    manifest_json = json.dumps(manifest)
-    form_files['manifest'] = (None, manifest_json, 'application/json')
-
-    print(f"ZIP: {sum(len(v[1]) for k,v in form_files.items() if k != 'manifest')//1024}KB")
-
-    r = requests.post(base_url, headers=headers, files=form_files)
-
+    
+    # Create temp folder with all files
+    dist = tempfile.mkdtemp()
     try:
-        data = r.json()
-        if data.get('success'):
-            print(f"✅ Publicado: grupoestrategika.com")
+        for filename, content in files_dict.items():
+            if isinstance(content, str):
+                content = content.encode('utf-8')
+            filepath = os.path.join(dist, filename)
+            with open(filepath, 'wb') as f:
+                f.write(content)
+            print(f"  + {filename}")
+        
+        env = os.environ.copy()
+        env['CLOUDFLARE_API_TOKEN'] = CF_TOKEN
+        env['CLOUDFLARE_ACCOUNT_ID'] = CF_ACCOUNT_ID
+        
+        result = subprocess.run(
+            ['npx', 'wrangler', 'pages', 'deploy', dist,
+             f'--project-name={CF_PROJECT}',
+             '--branch=main',
+             '--commit-dirty=true'],
+            env=env, capture_output=True, text=True, timeout=120
+        )
+        
+        if result.returncode == 0:
+            print("✅ Publicado: grupoestrategika.com")
             return True
         else:
-            print(f"❌ Error Cloudflare: {data.get('errors')}")
+            print(f"❌ Error Wrangler: {result.stderr[-500:]}")
             return False
-    except Exception as e:
-        print(f"❌ HTTP {r.status_code}: {r.text[:300]}")
-        return False
+    finally:
+        shutil.rmtree(dist, ignore_errors=True)
 
 if __name__ == "__main__":
     print("=" * 50)
