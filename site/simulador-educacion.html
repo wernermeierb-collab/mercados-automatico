@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Simulador Educación · Grupo Estrategika</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink:#1A1814;--warm:#F7F3EE;--gold:#B89A6A;--gold-light:#D4B896;
+  --muted:#7A7063;--border:#E2D9CE;--white:#FFFFFF;--accent:#2C4A3E;
+  --savings:#2C4A3E;--wealth:#1E3A5F;--care:#5C3A5F;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--warm);color:var(--ink);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 4rem;background:rgba(247,243,238,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500;color:var(--ink);text-decoration:none;}
+.nav-logo span{color:var(--gold);}
+.nav-back{font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;}
+.nav-back:hover{color:var(--gold);}
+.hero{padding:7rem 4rem 3rem;text-align:center;background:var(--warm);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(30,58,95,0.08) 0%,transparent 70%);border-radius:50%;}
+.hero-tag{font-size:0.72rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--wealth);display:block;margin-bottom:1rem;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:400;line-height:1.15;margin-bottom:1rem;}
+.hero h1 em{font-style:italic;color:var(--gold);}
+.hero p{font-size:0.95rem;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.75;}
+.wrapper{max-width:1100px;margin:3rem auto;padding:0 2rem 5rem;}
+.calc-card{background:var(--white);border:1px solid var(--border);padding:3rem;margin-bottom:2rem;}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.input-section h2{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;margin-bottom:0.4rem;}
+.input-section p{font-size:0.85rem;color:var(--muted);margin-bottom:2rem;line-height:1.6;}
+.input-group{margin-bottom:1.8rem;}
+.input-group label{font-size:0.72rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.5rem;}
+.input-val{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:500;color:var(--ink);margin-bottom:0.4rem;}
+.input-val span{font-size:1rem;color:var(--muted);font-family:'DM Sans',sans-serif;}
+input[type=range]{-webkit-appearance:none;width:100%;height:4px;background:linear-gradient(to right,var(--gold) 0%,var(--gold) var(--pct,50%),var(--border) var(--pct,50%),var(--border) 100%);border-radius:2px;outline:none;cursor:pointer;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--white);border:2px solid var(--gold);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.12);}
+.range-labels{display:flex;justify-content:space-between;font-size:0.7rem;color:var(--muted);margin-top:0.3rem;}
+.dest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.6rem;margin-top:0.5rem;}
+.dest-btn{padding:0.6rem 0.5rem;border:1px solid var(--border);background:var(--warm);font-size:0.72rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;color:var(--muted);text-align:center;}
+.dest-btn.active{background:var(--wealth);color:var(--white);border-color:var(--wealth);}
+.dest-btn:hover:not(.active){border-color:var(--gold);color:var(--gold);}
+.result-main{background:var(--ink);color:var(--white);padding:2.5rem;margin-bottom:1rem;}
+.result-label{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.45);display:block;margin-bottom:0.4rem;}
+.result-amount{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:400;color:var(--gold);line-height:1;}
+.result-sub{font-size:0.78rem;color:rgba(255,255,255,0.4);margin-top:0.4rem;}
+.result-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.08);margin-top:1.5rem;}
+.result-stat{background:var(--ink);padding:1rem;}
+.result-stat .label{font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);display:block;margin-bottom:0.3rem;}
+.result-stat .val{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--white);}
+.chart-wrapper{margin-top:1.5rem;}
+.chart-title{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;}
+canvas{width:100%!important;max-height:200px;}
+.insight-box{background:var(--warm);border:1px solid var(--border);border-left:3px solid var(--gold);padding:1.2rem 1.5rem;margin-top:1rem;}
+.insight-box p{font-size:0.82rem;color:var(--ink);line-height:1.6;}
+.insight-box strong{color:var(--gold);}
+.urgency{margin-top:2rem;}
+.urgency h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;margin-bottom:0.3rem;}
+.urgency p{font-size:0.85rem;color:var(--muted);margin-bottom:1.5rem;}
+.urgency-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.urg-card{background:var(--white);border:1px solid var(--border);padding:1.8rem;position:relative;overflow:hidden;}
+.urg-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.urg-card.now::after{background:var(--accent);}
+.urg-card.two::after{background:var(--gold);}
+.urg-card.five::after{background:#C4756A;}
+.urg-label{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.8rem;}
+.urg-card h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;margin-bottom:0.5rem;}
+.urg-amount{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--ink);display:block;margin:0.3rem 0;}
+.urg-diff{font-size:0.8rem;font-weight:500;margin-top:0.3rem;}
+.urg-card.now .urg-diff{color:var(--accent);}
+.urg-card.two .urg-diff{color:var(--gold);}
+.urg-card.five .urg-diff{color:#C4756A;}
+.dest-info{margin-top:2rem;}
+.dest-info h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;margin-bottom:1rem;}
+.dest-grid-full{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.dest-card{background:var(--white);border:1px solid var(--border);padding:1.5rem;}
+.dest-card h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;margin-bottom:0.5rem;}
+.dest-card .cost{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--ink);display:block;margin:0.3rem 0;}
+.dest-card p{font-size:0.78rem;color:var(--muted);line-height:1.6;}
+.cta{padding:4rem;text-align:center;background:var(--ink);}
+.cta h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:var(--white);margin-bottom:1rem;}
+.cta h2 em{font-style:italic;color:var(--gold);}
+.cta p{font-size:0.88rem;color:rgba(255,255,255,0.5);margin-bottom:2rem;}
+.btn-primary{display:inline-flex;align-items:center;gap:0.6rem;background:var(--gold);color:var(--white);padding:1rem 2.5rem;font-size:0.82rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;transition:background 0.25s;}
+.btn-primary:hover{background:var(--accent);}
+.disclaimer{background:var(--ink);padding:2rem 4rem;font-size:0.72rem;color:rgba(255,255,255,0.25);line-height:1.7;text-align:center;border-top:1px solid rgba(255,255,255,0.06);}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Grupo <span>Estrategika</span></a>
+  <a href="index.html" class="nav-back">← Volver al sitio</a>
+</nav>
+
+<div class="hero">
+  <span class="hero-tag">Estrategika Savings · Educación</span>
+  <h1>El mejor regalo para su hijo es <em>empezar hoy</em></h1>
+  <p>Calcule cuánto necesita ahorrar mensualmente para financiar la educación universitaria de su hijo — en la universidad que elija, en cualquier país.</p>
+</div>
+
+<div class="wrapper">
+  <div class="calc-card fade-in">
+    <div class="calc-grid">
+      <div class="input-section">
+        <h2>Configure el plan</h2>
+        <p>Ingrese la edad de su hijo y el destino universitario. El simulador calcula el aporte mensual necesario hoy para cubrir el costo total.</p>
+
+        <div class="input-group">
+          <label>Edad actual del hijo</label>
+          <div class="input-val"><span id="dispEdad">5</span> años</div>
+          <input type="range" id="sliderEdad" min="0" max="17" step="1" value="5" oninput="updateEdu()"/>
+          <div class="range-labels"><span>Recién nacido</span><span>17 años</span></div>
+        </div>
+
+        <div class="input-group">
+          <label>Destino universitario</label>
+          <div class="dest-grid">
+            <button class="dest-btn active" onclick="setDest('peru',this)">Perú</button>
+            <button class="dest-btn" onclick="setDest('latam',this)">LATAM</button>
+            <button class="dest-btn" onclick="setDest('usa',this)">EE.UU.</button>
+            <button class="dest-btn" onclick="setDest('europa',this)">Europa</button>
+            <button class="dest-btn" onclick="setDest('uk',this)">Reino Unido</button>
+            <button class="dest-btn" onclick="setDest('canada',this)">Canadá</button>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Duración de la carrera</label>
+          <div class="input-val"><span id="dispCarrera">5</span> años</div>
+          <input type="range" id="sliderCarrera" min="3" max="6" step="1" value="5" oninput="updateEdu()"/>
+          <div class="range-labels"><span>3 años</span><span>6 años</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="result-main">
+          <span class="result-label">Aporte mensual necesario (hoy)</span>
+          <div class="result-amount" id="resAporte">USD 0</div>
+          <div class="result-sub" id="resSub">Para cubrir matrícula, vida y gastos</div>
+          <div class="result-stats">
+            <div class="result-stat">
+              <span class="label">Costo total estimado</span>
+              <span class="val" id="resCosto">USD 0</span>
+            </div>
+            <div class="result-stat">
+              <span class="label">Años disponibles</span>
+              <span class="val" id="resAnios">0</span>
+            </div>
+            <div class="result-stat">
+              <span class="label">Destino</span>
+              <span class="val" id="resDest">Perú</span>
+            </div>
+            <div class="result-stat">
+              <span class="label">Retorno est.</span>
+              <span class="val">~8% anual</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="insight-box" id="insightBox">
+          <p id="insightText"></p>
+        </div>
+
+        <div class="chart-wrapper">
+          <div class="chart-title">Crecimiento del fondo educativo</div>
+          <canvas id="chartEdu" style="height:200px;"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- URGENCY -->
+  <div class="urgency fade-in">
+    <h3>¿Qué pasa si espera?</h3>
+    <p>Cada año que posterga, el aporte mensual necesario aumenta significativamente.</p>
+    <div class="urgency-grid" id="urgencyGrid"></div>
+  </div>
+
+  <!-- DEST INFO -->
+  <div class="dest-info fade-in" style="margin-top:3rem;">
+    <h3>Costo estimado por destino</h3>
+    <div class="dest-grid-full">
+      <div class="dest-card">
+        <span style="font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.5rem;">Perú · Lima</span>
+        <h4>Universidad privada top</h4>
+        <span class="cost">USD 40,000 – 70,000</span>
+        <p>5 años de carrera. Incluye matrícula y gastos de vida. PUCP, UP, UPC, Pacífico.</p>
+      </div>
+      <div class="dest-card">
+        <span style="font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.5rem;">EE.UU.</span>
+        <h4>Universidad privada</h4>
+        <span class="cost">USD 180,000 – 320,000</span>
+        <p>4 años. Matrícula + alojamiento + vida. Boston, Miami, New York. La inflación educativa supera el 4% anual.</p>
+      </div>
+      <div class="dest-card">
+        <span style="font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.5rem;">Europa · UK</span>
+        <h4>Universidad internacional</h4>
+        <span class="cost">USD 80,000 – 160,000</span>
+        <p>3–4 años. España, Países Bajos, UK. Excelente relación calidad-precio vs EE.UU. para programas en inglés.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cta fade-in">
+  <h2>Abra el plan de su hijo <em>hoy</em></h2>
+  <p>Cada mes que posterga es dinero que su plan ya no puede multiplicar.</p>
+  <a href="index.html#contacto" class="btn-primary">Agendar consulta →</a>
+</div>
+
+<div class="disclaimer">
+  Los cálculos son proyecciones estimadas con fines ilustrativos. Los costos universitarios incluyen una inflación educativa del 4% anual. Los retornos de inversión no están garantizados. Este simulador no constituye asesoría financiera. Grupo Estrategika · grupoestrategika.com
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script>
+const COSTOS = {
+  peru:   { base: 55000,  label: 'Perú', inf: 0.03 },
+  latam:  { base: 80000,  label: 'LATAM', inf: 0.04 },
+  usa:    { base: 250000, label: 'EE.UU.', inf: 0.05 },
+  europa: { base: 100000, label: 'Europa', inf: 0.04 },
+  uk:     { base: 130000, label: 'Reino Unido', inf: 0.04 },
+  canada: { base: 110000, label: 'Canadá', inf: 0.04 },
+};
+let currentDest = 'peru';
+let eduChart = null;
+
+function fmt(n) {
+  if(n >= 1000000) return 'USD ' + (n/1000000).toFixed(2) + 'M';
+  return 'USD ' + Math.round(n).toLocaleString('en-US');
+}
+
+function calcMonthly(target, years, rate) {
+  if(years <= 0) return target;
+  const r = rate / 12;
+  return target * r / (Math.pow(1+r, years*12) - 1);
+}
+
+function setDest(d, btn) {
+  currentDest = d;
+  document.querySelectorAll('.dest-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  updateEdu();
+}
+
+function updateSlider(el) {
+  const min = parseFloat(el.min), max = parseFloat(el.max), val = parseFloat(el.value);
+  el.style.setProperty('--pct', ((val-min)/(max-min)*100) + '%');
+}
+
+function updateEdu() {
+  const edad   = parseInt(document.getElementById('sliderEdad').value);
+  const carrera= parseInt(document.getElementById('sliderCarrera').value);
+  const dest   = COSTOS[currentDest];
+  const anios  = Math.max(18 - edad, 1);
+  const rate   = 0.08;
+
+  updateSlider(document.getElementById('sliderEdad'));
+  updateSlider(document.getElementById('sliderCarrera'));
+
+  document.getElementById('dispEdad').textContent    = edad;
+  document.getElementById('dispCarrera').textContent = carrera;
+
+  // Future cost with education inflation
+  const costoFuturo = dest.base * (carrera/5) * Math.pow(1+dest.inf, anios);
+  const mensual     = calcMonthly(costoFuturo, anios, rate);
+
+  document.getElementById('resAporte').textContent  = fmt(mensual) + '/mes';
+  document.getElementById('resCosto').textContent   = fmt(costoFuturo);
+  document.getElementById('resAnios').textContent   = anios + ' años';
+  document.getElementById('resDest').textContent    = dest.label;
+
+  // Insight
+  const insight = document.getElementById('insightText');
+  if(edad <= 3) {
+    insight.innerHTML = `<strong>Momento ideal.</strong> Con ${anios} años por delante, el interés compuesto trabaja a su favor. El aporte mensual es el más bajo posible.`;
+  } else if(edad <= 8) {
+    insight.innerHTML = `<strong>Buen momento para empezar.</strong> Todavía tiene ${anios} años. Cada año que espera aumenta el aporte mensual necesario en ~15%.`;
+  } else if(edad <= 13) {
+    insight.innerHTML = `<strong>Es momento de actuar.</strong> Con ${anios} años disponibles, el margen se reduce. El costo de esperar un año más es significativo.`;
+  } else {
+    insight.innerHTML = `<strong>Urgente.</strong> Con solo ${anios} años, el aporte mensual es alto. Considere complementar con un capital inicial para reducirlo.`;
+  }
+
+  // Chart
+  const labels = [], data = [];
+  for(let y = 1; y <= anios; y++) {
+    labels.push('Año ' + y);
+    let fv = 0, r = rate/12;
+    for(let m = 1; m <= y*12; m++) fv = (fv + mensual) * (1+r);
+    data.push(Math.round(fv));
+  }
+  // Add target line
+  const targetLine = Array(anios).fill(Math.round(costoFuturo));
+
+  if(eduChart) eduChart.destroy();
+  const ctx = document.getElementById('chartEdu').getContext('2d');
+  eduChart = new Chart(ctx, {
+    type:'line',
+    data:{
+      labels,
+      datasets:[
+        { label:'Fondo acumulado', data, borderColor:'#B89A6A', backgroundColor:'rgba(184,154,106,0.1)', borderWidth:2, fill:true, tension:0.4, pointRadius:0 },
+        { label:'Meta', data:targetLine, borderColor:'rgba(255,255,255,0.2)', backgroundColor:'transparent', borderWidth:1.5, borderDash:[4,4], fill:false, tension:0, pointRadius:0 }
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:false } },
+      scales:{
+        x:{ grid:{ color:'rgba(255,255,255,0.05)' }, ticks:{ color:'rgba(255,255,255,0.3)', font:{size:9} } },
+        y:{ grid:{ color:'rgba(255,255,255,0.05)' }, ticks:{ color:'rgba(255,255,255,0.3)', font:{size:9}, callback: v => v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+Math.round(v/1000)+'K' } }
+      }
+    }
+  });
+
+  // Urgency
+  const grid = document.getElementById('urgencyGrid');
+  const scenarios = [
+    { label:'Empieza hoy', extra:0, cls:'now' },
+    { label:'Espera 2 años', extra:2, cls:'two' },
+    { label:'Espera 5 años', extra:5, cls:'five' },
+  ];
+  grid.innerHTML = scenarios.map(s => {
+    const a2 = Math.max(anios - s.extra, 1);
+    const c2 = dest.base * (carrera/5) * Math.pow(1+dest.inf, anios);
+    const m2 = calcMonthly(c2, a2, rate);
+    const diff = m2 - mensual;
+    return `<div class="urg-card ${s.cls}">
+      <span class="urg-label">${s.label}</span>
+      <h4>${a2} años disponibles</h4>
+      <span class="urg-amount">${fmt(m2)}/mes</span>
+      <div class="urg-diff">${s.extra===0 ? '✓ Aporte óptimo' : '+' + fmt(diff) + '/mes más'}</div>
+    </div>`;
+  }).join('');
+}
+
+document.getElementById('sliderEdad').addEventListener('input', updateEdu);
+document.getElementById('sliderCarrera').addEventListener('input', updateEdu);
+updateSlider(document.getElementById('sliderEdad'));
+updateSlider(document.getElementById('sliderCarrera'));
+window.addEventListener('load', updateEdu);
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold:0.08 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
