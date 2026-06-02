@@ -2,7 +2,7 @@ name: Publicar Reporte de Mercados
 
 on:
   schedule:
-    - cron: '0 13 * * 1-5'
+    - cron: '0 14 * * 1-5'
   workflow_dispatch:
   repository_dispatch:
     types: [publicar-mercados]
