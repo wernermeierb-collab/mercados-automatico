@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporte de Mercados · Grupo Estrategika</title>
+<style>
+
+:root{{--ink:#1A1814;--warm:#F7F3EE;--gold:#B89A6A;--muted:#7A7063;--border:#E2D9CE;--green:#1a6b3c;--red:#c0392b;}}
+*{{margin:0;padding:0;box-sizing:border-box;}}
+body{{font-family:'DM Sans',sans-serif;background:var(--warm);color:var(--ink);}}
+nav{{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 4rem;background:rgba(26,24,20,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);}}
+.logo{{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:500;color:#fff;text-decoration:none;}}.logo span{{color:var(--gold);}}
+.nav-date{{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);}}
+.nav-back{{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid rgba(184,154,106,0.3);padding:0.4rem 0.9rem;}}
+.hero{{background:#1A1814;padding:7rem 4rem 3rem;}}.hero-tag{{font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:1rem;}}
+.hero h1{{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:#fff;margin-bottom:0.5rem;}}
+.hero-sub{{font-size:0.82rem;color:rgba(255,255,255,0.4);}}
+.exec-summary{{background:linear-gradient(135deg,#1A1814,#2a2420);border-left:3px solid var(--gold);padding:2rem 2.5rem;margin-bottom:2rem;}}
+.exec-label{{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-weight:500;}}
+.exec-summary p{{font-size:0.9rem;color:rgba(255,255,255,0.78);line-height:1.75;margin-bottom:0.5rem;}}
+.exec-summary strong{{color:#fff;}}
+.content{{max-width:960px;margin:0 auto;padding:3rem 4rem;}}
+.report{{background:#fff;border:1px solid var(--border);padding:3rem;line-height:1.85;}}
+.report h1{{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:400;border-bottom:2px solid var(--border);padding-bottom:0.6rem;margin:2.5rem 0 1.2rem;}}
+.report h1:first-child{{margin-top:0;}}
+.report h2{{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:500;color:var(--gold);margin:2rem 0 0.8rem;}}
+.report h3{{font-size:0.88rem;font-weight:600;margin:1.5rem 0 0.5rem;text-transform:uppercase;letter-spacing:0.08em;}}
+.report p{{font-size:0.88rem;color:var(--muted);margin-bottom:0.8rem;line-height:1.8;}}
+.report ul{{margin:0.5rem 0 1.2rem 1.8rem;}}.report li{{font-size:0.86rem;color:var(--muted);margin-bottom:0.4rem;}}
+.report table{{width:100%;border-collapse:collapse;margin:1.2rem 0 2rem;font-size:0.83rem;border:1px solid var(--border);}}
+.report thead tr td{{font-weight:600;background:var(--ink);color:#fff;padding:0.7rem 1rem;}}
+.report tbody td{{padding:0.6rem 1rem;border-bottom:1px solid var(--border);}}
+.report tbody tr:hover td{{background:#faf8f5;}}.report strong{{color:var(--ink);font-weight:600;}}
+.positive{{color:var(--green);font-weight:600;}}.negative{{color:var(--red);font-weight:600;}}
+footer{{background:#1A1814;padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;margin-top:3rem;}}
+.footer-logo{{font-family:'Cormorant Garamond',serif;font-size:1rem;color:#fff;}}.footer-logo span{{color:var(--gold);}}
+.footer-copy{{font-size:0.68rem;color:rgba(255,255,255,0.25);}}
+.disc{{background:#1A1814;padding:1.5rem 4rem;}}.disc p{{font-size:0.7rem;color:rgba(255,255,255,0.2);line-height:1.7;max-width:800px;}}
+@media(max-width:768px){{nav,footer,.disc{{padding-left:1.5rem;padding-right:1.5rem;}}.hero{{padding:6rem 1.5rem 2rem;}}.content{{padding:2rem 1.5rem;}}.report{{padding:1.5rem;}}}}
+
+</style>
+</head>
+<body>
+<header class="site-header">
+  <a href="/" class="logo">Grupo <span>Estrategika</span></a>
+  <div class="header-date">MARTES 2 DE JUNIO DE 2026</div>
+  <a href="/" class="back-btn">← INICIO</a>
+</header>
+<div class="hero">
+  <div class="hero-tag">REPORTE DIARIO DE MERCADOS · EXCLUSIVO PARA CLIENTES</div>
+  <h1 class="hero-title">Daily Market Report</h1>
+  <p class="hero-sub">Martes 2 de junio de 2026 · Preparado por Grupo Estrategika</p>
+</div>
+<main class="content">
+
+<div class="exec-summary">
+  <div class="exec-label">📊 QUICK READ</div>
+  <p>Mercados de renta variable en zona de récord con divergencia notable: el S&P 500 supera 7,600 por primera vez mientras Bitcoin cae por debajo de $70,000. JOLTS de abril sorprendió a la baja (2.98M vs. 3.1M esperado), señal de enfriamiento gradual del mercado laboral. Alphabet anuncia aumento de capital de $80B para IA, incluyendo $10B de Berkshire Hathaway. BTC en caída libre: -5.8% en el día, mínimo desde abril.</p>
+</div>
+
+<div class="report-card">
+  <h1>Daily Market Report — Tuesday, June 2, 2026</h1>
+  <hr>
+  <p><em>Cierre de sesión del martes 2 de junio. Datos de cierre del mercado americano.</em></p>
+  <hr>
+
+  <h2>Market Opening Data</h2>
+
+  <h3>US EQUITY INDICES</h3>
+  <table>
+    <thead>
+      <tr><th>Índice</th><th>Cierre</th><th>Cambio</th><th>% Cambio</th><th>Notas</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>S&amp;P 500 (SPX)</td><td>7,609.78</td><td class="pos">+9.82</td><td class="pos">+0.13%</td><td>Primera vez por encima de 7,600</td></tr>
+      <tr><td>NASDAQ Composite</td><td>27,093.90</td><td class="pos">+7.09</td><td class="pos">+0.03%</td><td>Nuevo récord histórico</td></tr>
+      <tr><td>Dow Jones (DJIA)</td><td>51,307.79</td><td class="pos">+228.91</td><td class="pos">+0.45%</td><td>Nuevo récord intraday</td></tr>
+      <tr><td>Russell 2000</td><td>—</td><td class="pos">+0.90%</td><td class="pos">+0.90%</td><td>Star del día — small caps lideran</td></tr>
+    </tbody>
+  </table>
+
+  <h3>US TREASURIES (Cierre 1 junio)</h3>
+  <table>
+    <thead>
+      <tr><th>Instrumento</th><th>Yield</th><th>Notas</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>10-Year UST</td><td>4.46%</td><td>Curva positiva (+42 bps sobre 2Y)</td></tr>
+      <tr><td>2-Year UST</td><td>4.04%</td><td>Tracking expectativas Fed</td></tr>
+      <tr><td>30-Year UST</td><td>4.98%</td><td>Presión upward en largo plazo</td></tr>
+      <tr><td>DXY (US Dollar)</td><td>99.15</td><td>+0.23% — dólar fortalecido</td></tr>
+    </tbody>
+  </table>
+
+  <h3>BITCOIN & CRYPTO</h3>
+  <table>
+    <thead>
+      <tr><th>Asset</th><th>Precio</th><th>Cambio 24h</th><th>Notas</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Bitcoin (BTC/USD)</td><td>~$67,094</td><td class="neg">-5.8%</td><td>Primer cierre bajo $70K desde abril</td></tr>
+      <tr><td>Ethereum (ETH/USD)</td><td>~$1,921</td><td class="neg">-ve</td><td>Presión en todo el mercado crypto</td></tr>
+      <tr><td>BTC Dominance</td><td>58.7%</td><td>—</td><td>ATH: $126,200 (oct 2025); -46% desde ATH</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Derivatives Markets</h2>
+
+  <h3>VOLATILIDAD & OPCIONES</h3>
+  <table>
+    <thead>
+      <tr><th>Indicador</th><th>Nivel</th><th>Notas</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>VIX</td><td>~15.32</td><td>Régimen de baja volatilidad — riesgo de complacencia</td></tr>
+      <tr><td>BTC 24h High</td><td>$73,315.85</td><td>Amplio rango intraday — alta volatilidad crypto</td></tr>
+      <tr><td>BTC 24h Low</td><td>$67,006.54</td><td>Liquidaciones masivas de longs en Binance</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Macroeconomic Data</h2>
+
+  <h3>DATOS PUBLICADOS HOY</h3>
+  <table>
+    <thead>
+      <tr><th>Indicador</th><th>Resultado</th><th>Consenso</th><th>Anterior</th><th>Lectura</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>JOLTS Job Openings (abr)</td><td>2.98M</td><td>3.1M</td><td>3.17M</td><td class="neg">Bearish — mercado laboral enfriándose</td></tr>
+      <tr><td>NZ Global Dairy Trade</td><td>-0.6%</td><td>—</td><td>+0.6%</td><td class="neg">Negativo</td></tr>
+    </tbody>
+  </table>
+
+  <h3>BANCOS CENTRALES</h3>
+  <table>
+    <thead>
+      <tr><th>Banco Central</th><th>Tasa</th><th>Próxima reunión</th><th>Notas</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Federal Reserve</td><td>3.50%–3.75%</td><td>16-17 junio 2026</td><td>Hold; JOLTS sugiere cooling gradual</td></tr>
+      <tr><td>ECB</td><td>DFR 2.00%</td><td>4 junio 2026</td><td>Reunión mañana — sin movimiento esperado</td></tr>
+      <tr><td>BoJ</td><td>0.75%</td><td>Mid-junio</td><td>Más hawkish de los bancos centrales</td></tr>
+    </tbody>
+  </table>
+
+  <h2>News & Analysis — Top 5 Market-Moving Stories</h2>
+
+  <ol>
+    <li><strong>Alphabet anuncia aumento de capital de $80B para IA</strong> — Incluye $10B de Berkshire Hathaway. Acciones GOOGL cayeron ~4% por dilución. Señal de que la carrera por IA requiere capital masivo.</li>
+    <li><strong>Hewlett Packard Enterprise (HPE) supera estimados</strong> — Beat de ganancias trimestrales y alza de guidance para todo el año. Junto con Marvell, impulsaron el sector semiconductor.</li>
+    <li><strong>Bitcoin rompe $70,000 a la baja</strong> — Primer cierre bajo esa marca desde el 7 de abril. Siete de las últimas ocho velas de 4h cerraron en rojo. Sin catalizador fundamental claro — presión macro y rotación hacia IA.</li>
+    <li><strong>JOLTS abril debajo del consenso (2.98M vs 3.1M)</strong> — Señal de enfriamiento laboral que refuerza expectativa de pausa de la Fed. Curva de tasas reaccionó positivamente (yields bajaron levemente).</li>
+    <li><strong>Russell 2000 lidera con +0.90%</strong> — Small caps superan a large caps por primera vez en semanas. Rotación sectorial hacia empresas más pequeñas y domésticas; signal potencialmente constructivo para la amplitud del mercado.</li>
+  </ol>
+
+  <h3>SECTOR ROTATION</h3>
+  <table>
+    <thead>
+      <tr><th>Liderazgo</th><th>Rezagados</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Semiconductores (HPE, Marvell, Microchip +12%)</td><td>Alphabet (-4%) por dilución masiva</td></tr>
+      <tr><td>Small caps (Russell 2000 +0.90%)</td><td>Bitcoin y crypto en general (-5.8%)</td></tr>
+      <tr><td>S&amp;P 500 Tech sector</td><td>DeFi TVL cae a mínimo desde oct 2024</td></tr>
+    </tbody>
+  </table>
+
+  <h3>WATCH TOMORROW — MIÉRCOLES 3 JUNIO</h3>
+  <ul>
+    <li><strong>ECB Meeting</strong> — Reunión del Banco Central Europeo. Sin movimiento esperado pero atención al statement.</li>
+    <li><strong>Palo Alto Networks</strong> — Earnings post-cierre de hoy martes. Resultados matutinos mañana.</li>
+    <li><strong>Ulta Beauty &amp; Gitlab</strong> — También reportan hoy post-cierre.</li>
+    <li><strong>BTC</strong> — Soporte clave en $67,000 — si cede, siguiente zona $65,000. Liquidaciones de longs siguen elevadas.</li>
+  </ul>
+</div>
+
+</main>
+</body>
+</html>
