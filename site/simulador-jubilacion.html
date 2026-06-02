@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Simulador Jubilación · Grupo Estrategika</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--ink:#1A1814;--warm:#F7F3EE;--gold:#B89A6A;--gold-light:#D4B896;--muted:#7A7063;--border:#E2D9CE;--white:#FFFFFF;--accent:#2C4A3E;--afp:#5A4A6A;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--warm);color:var(--ink);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 4rem;background:rgba(247,243,238,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500;color:var(--ink);text-decoration:none;}
+.nav-logo span{color:var(--gold);}
+.nav-back{font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;}
+.nav-back:hover{color:var(--gold);}
+.hero{padding:7rem 4rem 3rem;text-align:center;background:var(--warm);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(90,74,106,0.08) 0%,transparent 70%);border-radius:50%;}
+.hero-tag{font-size:0.72rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--afp);display:block;margin-bottom:1rem;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:400;line-height:1.15;margin-bottom:1rem;}
+.hero h1 em{font-style:italic;color:var(--gold);}
+.hero p{font-size:0.95rem;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.75;}
+.wrapper{max-width:1100px;margin:3rem auto;padding:0 2rem 5rem;}
+.calc-card{background:var(--white);border:1px solid var(--border);padding:3rem;margin-bottom:2rem;}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.input-section h2{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;margin-bottom:0.4rem;}
+.input-section p{font-size:0.85rem;color:var(--muted);margin-bottom:2rem;line-height:1.6;}
+.input-group{margin-bottom:1.8rem;}
+.input-group label{font-size:0.72rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.5rem;}
+.input-val{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:500;color:var(--ink);margin-bottom:0.4rem;}
+input[type=range]{-webkit-appearance:none;width:100%;height:4px;background:linear-gradient(to right,var(--gold) 0%,var(--gold) var(--pct,50%),var(--border) var(--pct,50%),var(--border) 100%);border-radius:2px;outline:none;cursor:pointer;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--white);border:2px solid var(--gold);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.12);}
+.range-labels{display:flex;justify-content:space-between;font-size:0.7rem;color:var(--muted);margin-top:0.3rem;}
+.result-main{background:var(--ink);color:var(--white);padding:2.5rem;margin-bottom:1rem;}
+.result-label{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.45);display:block;margin-bottom:0.4rem;}
+.result-amount{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:400;line-height:1;}
+.result-amount.good{color:var(--gold);}
+.result-amount.bad{color:#E07070;}
+.result-sub{font-size:0.78rem;color:rgba(255,255,255,0.4);margin-top:0.4rem;}
+.result-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.08);margin-top:1.5rem;}
+.result-stat{background:var(--ink);padding:1rem;}
+.result-stat .label{font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);display:block;margin-bottom:0.3rem;}
+.result-stat .val{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--white);}
+.gap-box{margin-top:1rem;padding:1.2rem 1.5rem;border-left:3px solid;}
+.gap-box.positive{background:#EAF4EE;border-color:#2C4A3E;}
+.gap-box.negative{background:#FDF0EE;border-color:#E07070;}
+.gap-box p{font-size:0.82rem;line-height:1.6;}
+.chart-wrapper{margin-top:1.5rem;}
+.chart-title{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;}
+canvas{width:100%!important;max-height:200px;}
+.comparison{margin-top:2rem;}
+.comparison h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;margin-bottom:0.3rem;}
+.comparison p{font-size:0.85rem;color:var(--muted);margin-bottom:1.5rem;}
+.comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.comp-card{background:var(--white);border:1px solid var(--border);padding:2rem;position:relative;overflow:hidden;}
+.comp-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.comp-card.estrategika::after{background:var(--accent);}
+.comp-card.afp::after{background:var(--afp);}
+.comp-card.nada::after{background:#C4756A;}
+.comp-tag{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.8rem;}
+.comp-card h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:500;margin-bottom:0.5rem;}
+.comp-pension{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--ink);display:block;margin:0.3rem 0;}
+.comp-total{font-size:0.78rem;color:var(--muted);}
+.comp-verdict{font-size:0.78rem;font-weight:500;margin-top:0.8rem;}
+.comp-card.estrategika .comp-verdict{color:var(--accent);}
+.comp-card.afp .comp-verdict{color:var(--afp);}
+.comp-card.nada .comp-verdict{color:#C4756A;}
+.afp-reality{background:var(--ink);padding:4rem;margin-top:2rem;}
+.afp-reality .tag{font-size:0.72rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-light);display:block;margin-bottom:1rem;}
+.afp-reality h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:var(--white);margin-bottom:1rem;}
+.afp-reality p{font-size:0.88rem;color:rgba(255,255,255,0.5);max-width:640px;line-height:1.75;margin-bottom:2.5rem;}
+.facts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;}
+.fact-card{border:1px solid rgba(255,255,255,0.08);padding:1.5rem;}
+.fact-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--gold);display:block;margin-bottom:0.4rem;}
+.fact-card p{font-size:0.8rem;color:rgba(255,255,255,0.45);line-height:1.6;}
+.cta{padding:4rem;text-align:center;background:var(--warm);}
+.cta h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;margin-bottom:1rem;}
+.cta h2 em{font-style:italic;color:var(--gold);}
+.cta p{font-size:0.88rem;color:var(--muted);margin-bottom:2rem;}
+.btn-primary{display:inline-flex;align-items:center;gap:0.6rem;background:var(--accent);color:var(--white);padding:1rem 2.5rem;font-size:0.82rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;transition:background 0.25s;}
+.btn-primary:hover{background:var(--gold);}
+.disclaimer{background:var(--ink);padding:2rem 4rem;font-size:0.72rem;color:rgba(255,255,255,0.25);line-height:1.7;text-align:center;border-top:1px solid rgba(255,255,255,0.06);}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.infl-table{width:100%;border-collapse:collapse;margin-top:1.5rem;}
+.infl-table th{font-family:Arial,sans-serif;font-size:0.65rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);padding:0.6rem 0.8rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.08);}
+.infl-table td{font-family:Arial,sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.75);padding:0.55rem 0.8rem;border-bottom:1px solid rgba(255,255,255,0.05);}
+.infl-table tr.retiro-row td{color:var(--gold);font-weight:500;}
+.infl-table tr.retiro-row{background:rgba(184,154,106,0.08);}
+.infl-table td.muted{color:rgba(255,255,255,0.35);font-size:0.75rem;}
+.infl-table td.highlight{color:var(--gold);}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Grupo <span>Estrategika</span></a>
+  <a href="index.html" class="nav-back">← Volver al sitio</a>
+</nav>
+
+<div class="hero">
+  <span class="hero-tag">Estrategika Savings · Jubilación</span>
+  <h1>¿Podrá <em>mantener su estilo de vida</em> cuando se jubile?</h1>
+  <p>Ingrese su gasto deseado en valor de hoy. El simulador ajusta por inflación para mostrar el capital real que necesita al momento del retiro.</p>
+</div>
+
+<div class="wrapper">
+  <div class="calc-card fade-in">
+    <div class="calc-grid">
+      <div class="input-section">
+        <h2>Configure su situación</h2>
+        <p>Ingrese sus datos actuales y el estilo de vida que quiere mantener en retiro. El simulador calcula si su AFP alcanza — y qué brecha necesita cubrir.</p>
+
+        <div class="input-group">
+          <label>Edad actual</label>
+          <div class="input-val"><span id="dispEdad">40</span> años</div>
+          <input type="range" id="sliderEdad" min="25" max="64" step="1" value="40" oninput="updateJub()"/>
+          <div class="range-labels"><span>25 años</span><span>64 años</span></div>
+        </div>
+
+        <div class="input-group">
+          <label>Edad de jubilación deseada</label>
+          <div class="input-val"><span id="dispRetiro">65</span> años</div>
+          <input type="range" id="sliderRetiro" min="55" max="75" step="1" value="65" oninput="updateJub()"/>
+          <div class="range-labels"><span>55 años</span><span>75 años</span></div>
+        </div>
+
+        <div class="input-group">
+          <label>Gasto mensual deseado en retiro (USD)</label>
+          <div class="input-val">USD <span id="dispGasto">3,000</span></div>
+          <input type="range" id="sliderGasto" min="1000" max="15000" step="500" value="3000" oninput="updateJub()"/>
+          <div class="range-labels"><span>USD 1,000</span><span>USD 15,000</span></div>
+        </div>
+
+        <div class="input-group">
+          <label>Aporte mensual adicional que puede hacer hoy (USD)</label>
+          <div class="input-val">USD <span id="dispAporte">500</span></div>
+          <input type="range" id="sliderAporte" min="250" max="5000" step="250" value="500" oninput="updateJub()"/>
+          <div class="range-labels"><span>USD 250</span><span>USD 5,000</span></div>
+        </div>
+
+        <div class="input-group">
+          <label>Esperanza de vida (años)</label>
+          <div class="input-val"><span id="dispVida">90</span> años <span style="font-size:0.85rem;color:var(--muted);">→ <span id="dispVidaRetiro">25</span> años de retiro</span></div>
+          <input type="range" id="sliderVida" min="75" max="100" step="1" value="90" oninput="updateJub()"/>
+          <div class="range-labels"><span>75 años</span><span>100 años</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="result-main">
+          <span class="result-label">Capital necesario para jubilarse</span>
+          <div class="result-amount good" id="resCapital">USD 0</div>
+          <div class="result-sub" id="resVidaSub">Incluye inflación acumulada hasta el retiro y durante el retiro · <span id="resVidaAnios">25</span> años</div>
+          <div id="resRetiroSub" style="font-size:0.72rem;color:rgba(255,255,255,0.5);margin-top:0.3rem;"></div>
+          <div class="result-stats">
+            <div class="result-stat">
+              <span class="label">Su plan Estrategika generará</span>
+              <span class="val" id="resEstrategika">USD 0</span>
+            </div>
+            <div class="result-stat">
+              <span class="label">Años hasta retiro</span>
+              <span class="val" id="resAnios">0</span>
+            </div>
+            <div class="result-stat">
+              <span class="label">Brecha estimada</span>
+              <span class="val" id="resBrecha">USD 0</span>
+            </div>
+            <div class="result-stat">
+              <span class="label">Pensión AFP estimada</span>
+              <span class="val" id="resAfp">USD 0/mes</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- INFLATION TABLE -->
+        <div style="background:var(--ink);padding:1.5rem;margin-bottom:1rem;">
+          <div style="font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:0.8rem;">Poder adquisitivo de su gasto en el tiempo</div>
+          <table class="infl-table" id="inflTable">
+            <thead>
+              <tr>
+                <th>Edad</th>
+                <th>Año</th>
+                <th>Equivale a hoy</th>
+                <th>Necesitará</th>
+                <th>vs hoy</th>
+              </tr>
+            </thead>
+            <tbody id="inflTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="gap-box" id="gapBox">
+          <p id="gapText"></p>
+        </div>
+
+        <div class="chart-wrapper">
+          <div class="chart-title">Acumulación hacia el retiro</div>
+          <canvas id="chartJub" style="height:200px;"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARISON -->
+  <div class="comparison fade-in">
+    <h3>¿Qué pensión recibirá con cada opción?</h3>
+    <p>Pensión mensual estimada según dónde deposita su dinero durante los años de trabajo.</p>
+    <div class="comp-grid" id="compGrid"></div>
+  </div>
+</div>
+
+<!-- AFP REALITY -->
+<div class="afp-reality fade-in">
+  <div style="max-width:1100px;margin:0 auto">
+    <span class="tag">La realidad de la AFP en Perú</span>
+    <h2>Lo que la AFP no le cuenta</h2>
+    <p>El sistema AFP peruano fue diseñado para un contexto que ha cambiado. Los datos son claros: la mayoría de jubilados peruanos recibe una pensión que no cubre ni el 40% de su último sueldo.</p>
+    <div class="facts-grid">
+      <div class="fact-card">
+        <span class="fact-num">38%</span>
+        <p>Tasa de reemplazo promedio de la AFP peruana. Por cada S/. 1,000 de sueldo, la pensión promedio es S/. 380.</p>
+      </div>
+      <div class="fact-card">
+        <span class="fact-num">~5%</span>
+        <p>Retorno histórico anual promedio AFP Fondo 2. La inflación y comisiones reducen el retorno real significativamente.</p>
+      </div>
+      <div class="fact-card">
+        <span class="fact-num">95%</span>
+        <p>De los afiliados que se jubilan reciben pensiones por debajo de la canasta básica familiar según estudios del BID.</p>
+      </div>
+      <div class="fact-card">
+        <span class="fact-num">USD 0</span>
+        <p>Herencia para sus hijos si agota el fondo. Con un plan internacional en USD, el saldo remanente es heredable.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cta fade-in">
+  <h2>Complemente su AFP con un <em>plan internacional</em></h2>
+  <p>No reemplaza su AFP — la complementa. En dólares, fuera del sistema local, con retornos históricos superiores.</p>
+  <a href="index.html#contacto" class="btn-primary">Agendar consulta →</a>
+</div>
+
+<div class="disclaimer">
+  Los cálculos son proyecciones estimadas con fines ilustrativos. La pensión AFP estimada asume un sueldo promedio y contribuciones constantes — los resultados reales varían según historial laboral y fondo seleccionado. Los retornos del plan internacional no están garantizados. Este simulador no constituye asesoría financiera. Grupo Estrategika · grupoestrategika.com
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script>
+let jubChart = null;
+
+function fmt(n) {
+  if(n >= 1000000) return 'USD ' + (n/1000000).toFixed(2) + 'M';
+  return 'USD ' + Math.round(n).toLocaleString('en-US');
+}
+
+function calcFV(monthly, years, rate) {
+  if(years <= 0) return 0;
+  const r = rate/12;
+  return monthly * ((Math.pow(1+r,years*12)-1)/r) * (1+r);
+}
+
+function updateSlider(el) {
+  const min=parseFloat(el.min),max=parseFloat(el.max),val=parseFloat(el.value);
+  el.style.setProperty('--pct',((val-min)/(max-min)*100)+'%');
+}
+
+function updateJub() {
+  const edad   = parseInt(document.getElementById('sliderEdad').value);
+  const retiro = parseInt(document.getElementById('sliderRetiro').value);
+  const gasto  = parseInt(document.getElementById('sliderGasto').value);
+  const aporte = parseInt(document.getElementById('sliderAporte').value);
+
+  updateSlider(document.getElementById('sliderEdad'));
+  updateSlider(document.getElementById('sliderRetiro'));
+  updateSlider(document.getElementById('sliderGasto'));
+  updateSlider(document.getElementById('sliderAporte'));
+
+  const vida   = parseInt(document.getElementById('sliderVida').value);
+  const anios = Math.max(retiro - edad, 1);
+  const vidaRetiro = Math.max(vida - retiro, 1);
+  const inflacion = 0.03; // 3% anual
+
+  updateSlider(document.getElementById('sliderVida'));
+  document.getElementById('dispVida').textContent      = vida;
+  document.getElementById('dispVidaRetiro').textContent = Math.max(vida - retiro, 1);
+  document.getElementById('dispEdad').textContent   = edad;
+  document.getElementById('dispRetiro').textContent = retiro;
+  document.getElementById('dispGasto').textContent  = gasto.toLocaleString('en-US');
+  document.getElementById('dispAporte').textContent = aporte.toLocaleString('en-US');
+
+  // Adjust desired spending for inflation at retirement
+  const gastoFuturo = gasto * Math.pow(1 + inflacion, anios);
+
+  // Capital needed at retirement using growing annuity formula
+  // Payments grow with inflation (3%) during retirement years
+  // Discount rate = conservative 4% withdrawal rate
+  const retiroInfl = 0.03;   // inflation during retirement
+  const withdrawalRate = 0.04;
+  let capital;
+  if (Math.abs(withdrawalRate - retiroInfl) < 0.0001) {
+    // Edge case: r ≈ g
+    capital = gastoFuturo * 12 * vidaRetiro;
+  } else {
+    // Present value of growing annuity at retirement date
+    capital = (gastoFuturo * 12) * (1 - Math.pow((1 + retiroInfl) / (1 + withdrawalRate), vidaRetiro)) / (withdrawalRate - retiroInfl);
+  }
+
+  // AFP estimate
+  const salario = gasto * 1.5;
+  const aporteAfp = salario * 0.10;
+  const fondoAfp = calcFV(aporteAfp, anios, 0.05);
+  const pensionAfp = fondoAfp / (vidaRetiro * 12);
+
+  // Estrategika plan
+  const fondoEstrategika = calcFV(aporte, anios, 0.08);
+  const pensionEstrategika = fondoEstrategika / (vidaRetiro * 12);
+
+  // Total
+  const totalCombinado = fondoAfp + fondoEstrategika;
+  const brecha = Math.max(capital - totalCombinado, 0);
+
+  // Show both values in result sub
+  document.getElementById('resVidaAnios').textContent = vidaRetiro;
+  document.getElementById('resRetiroSub').textContent = 
+    'Hoy: USD ' + gasto.toLocaleString('en-US') + '/mes  →  Al retiro: USD ' + Math.round(gastoFuturo).toLocaleString('en-US') + '/mes (inflación 3% anual)';
+
+  document.getElementById('resCapital').textContent     = fmt(capital);
+  document.getElementById('resEstrategika').textContent = fmt(fondoEstrategika);
+  document.getElementById('resAnios').textContent       = anios + ' años';
+  document.getElementById('resBrecha').textContent      = brecha > 0 ? fmt(brecha) : '✓ Cubierto';
+  document.getElementById('resAfp').textContent         = fmt(pensionAfp) + '/mes';
+
+  // Gap box
+  const gapBox = document.getElementById('gapBox');
+  const gapText = document.getElementById('gapText');
+  if(brecha === 0) {
+    gapBox.className = 'gap-box positive';
+    gapText.innerHTML = `<strong style="color:#2C4A3E">✓ Plan suficiente.</strong> Con su aporte mensual de ${fmt(aporte)} más la AFP, cubre el capital necesario para jubilarse con USD ${gasto.toLocaleString()}/mes.`;
+  } else {
+    gapBox.className = 'gap-box negative';
+    gapText.innerHTML = `<strong style="color:#C04040">Brecha de ${fmt(brecha)}.</strong> Su AFP sola cubre solo ${Math.round(pensionAfp/gasto*100)}% de su gasto deseado. El plan Estrategika reduce significativamente esa brecha.`;
+  }
+
+  // Inflation table
+  const currentYear = new Date().getFullYear();
+  const inflTableBody = document.getElementById('inflTableBody');
+  let tableHTML = '';
+  // Show every 5 years from now until end of retirement
+  const endAge = vida;
+  for(let age = edad; age <= endAge; age += 5) {
+    const yearsFromNow = age - edad;
+    const gastoEnEsaEdad = gasto * Math.pow(1 + inflacion, yearsFromNow);
+    const isRetiro = age >= retiro && age < retiro + 5;
+    const isNow = age === edad;
+    const rowClass = isRetiro ? 'retiro-row' : '';
+    const label = isNow ? '← hoy' : (age === retiro ? '← jubilación' : (age >= retiro ? 'retiro' : 'acumulando'));
+    tableHTML += `<tr class="${rowClass}">
+      <td>${age} años</td>
+      <td>${currentYear + yearsFromNow}</td>
+      <td class="muted">USD ${gasto.toLocaleString('en-US')}/mes</td>
+      <td class="${isRetiro || age > retiro ? 'highlight' : ''}">USD ${Math.round(gastoEnEsaEdad).toLocaleString('en-US')}/mes</td>
+      <td class="muted">${label}</td>
+    </tr>`;
+  }
+  inflTableBody.innerHTML = tableHTML;
+
+  // Chart
+  const labels = [], dataEst = [], dataAfp = [], dataMeta = [];
+  for(let y=1; y<=anios; y++) {
+    labels.push('Año '+y);
+    dataEst.push(Math.round(calcFV(aporte, y, 0.08)));
+    dataAfp.push(Math.round(calcFV(aporteAfp, y, 0.05)));
+    dataMeta.push(Math.round(capital));
+  }
+
+  if(jubChart) jubChart.destroy();
+  const ctx = document.getElementById('chartJub').getContext('2d');
+  jubChart = new Chart(ctx, {
+    type:'line',
+    data:{
+      labels,
+      datasets:[
+        { label:'Estrategika', data:dataEst, borderColor:'#B89A6A', backgroundColor:'rgba(184,154,106,0.1)', borderWidth:2, fill:true, tension:0.4, pointRadius:0 },
+        { label:'AFP', data:dataAfp, borderColor:'rgba(90,74,106,0.6)', backgroundColor:'transparent', borderWidth:1.5, borderDash:[3,3], fill:false, tension:0.4, pointRadius:0 },
+        { label:'Meta', data:dataMeta, borderColor:'rgba(255,255,255,0.15)', backgroundColor:'transparent', borderWidth:1, borderDash:[6,4], fill:false, tension:0, pointRadius:0 },
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:false } },
+      scales:{
+        x:{ grid:{ color:'rgba(255,255,255,0.05)' }, ticks:{ color:'rgba(255,255,255,0.3)', font:{size:9} } },
+        y:{ grid:{ color:'rgba(255,255,255,0.05)' }, ticks:{ color:'rgba(255,255,255,0.3)', font:{size:9}, callback: v => v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+Math.round(v/1000)+'K' } }
+      }
+    }
+  });
+
+  // Comparison cards
+  const nada = { pension: pensionAfp * 0.5, fondo: fondoAfp * 0.5 };
+  document.getElementById('compGrid').innerHTML = `
+    <div class="comp-card estrategika">
+      <span class="comp-tag">AFP + Estrategika Savings</span>
+      <h4>Plan complementario</h4>
+      <span class="comp-pension">${fmt(pensionAfp + pensionEstrategika)}/mes</span>
+      <div class="comp-total">Fondo acumulado: ${fmt(totalCombinado)}</div>
+      <div class="comp-verdict">✓ Cubre ${Math.min(Math.round((pensionAfp+pensionEstrategika)/gasto*100),100)}% de su meta</div>
+    </div>
+    <div class="comp-card afp">
+      <span class="comp-tag">Solo AFP Fondo 2</span>
+      <h4>Sistema actual</h4>
+      <span class="comp-pension">${fmt(pensionAfp)}/mes</span>
+      <div class="comp-total">Fondo acumulado: ${fmt(fondoAfp)}</div>
+      <div class="comp-verdict">Cubre ${Math.round(pensionAfp/gasto*100)}% de su meta</div>
+    </div>
+    <div class="comp-card nada">
+      <span class="comp-tag">Sin plan de retiro</span>
+      <h4>Solo ahorros propios</h4>
+      <span class="comp-pension">${fmt(nada.pension)}/mes</span>
+      <div class="comp-total">Capital estimado: ${fmt(nada.fondo)}</div>
+      <div class="comp-verdict">Cubre ~${Math.round(nada.pension/gasto*100)}% de su meta</div>
+    </div>
+  `;
+}
+
+['sliderEdad','sliderRetiro','sliderGasto','sliderAporte','sliderVida'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updateJub);
+  updateSlider(document.getElementById(id));
+});
+
+window.addEventListener('load', function() {
+  updateJub();
+});
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.08});
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
