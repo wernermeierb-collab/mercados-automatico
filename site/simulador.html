@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Simulador de Ahorro · Grupo Estrategika</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink: #1A1814; --warm: #F7F3EE; --gold: #B89A6A; --gold-light: #D4B896;
+  --muted: #7A7063; --border: #E2D9CE; --white: #FFFFFF; --accent: #2C4A3E;
+  --abc: #2C4A3E; --sp: #1E3A5F; --btc: #B87333; --gold-c: #7A6A3E; --afp: #5A4A6A;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { font-family:'DM Sans',sans-serif; background:var(--warm); color:var(--ink); }
+
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:1.2rem 4rem;
+  background:rgba(247,243,238,0.95); backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:500; color:var(--ink); text-decoration:none; }
+.nav-logo span { color:var(--gold); }
+.nav-back { font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; }
+.nav-back:hover { color:var(--gold); }
+
+.hero {
+  padding: 7rem 4rem 3rem;
+  text-align: center;
+  background: var(--warm);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content:''; position:absolute; top:-30%; left:50%; transform:translateX(-50%);
+  width:600px; height:600px;
+  background:radial-gradient(circle, rgba(184,154,106,0.1) 0%, transparent 70%);
+  border-radius:50%;
+}
+.hero-tag { font-size:0.72rem; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:1rem; }
+.hero h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,4vw,3.5rem); font-weight:400; line-height:1.15; margin-bottom:1rem; }
+.hero h1 em { font-style:italic; color:var(--gold); }
+.hero p { font-size:0.95rem; color:var(--muted); max-width:560px; margin:0 auto; line-height:1.75; }
+
+/* CALCULATOR */
+.calc-wrapper { max-width:1100px; margin:3rem auto; padding:0 2rem 4rem; }
+
+.calc-card {
+  background:var(--white); border:1px solid var(--border);
+  padding:3rem; margin-bottom:2rem;
+}
+
+.calc-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start; }
+
+.input-section h2 { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:400; margin-bottom:0.4rem; }
+.input-section p { font-size:0.85rem; color:var(--muted); margin-bottom:2rem; line-height:1.6; }
+
+.input-group { margin-bottom:2rem; }
+.input-group label { font-size:0.72rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:0.6rem; }
+.input-row { display:flex; align-items:center; gap:1rem; }
+.input-val { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:500; color:var(--ink); min-width:120px; }
+.input-val span { font-size:1rem; color:var(--muted); font-family:'DM Sans',sans-serif; }
+
+input[type=range] {
+  -webkit-appearance:none; width:100%; height:4px;
+  background:linear-gradient(to right, var(--gold) 0%, var(--gold) var(--pct,50%), var(--border) var(--pct,50%), var(--border) 100%);
+  border-radius:2px; outline:none; cursor:pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance:none; width:18px; height:18px; border-radius:50%;
+  background:var(--white); border:2px solid var(--gold); cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,0.12);
+}
+
+.strategy-select { display:flex; gap:0.6rem; flex-wrap:wrap; margin-top:0.5rem; }
+.strat-btn {
+  padding:0.5rem 1rem; border:1px solid var(--border); background:var(--warm);
+  font-family:'DM Sans',sans-serif; font-size:0.75rem; font-weight:500;
+  letter-spacing:0.08em; text-transform:uppercase; cursor:pointer;
+  transition:all 0.2s; color:var(--muted);
+}
+.strat-btn.active { background:var(--accent); color:var(--white); border-color:var(--accent); }
+.strat-btn:hover:not(.active) { border-color:var(--gold); color:var(--gold); }
+
+/* RESULTS */
+.result-section { position:sticky; top:5rem; }
+.result-main {
+  background:var(--ink); color:var(--white); padding:2.5rem;
+  margin-bottom:1rem;
+}
+.result-label { font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.45); display:block; margin-bottom:0.4rem; }
+.result-amount { font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:400; color:var(--gold); line-height:1; }
+.result-sub { font-size:0.78rem; color:rgba(255,255,255,0.45); margin-top:0.4rem; }
+.result-stats { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(255,255,255,0.08); margin-top:1.5rem; }
+.result-stat { background:var(--ink); padding:1rem; }
+.result-stat .label { font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.35); display:block; margin-bottom:0.3rem; }
+.result-stat .val { font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:var(--white); }
+
+/* CHART */
+.chart-wrapper { margin-top:2rem; }
+.chart-title { font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:1rem; }
+canvas { width:100% !important; max-height:220px; }
+
+/* COMPARISON TABLE */
+.comparison { margin-top:2rem; }
+.comparison h3 { font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:400; margin-bottom:0.3rem; }
+.comparison p { font-size:0.82rem; color:var(--muted); margin-bottom:1.5rem; }
+.comp-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--border); }
+.comp-cell { background:var(--white); padding:1.2rem 1rem; text-align:center; }
+.comp-cell.header { background:var(--ink); }
+.comp-cell.header .comp-name { color:rgba(255,255,255,0.5); }
+.comp-cell.highlight { background:var(--accent); }
+.comp-cell.highlight .comp-name, .comp-cell.highlight .comp-amount, .comp-cell.highlight .comp-ret { color:var(--white) !important; }
+.comp-name { font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:0.5rem; }
+.comp-amount { font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--ink); display:block; }
+.comp-ret { font-size:0.7rem; color:var(--muted); display:block; margin-top:0.3rem; }
+.comp-bar { height:4px; background:var(--border); margin-top:0.8rem; border-radius:2px; overflow:hidden; }
+.comp-bar-fill { height:100%; border-radius:2px; }
+
+/* HISTORICAL */
+.historical { margin-top:2rem; }
+.hist-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:1.5rem; }
+.hist-card { background:var(--white); border:1px solid var(--border); padding:1.8rem; position:relative; overflow:hidden; transition:transform 0.2s; }
+.hist-card:hover { transform:translateY(-3px); }
+.hist-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; }
+.hist-card.btc::after { background:#F7931A; }
+.hist-card.sp::after { background:var(--sp); }
+.hist-card.gold-c::after { background:#C9A84C; }
+.hist-tag { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:0.8rem; }
+.hist-card h4 { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:500; margin-bottom:0.3rem; }
+.hist-amount { font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--ink); display:block; margin:0.5rem 0 0.2rem; }
+.hist-invested { font-size:0.78rem; color:var(--muted); }
+.hist-mult { font-size:0.85rem; font-weight:500; margin-top:0.5rem; }
+.hist-mult.btc { color:#F7931A; }
+.hist-mult.sp { color:var(--sp); }
+.hist-mult.gold-c { color:#C9A84C; }
+.hist-note { font-size:0.72rem; color:var(--muted); margin-top:0.5rem; line-height:1.5; font-style:italic; }
+
+/* ABC EXPLAINER */
+.abc-section { background:var(--ink); padding:4rem; margin-top:2rem; }
+.abc-section .section-tag { color:var(--gold-light); font-size:0.72rem; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; display:block; margin-bottom:1rem; }
+.abc-section h2 { font-family:'Cormorant Garamond',serif; font-size:2.2rem; font-weight:400; color:var(--white); margin-bottom:0.5rem; }
+.abc-section > p { font-size:0.9rem; color:rgba(255,255,255,0.5); max-width:600px; margin-bottom:3rem; line-height:1.7; }
+.abc-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+.abc-card { border:1px solid rgba(255,255,255,0.08); padding:2rem; transition:border-color 0.3s; }
+.abc-card:hover { border-color:var(--gold); }
+.abc-letter { font-family:'Cormorant Garamond',serif; font-size:4rem; font-weight:300; line-height:1; margin-bottom:0.5rem; }
+.abc-card:nth-child(1) .abc-letter { color:rgba(255,255,255,0.15); }
+.abc-card:nth-child(2) .abc-letter { color:rgba(184,154,106,0.3); }
+.abc-card:nth-child(3) .abc-letter { color:rgba(255,255,255,0.1); }
+.abc-card h4 { font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:var(--white); margin-bottom:0.3rem; }
+.abc-years { font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:1rem; }
+.abc-card p { font-size:0.82rem; color:rgba(255,255,255,0.5); line-height:1.65; }
+.abc-ret { display:inline-block; font-size:0.75rem; font-weight:500; color:var(--gold-light); margin-top:1rem; padding:0.25rem 0.6rem; border:1px solid rgba(184,154,106,0.3); }
+.abc-alloc { display:flex; height:6px; border-radius:3px; overflow:hidden; margin-top:1.2rem; gap:2px; }
+.abc-alloc span { border-radius:3px; }
+
+/* VENTAJAS */
+.ventajas { padding:4rem; background:var(--white); }
+.ventajas h2 { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:400; margin-bottom:0.4rem; }
+.ventajas > p { font-size:0.88rem; color:var(--muted); margin-bottom:2.5rem; }
+.vent-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; }
+.vent-card { border:1px solid var(--border); padding:1.8rem; }
+.vent-icon { font-size:1.5rem; margin-bottom:1rem; }
+.vent-card h4 { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:500; margin-bottom:0.5rem; }
+.vent-card p { font-size:0.8rem; color:var(--muted); line-height:1.6; }
+
+/* CTA */
+.cta { padding:5rem 4rem; text-align:center; background:var(--warm); }
+.cta h2 { font-family:'Cormorant Garamond',serif; font-size:2.2rem; font-weight:400; margin-bottom:1rem; }
+.cta h2 em { font-style:italic; color:var(--gold); }
+.cta p { font-size:0.9rem; color:var(--muted); margin-bottom:2rem; }
+.btn-primary { display:inline-flex; align-items:center; gap:0.6rem; background:var(--accent); color:var(--white); padding:1rem 2.5rem; font-size:0.82rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; border:none; cursor:pointer; text-decoration:none; transition:background 0.25s; }
+.btn-primary:hover { background:var(--gold); }
+
+/* DISCLAIMER */
+.disclaimer { background:var(--ink); padding:2rem 4rem; font-size:0.72rem; color:rgba(255,255,255,0.3); line-height:1.7; text-align:center; }
+
+.fade-in { opacity:0; transform:translateY(20px); transition:opacity 0.6s ease, transform 0.6s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Grupo <span>Estrategika</span></a>
+  <a href="index.html" class="nav-back">← Volver al sitio</a>
+</nav>
+
+<div class="hero">
+  <span class="hero-tag">Estrategika Savings · Simulador</span>
+  <h1>¿Cuánto valdría su dinero si <em>empezara hoy</em>?</h1>
+  <p>Simule su plan de ahorro internacional en dólares y compare el resultado con AFP, banco local y activos históricos reales.</p>
+</div>
+
+<div class="calc-wrapper">
+
+  <!-- CALCULATOR -->
+  <div class="calc-card fade-in">
+    <div class="calc-grid">
+      <div class="input-section">
+        <h2>Configure su simulación</h2>
+        <p>Ajuste los parámetros y vea el resultado en tiempo real. Todos los cálculos en USD, fuera del sistema financiero peruano.</p>
+
+        <div class="input-group">
+          <label>Aporte mensual</label>
+          <div class="input-row">
+            <div class="input-val" id="valAporte">USD <span id="dispAporte">300</span></div>
+          </div>
+          <input type="range" id="sliderAporte" min="250" max="5000" step="50" value="300" oninput="updateSim()"/>
+          <div style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--muted);margin-top:0.3rem">
+            <span>USD 250</span><span>USD 5,000</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Plazo</label>
+          <div class="input-val" id="valPlazo"><span id="dispPlazo">10</span> años</div>
+          <input type="range" id="sliderPlazo" min="5" max="20" step="1" value="10" oninput="updateSim()"/>
+          <div style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--muted);margin-top:0.3rem">
+            <span>5 años</span><span>20 años</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Estrategia</label>
+          <div class="strategy-select">
+            <button class="strat-btn active" onclick="setStrat('abc',this)">ABC Strategy</button>
+            <button class="strat-btn" onclick="setStrat('agresivo',this)">Solo Agresivo</button>
+            <button class="strat-btn" onclick="setStrat('balanceado',this)">Solo Balanceado</button>
+            <button class="strat-btn" onclick="setStrat('cauteloso',this)">Solo Cauteloso</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-section">
+        <div class="result-main">
+          <span class="result-label">Patrimonio acumulado estimado</span>
+          <div class="result-amount" id="resTotal">$0</div>
+          <div class="result-sub" id="resRetorno">Retorno estimado neto anual: 8.0%</div>
+          <div class="result-stats">
+            <div class="result-stat">
+              <span class="label">Total aportado</span>
+              <span class="val" id="resAportado">$0</span>
+            </div>
+            <div class="result-stat">
+              <span class="label">Ganancia generada</span>
+              <span class="val" id="resGanancia">$0</span>
+            </div>
+            <div class="result-stat">
+              <span class="label">Multiplicador</span>
+              <span class="val" id="resMult">0x</span>
+            </div>
+            <div class="result-stat">
+              <span class="label">Moneda</span>
+              <span class="val">USD</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-wrapper">
+          <div class="chart-title">Crecimiento proyectado año a año</div>
+          <canvas id="chartGrowth" style="height:220px;"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARISON -->
+  <div class="comparison fade-in">
+    <h3>Comparación con otras opciones</h3>
+    <p>Mismo aporte mensual, mismo plazo — distintos destinos para su dinero.</p>
+    <div class="comp-grid" id="compGrid"></div>
+  </div>
+
+  <!-- HISTORICAL -->
+  <div class="historical fade-in" style="margin-top:3rem">
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;margin-bottom:0.3rem">Si hubiera empezado hace 15 años…</h3>
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.5rem">USD 1,000 mensuales por 15 años = USD 180,000 invertidos. Resultado real según cada activo:</p>
+    <div class="hist-grid">
+      <div class="hist-card btc">
+        <span class="hist-tag">Bitcoin · BTC</span>
+        <h4>USD 1,000/mes × 15 años</h4>
+        <span class="hist-amount">~USD 8.2M</span>
+        <div class="hist-invested">Total invertido: USD 180,000</div>
+        <div class="hist-mult btc">45x el capital invertido</div>
+        <div class="hist-note">DCA desde 2010. Incluye alta volatilidad — caídas de hasta 80% en el camino. No apto para todos los perfiles.</div>
+      </div>
+      <div class="hist-card sp">
+        <span class="hist-tag">S&P 500 · Índice EE.UU.</span>
+        <h4>USD 1,000/mes × 15 años</h4>
+        <span class="hist-amount">~USD 490,000</span>
+        <div class="hist-invested">Total invertido: USD 180,000</div>
+        <div class="hist-mult sp">2.7x el capital invertido</div>
+        <div class="hist-note">Retorno histórico ~10.5% anual. ETF UCITS disponible en la estrategia ABC. Sin riesgo de custodia domiciliado en EE.UU.</div>
+      </div>
+      <div class="hist-card gold-c">
+        <span class="hist-tag">Oro · Gold</span>
+        <h4>USD 1,000/mes × 15 años</h4>
+        <span class="hist-amount">~USD 330,000</span>
+        <div class="hist-invested">Total invertido: USD 180,000</div>
+        <div class="hist-mult gold-c">1.8x el capital invertido</div>
+        <div class="hist-note">Retorno histórico ~6% anual. Reserva de valor frente a inflación y riesgo geopolítico. Componente en estrategia Cautious.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABC EXPLAINER -->
+<div class="abc-section fade-in">
+  <div style="max-width:1100px;margin:0 auto">
+    <span class="section-tag">Estrategia de inversión</span>
+    <h2>La Estrategia ABC de Dominion</h2>
+    <p>Un plan de inversión gestionado por Pacific Asset Management, regulado por la FCA de Londres, que evoluciona con usted. En los primeros años toma más riesgo para crecer; en los años intermedios equilibra; al acercarse al vencimiento protege lo acumulado.</p>
+    <div class="abc-cards">
+      <div class="abc-card">
+        <div class="abc-letter">A</div>
+        <h4>Aggressive</h4>
+        <span class="abc-years">Años 1 – 7 · 60% del plan</span>
+        <p>Alta exposición a renta variable global. Gestionado por Pacific Asset Management (FCA Londres, USD 22B+ AUM). Máximo crecimiento en el horizonte largo.</p>
+        <div class="abc-alloc">
+          <span style="width:70%;background:#2C4A3E;"></span>
+          <span style="width:20%;background:#B89A6A;"></span>
+          <span style="width:10%;background:#D4B896;"></span>
+        </div>
+        <div class="abc-ret">~9% retorno est. anual neto</div>
+      </div>
+      <div class="abc-card">
+        <div class="abc-letter">B</div>
+        <h4>Balanced</h4>
+        <span class="abc-years">Años 7 – 12 · 20% del plan</span>
+        <p>Gestionado por Pacific Asset Management. Mezcla renta variable y renta fija global con rebalanceo automático.</p>
+        <div class="abc-alloc">
+          <span style="width:50%;background:#2C4A3E;"></span>
+          <span style="width:35%;background:#B89A6A;"></span>
+          <span style="width:15%;background:#D4B896;"></span>
+        </div>
+        <div class="abc-ret">~7% retorno est. anual neto</div>
+      </div>
+      <div class="abc-card">
+        <div class="abc-letter">C</div>
+        <h4>Cautious</h4>
+        <span class="abc-years">Años 12 – 20 · 20% del plan</span>
+        <p>Gestionado por Pacific Asset Management (FCA Londres). Alta renta fija y stops-loss automáticos. Protección del capital prioritaria.</p>
+        <div class="abc-alloc">
+          <span style="width:20%;background:#2C4A3E;"></span>
+          <span style="width:50%;background:#B89A6A;"></span>
+          <span style="width:30%;background:#D4B896;"></span>
+        </div>
+        <div class="abc-ret">~5% retorno est. anual neto</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta fade-in">
+  <h2>¿Listo para empezar su <em>plan de ahorro</em>?</h2>
+  <p>Una conversación sin compromiso para entender si esta solución es adecuada para usted.</p>
+  <a href="index.html#contacto" class="btn-primary">Agendar consulta →</a>
+</div>
+
+<div class="disclaimer">
+  Los resultados del simulador son proyecciones basadas en retornos históricos estimados y no garantizan rendimientos futuros. Las comparaciones con AFP y banco local son aproximaciones con fines ilustrativos. Inversiones internacionales conllevan riesgos incluyendo pérdida de capital. Este simulador no constituye asesoría financiera. Grupo Estrategika · grupoestrategika.com
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script>
+const RATES = { abc:0.08, agresivo:0.09, balanceado:0.07, cauteloso:0.05 };
+const RATE_LABELS = { abc:'8.0% (ABC)', agresivo:'9.0% (Agresivo)', balanceado:'7.0% (Balanceado)', cauteloso:'5.0% (Cauteloso)' };
+let currentStrat = 'abc';
+let growthChart = null;
+
+function fmt(n) {
+  if(n >= 1000000) return 'USD ' + (n/1000000).toFixed(2) + 'M';
+  return 'USD ' + Math.round(n).toLocaleString('en-US');
+}
+
+function calcFV(monthly, years, rate) {
+  const r = rate / 12;
+  return monthly * ((Math.pow(1+r, years*12) - 1) / r) * (1+r);
+}
+
+function setStrat(s, btn) {
+  currentStrat = s;
+  document.querySelectorAll('.strat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  updateSim();
+}
+
+function updateSliderStyle(el) {
+  const min = parseFloat(el.min), max = parseFloat(el.max), val = parseFloat(el.value);
+  const pct = ((val - min) / (max - min)) * 100;
+  el.style.setProperty('--pct', pct + '%');
+}
+
+function updateSim() {
+  const aporte = parseFloat(document.getElementById('sliderAporte').value);
+  const plazo  = parseInt(document.getElementById('sliderPlazo').value);
+  const rate   = RATES[currentStrat];
+
+  updateSliderStyle(document.getElementById('sliderAporte'));
+  updateSliderStyle(document.getElementById('sliderPlazo'));
+
+  document.getElementById('dispAporte').textContent = aporte.toLocaleString('en-US');
+  document.getElementById('dispPlazo').textContent  = plazo;
+
+  const total    = calcFV(aporte, plazo, rate);
+  const aportado = aporte * 12 * plazo;
+  const ganancia = total - aportado;
+  const mult     = total / aportado;
+
+  document.getElementById('resTotal').textContent    = fmt(total);
+  document.getElementById('resAportado').textContent = fmt(aportado);
+  document.getElementById('resGanancia').textContent = fmt(ganancia);
+  document.getElementById('resMult').textContent     = mult.toFixed(1) + 'x';
+  document.getElementById('resRetorno').textContent  = 'Retorno estimado neto anual: ' + RATE_LABELS[currentStrat];
+
+  // Chart
+  const labels = [], data = [], dataAport = [];
+  for(let y = 1; y <= plazo; y++) {
+    labels.push('Año ' + y);
+    data.push(Math.round(calcFV(aporte, y, rate)));
+    dataAport.push(Math.round(aporte * 12 * y));
+  }
+
+  if(growthChart) growthChart.destroy();
+  const ctx = document.getElementById('chartGrowth').getContext('2d');
+  growthChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Patrimonio proyectado', data, borderColor:'#B89A6A', backgroundColor:'rgba(184,154,106,0.1)', borderWidth:2, fill:true, tension:0.4, pointRadius:0 },
+        { label: 'Total aportado', data:dataAport, borderColor:'rgba(255,255,255,0.2)', backgroundColor:'transparent', borderWidth:1.5, borderDash:[4,4], fill:false, tension:0.4, pointRadius:0 }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:false } },
+      scales:{
+        x:{ grid:{ color:'rgba(255,255,255,0.05)' }, ticks:{ color:'rgba(255,255,255,0.3)', font:{size:9} } },
+        y:{ grid:{ color:'rgba(255,255,255,0.05)' }, ticks:{ color:'rgba(255,255,255,0.3)', font:{size:9}, callback: v => v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+Math.round(v/1000)+'K' } }
+      }
+    }
+  });
+
+  // Override chart background
+  const chartEl = document.getElementById('chartGrowth');
+  chartEl.style.background = 'transparent';
+
+  // Comparison
+  const compData = [
+    { name:'Estrategika\nSavings (ABC)', amount: total, ret:'~8% anual neto', color:'#2C4A3E', highlight:true },
+    { name:'AFP Fondo 2\n(Perú)', amount: calcFV(aporte, plazo, 0.05), ret:'~5% histórico', color:'#5A4A6A', highlight:false },
+    { name:'Banco Local\n(soles)', amount: aporte*12*plazo*Math.pow(1.01, plazo), ret:'~1% real anual', color:'#7A7063', highlight:false },
+    { name:'S&P 500\n(ETF UCITS)', amount: calcFV(aporte, plazo, 0.105), ret:'~10.5% histórico', color:'#1E3A5F', highlight:false },
+    { name:'Colchón\n(USD en casa)', amount: aporte*12*plazo, ret:'0% – pierde vs inflación', color:'#A09080', highlight:false },
+  ];
+  const maxAmt = Math.max(...compData.map(d=>d.amount));
+  const grid = document.getElementById('compGrid');
+  grid.innerHTML = compData.map(d => `
+    <div class="comp-cell ${d.highlight?'highlight':''}">
+      <span class="comp-name">${d.name.replace('\n','<br>')}</span>
+      <span class="comp-amount">${fmt(d.amount)}</span>
+      <span class="comp-ret">${d.ret}</span>
+      <div class="comp-bar"><div class="comp-bar-fill" style="width:${Math.round(d.amount/maxAmt*100)}%;background:${d.highlight?'rgba(255,255,255,0.5)':d.color}"></div></div>
+    </div>
+  `).join('');
+}
+
+// Init
+document.getElementById('sliderAporte').addEventListener('input', updateSim);
+document.getElementById('sliderPlazo').addEventListener('input', updateSim);
+updateSliderStyle(document.getElementById('sliderAporte'));
+updateSliderStyle(document.getElementById('sliderPlazo'));
+window.addEventListener('load', updateSim);
+
+// Scroll animations
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold:0.08 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
