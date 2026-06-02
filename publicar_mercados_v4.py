@@ -110,9 +110,29 @@ def md_to_html(text):
 def build_html(report_text):
     today = datetime.now()
     dias  = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo']
-    meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre']
+    meses = ['enero','febrero','marzo','abril','mayo','junio','julio',
+             'agosto','septiembre','octubre','noviembre','diciembre']
     fecha = f"{dias[today.weekday()]} {today.day} de {meses[today.month-1]} de {today.year}"
     body  = md_to_html(report_text)
+
+    # Executive summary
+    summary_lines = []
+    for line in report_text.strip().split('\n'):
+        line = line.strip()
+        if not line or line.startswith('#') or line.startswith('|') or line.startswith('-'):
+            if summary_lines: break
+            continue
+        if len(line) > 30:
+            summary_lines.append(re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', line))
+            if len(summary_lines) >= 2: break
+
+    summary_html = ''
+    if summary_lines:
+        summary_html = f'''<div class="exec-summary">
+  <div class="exec-label">📊 Quick Read</div>
+  {chr(10).join(f'<p>{l}</p>' for l in summary_lines)}
+</div>'''
+
     return f'''<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -131,6 +151,10 @@ nav{{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-conten
 .hero{{background:#1A1814;padding:7rem 4rem 3rem;}}.hero-tag{{font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:1rem;}}
 .hero h1{{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:#fff;margin-bottom:0.5rem;}}
 .hero-sub{{font-size:0.82rem;color:rgba(255,255,255,0.4);}}
+.exec-summary{{background:linear-gradient(135deg,#1A1814,#2a2420);border-left:3px solid var(--gold);padding:2rem 2.5rem;margin-bottom:2rem;}}
+.exec-label{{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-weight:500;}}
+.exec-summary p{{font-size:0.9rem;color:rgba(255,255,255,0.78);line-height:1.75;margin-bottom:0.5rem;}}
+.exec-summary strong{{color:#fff;}}
 .content{{max-width:960px;margin:0 auto;padding:3rem 4rem;}}
 .report{{background:#fff;border:1px solid var(--border);padding:3rem;line-height:1.85;}}
 .report h1{{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:400;border-bottom:2px solid var(--border);padding-bottom:0.6rem;margin:2.5rem 0 1.2rem;}}
@@ -162,7 +186,10 @@ footer{{background:#1A1814;padding:2rem 4rem;display:flex;justify-content:space-
   <h1>Daily Market Report</h1>
   <p class="hero-sub">{fecha} · Preparado por Grupo Estrategika</p>
 </div>
-<div class="content"><div class="report">{body}</div></div>
+<div class="content">
+  {summary_html}
+  <div class="report">{body}</div>
+</div>
 <div class="disc"><p>Este reporte es de carácter informativo y elaborado exclusivamente para clientes de Grupo Estrategika. No constituye asesoría de inversión.</p></div>
 <footer>
   <div class="footer-logo">Grupo <span>Estrategika</span></div>
