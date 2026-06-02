@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Estrategika Wealth · Gestión de Patrimonio Internacional</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink: #0A0908;
+  --ink2: #141210;
+  --warm: #F5F0EB;
+  --gold: #B89A6A;
+  --gold-light: #D4B896;
+  --silver: #9A9488;
+  --muted: rgba(255,255,255,0.45);
+  --border: rgba(255,255,255,0.08);
+  --border-warm: #E2D9CE;
+  --white: #FFFFFF;
+  --wealth: #1E3A5F;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'DM Sans',sans-serif; background:var(--ink); color:var(--white); overflow-x:hidden; }
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:1.4rem 4rem;
+  background:rgba(10,9,8,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo { text-decoration:none; }
+.nav-logo-top { font-family:'DM Sans',sans-serif; font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--silver); display:block; }
+.nav-logo-main { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:500; color:var(--white); letter-spacing:0.04em; }
+.nav-logo-main span { color:var(--gold); }
+.nav-links { display:flex; gap:2.5rem; list-style:none; align-items:center; }
+.nav-links a { font-size:0.75rem; font-weight:400; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+.nav-links a:hover { color:var(--gold); }
+.nav-cta { background:transparent; border:1px solid rgba(184,154,106,0.4); color:var(--gold); padding:0.6rem 1.4rem; font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; cursor:pointer; text-decoration:none; transition:all 0.25s; }
+.nav-cta:hover { background:var(--gold); color:var(--ink); }
+
+/* HERO */
+.hero {
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:8rem 4rem 4rem;
+  gap:4rem;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before {
+  content:'';
+  position:absolute; top:0; right:0; bottom:0;
+  width:50%;
+  background:linear-gradient(135deg, rgba(30,58,95,0.15) 0%, transparent 60%);
+}
+.hero::after {
+  content:'';
+  position:absolute;
+  top:10%; right:15%;
+  width:500px; height:500px;
+  background:radial-gradient(circle, rgba(184,154,106,0.06) 0%, transparent 70%);
+  border-radius:50%;
+}
+.hero-tag { font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:1.5rem; padding-bottom:0.8rem; border-bottom:1px solid rgba(184,154,106,0.25); }
+.hero h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(3rem,5vw,5rem); font-weight:300; line-height:1.08; margin-bottom:2rem; }
+.hero h1 em { font-style:italic; color:var(--gold); font-weight:300; }
+.hero-desc { font-size:0.95rem; line-height:1.8; color:var(--muted); max-width:440px; margin-bottom:3rem; }
+.hero-actions { display:flex; gap:1.2rem; align-items:center; }
+.btn-gold { background:var(--gold); color:var(--ink); padding:1rem 2.5rem; font-size:0.78rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; border:none; cursor:pointer; text-decoration:none; transition:all 0.25s; display:inline-block; }
+.btn-gold:hover { background:var(--gold-light); transform:translateY(-2px); }
+.btn-ghost { background:transparent; color:var(--muted); padding:1rem 0; font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; border:none; cursor:pointer; text-decoration:none; transition:color 0.2s; display:inline-block; border-bottom:1px solid rgba(255,255,255,0.15); }
+.btn-ghost:hover { color:var(--white); }
+
+/* HERO RIGHT — STATS */
+.hero-right { display:flex; flex-direction:column; gap:1px; }
+.hero-stat { background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:2rem 2.5rem; position:relative; overflow:hidden; transition:background 0.3s; }
+.hero-stat:hover { background:rgba(255,255,255,0.05); }
+.hero-stat::before { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--gold); opacity:0; transition:opacity 0.3s; }
+.hero-stat:hover::before { opacity:1; }
+.stat-num { font-family:'Cormorant Garamond',serif; font-size:2.8rem; font-weight:300; color:var(--gold); display:block; line-height:1; margin-bottom:0.4rem; }
+.stat-label { font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); }
+
+/* MARQUEE */
+.marquee-wrap { border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:1rem 0; overflow:hidden; background:rgba(255,255,255,0.02); }
+.marquee-inner { display:flex; gap:4rem; animation:marquee 30s linear infinite; white-space:nowrap; }
+.marquee-inner:hover { animation-play-state:paused; }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.marquee-item { font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--silver); display:flex; align-items:center; gap:1rem; }
+.marquee-dot { width:4px; height:4px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+
+/* SECTIONS */
+section { padding:6rem 4rem; }
+.section-tag { font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:1rem; }
+.section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,3.5vw,3rem); font-weight:300; line-height:1.15; margin-bottom:1.5rem; }
+.section-title em { font-style:italic; color:var(--gold); }
+.section-sub { font-size:0.9rem; line-height:1.8; color:var(--muted); max-width:560px; margin-bottom:3rem; }
+
+/* PROPUESTA */
+#propuesta { background:var(--ink2); }
+.prop-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+.prop-features { display:flex; flex-direction:column; gap:0; }
+.prop-feature { padding:2rem 0; border-bottom:1px solid var(--border); display:flex; gap:2rem; align-items:flex-start; transition:background 0.2s; }
+.prop-feature:first-child { border-top:1px solid var(--border); }
+.prop-num { font-family:'Cormorant Garamond',serif; font-size:2.5rem; font-weight:300; color:rgba(184,154,106,0.2); line-height:1; flex-shrink:0; width:3rem; }
+.prop-feature h4 { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:400; color:var(--white); margin-bottom:0.4rem; }
+.prop-feature p { font-size:0.82rem; color:var(--muted); line-height:1.7; }
+
+.prop-visual { position:relative; }
+.prop-card-main { background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:3rem; }
+.prop-card-main h3 { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:300; margin-bottom:2rem; }
+.prop-markets { display:flex; flex-direction:column; gap:1px; }
+.market-row { display:flex; justify-content:space-between; align-items:center; padding:0.9rem 0; border-bottom:1px solid var(--border); }
+.market-row:last-child { border-bottom:none; }
+.market-name { font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); }
+.market-val { font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--white); }
+.market-chg { font-size:0.75rem; font-weight:500; }
+.market-chg.up { color:#6BAA8A; }
+.market-chg.down { color:#C47A7A; }
+.prop-card-sub { background:rgba(184,154,106,0.06); border:1px solid rgba(184,154,106,0.15); padding:1.5rem 2rem; margin-top:1rem; display:flex; gap:1rem; align-items:center; }
+.prop-card-sub p { font-size:0.8rem; color:var(--muted); line-height:1.6; }
+
+/* PERFILES */
+#perfiles { background:var(--ink); }
+.perfiles-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); margin-top:3rem; }
+.perfil-card { background:var(--ink2); padding:3rem 2.5rem; position:relative; overflow:hidden; transition:background 0.3s; }
+.perfil-card:hover { background:rgba(30,58,95,0.2); }
+.perfil-icon { font-size:2rem; margin-bottom:1.5rem; display:block; }
+.perfil-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:400; color:var(--white); margin-bottom:0.8rem; }
+.perfil-card p { font-size:0.82rem; color:var(--muted); line-height:1.75; margin-bottom:1.5rem; }
+.perfil-ticket { display:inline-block; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); border:1px solid rgba(184,154,106,0.25); padding:0.35rem 0.8rem; }
+.perfil-card::after { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, var(--gold), transparent); opacity:0; transition:opacity 0.3s; }
+.perfil-card:hover::after { opacity:1; }
+
+/* PROCESO */
+#proceso { background:var(--ink2); }
+.proceso-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); margin-top:3rem; }
+.proceso-step { background:var(--ink2); padding:2.5rem 2rem; }
+.paso-num { font-family:'Cormorant Garamond',serif; font-size:3.5rem; font-weight:300; color:rgba(184,154,106,0.15); line-height:1; margin-bottom:1rem; }
+.proceso-step h4 { font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:400; color:var(--white); margin-bottom:0.6rem; }
+.proceso-step p { font-size:0.8rem; color:var(--muted); line-height:1.7; }
+
+/* MERCADOS PREVIEW */
+#mercados-preview { background:var(--ink); }
+.mercados-inner { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+.mercados-badge { display:inline-flex; align-items:center; gap:0.6rem; background:rgba(184,154,106,0.08); border:1px solid rgba(184,154,106,0.2); padding:0.5rem 1rem; margin-bottom:2rem; }
+.mercados-badge span { font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); }
+.mercados-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:#6BAA8A; flex-shrink:0; animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+.mercados-preview-card { background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:2.5rem; }
+.prev-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; padding-bottom:1rem; border-bottom:1px solid var(--border); }
+.prev-title { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:400; }
+.prev-date { font-size:0.7rem; letter-spacing:0.1em; color:var(--muted); }
+.prev-excerpt { font-size:0.83rem; color:var(--muted); line-height:1.8; margin-bottom:1.5rem; }
+.prev-topics { display:flex; gap:0.5rem; flex-wrap:wrap; }
+.prev-topic { font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--silver); border:1px solid var(--border); padding:0.25rem 0.6rem; }
+
+/* CONTACTO */
+#contacto-wealth { background:rgba(30,58,95,0.15); border-top:1px solid rgba(30,58,95,0.3); }
+.contacto-inner { display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:start; }
+.contacto-left h2 { font-family:'Cormorant Garamond',serif; font-size:2.8rem; font-weight:300; line-height:1.15; margin-bottom:1.5rem; }
+.contacto-left h2 em { font-style:italic; color:var(--gold); }
+.contacto-left p { font-size:0.88rem; color:var(--muted); line-height:1.8; margin-bottom:2rem; }
+.contacto-detail { display:flex; align-items:center; gap:1rem; padding:0.8rem 0; border-bottom:1px solid var(--border); }
+.contacto-detail:last-child { border-bottom:none; }
+.detail-label { font-size:0.65rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:0.2rem; }
+.detail-val { font-size:0.85rem; color:var(--white); }
+
+.wealth-form { display:flex; flex-direction:column; gap:1.2rem; }
+.form-group { display:flex; flex-direction:column; gap:0.4rem; }
+.form-group label { font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--silver); }
+.form-group input, .form-group select, .form-group textarea {
+  padding:0.9rem 1rem;
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  color:var(--white);
+  font-family:'DM Sans',sans-serif;
+  font-size:0.88rem;
+  outline:none;
+  transition:border-color 0.2s;
+  -webkit-appearance:none;
+}
+.form-group input::placeholder, .form-group textarea::placeholder { color:rgba(255,255,255,0.2); }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:rgba(184,154,106,0.5); }
+.form-group select option { background:var(--ink2); color:var(--white); }
+.form-group textarea { resize:vertical; min-height:100px; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
+.form-submit { background:var(--gold); color:var(--ink); border:none; padding:1rem 2.5rem; font-family:'DM Sans',sans-serif; font-size:0.78rem; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; cursor:pointer; transition:all 0.25s; align-self:flex-start; }
+.form-submit:hover { background:var(--gold-light); }
+.form-success { display:none; background:rgba(107,170,138,0.1); border:1px solid rgba(107,170,138,0.3); padding:1rem 1.5rem; font-size:0.85rem; color:#6BAA8A; }
+.form-note { font-size:0.72rem; color:rgba(255,255,255,0.25); line-height:1.6; }
+
+/* FOOTER */
+footer { background:var(--ink); padding:2.5rem 4rem; display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); }
+.footer-left { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:300; color:var(--white); }
+.footer-left span { color:var(--gold); }
+.footer-center { font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.2); }
+.footer-right a { font-size:0.75rem; color:var(--silver); text-decoration:none; }
+.footer-right a:hover { color:var(--gold); }
+
+.fade-in { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-top">Grupo Estrategika</span>
+    <span class="nav-logo-main">Estrategika <span>Wealth</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#propuesta">Servicios</a></li>
+    <li><a href="#perfiles">Perfiles</a></li>
+    <li><a href="#mercados-preview">Mercados</a></li>
+    <li><a href="#contacto-wealth" class="nav-cta">Solicitar reunión</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <span class="hero-tag">Estrategika Wealth · Gestión de Patrimonio Internacional</span>
+    <h1>Preserve su patrimonio.<br><em>Proteja</em> lo que ha construido.</h1>
+    <p class="hero-desc">Para quienes ya construyeron su patrimonio y ahora su prioridad es preservarlo. Capital protegido internacionalmente, en dólares, estructurado para ganarle a la inflación — sin sobresaltos ni apuestas innecesarias.</p>
+    <div class="hero-actions">
+      <a href="#contacto-wealth" class="btn-gold">Solicitar reunión privada</a>
+      <a href="#propuesta" class="btn-ghost">Nuestro enfoque de preservación</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat">
+      <span class="stat-num">USD 100K</span>
+      <span class="stat-label">Ticket mínimo · sin techo</span>
+    </div>
+    <div class="hero-stat">
+      <span class="stat-num">Capital</span>
+      <span class="stat-label">Preservado · protegido · en dólares</span>
+    </div>
+    <div class="hero-stat">
+      <span class="stat-num">Global</span>
+      <span class="stat-label">Acciones · ETFs · Divisas · Commodities</span>
+    </div>
+    <div class="hero-stat">
+      <span class="stat-num">LATAM</span>
+      <span class="stat-label">Presencia regional · plataformas internacionales</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="marquee-item"><span class="marquee-dot"></span>StoneX · Brokerage Institucional</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Acciones Globales</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>ETFs UCITS</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Divisas · FX</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Commodities</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Renta Fija Internacional</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Protección Patrimonial</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Planificación Internacional</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Dolarización de Activos</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>StoneX · Brokerage Institucional</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Acciones Globales</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>ETFs UCITS</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Divisas · FX</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Commodities</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Renta Fija Internacional</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Protección Patrimonial</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Planificación Internacional</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Dolarización de Activos</span>
+  </div>
+</div>
+
+<!-- PROPUESTA -->
+<section id="propuesta">
+  <div class="prop-grid fade-in">
+    <div>
+      <span class="section-tag">Nuestro enfoque</span>
+      <h2 class="section-title">Protección primero.<br><em>Crecimiento</em> después.</h2>
+      <p class="section-sub">En Estrategika Wealth no buscamos el mayor retorno posible — buscamos el retorno necesario para preservar su poder adquisitivo. Su patrimonio, protegido, estructurado y en dólares.</p>
+      <div class="prop-features">
+        <div class="prop-feature">
+          <div class="prop-num">01</div>
+          <div>
+            <h4>Diagnóstico patrimonial</h4>
+            <p>Analizamos su situación actual — activos, pasivos, exposición cambiaria, riesgo concentración — antes de proponer cualquier estrategia.</p>
+          </div>
+        </div>
+        <div class="prop-feature">
+          <div class="prop-num">02</div>
+          <div>
+            <h4>Diversificación internacional</h4>
+            <p>Su capital fuera del riesgo local. Instrumentos regulados globalmente — bonos, ETFs UCITS, divisas — diseñados para preservar valor, no para especular.</p>
+          </div>
+        </div>
+        <div class="prop-feature">
+          <div class="prop-num">03</div>
+          <div>
+            <h4>Protección y planificación</h4>
+            <p>Estructuramos su patrimonio para protegerlo — de la inflación, del riesgo político, de la concentración en activos locales y de la exposición cambiaria.</p>
+          </div>
+        </div>
+        <div class="prop-feature">
+          <div class="prop-num">04</div>
+          <div>
+            <h4>Seguimiento continuo</h4>
+            <p>Reporte de mercados diario, revisión trimestral del portafolio y acceso directo a su asesor en todo momento.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="prop-visual fade-in">
+      <div class="prop-card-main">
+        <h3>Mercados al cierre</h3>
+        <div class="prop-markets">
+          <div class="market-row">
+            <span class="market-name">S&P 500</span>
+            <span class="market-val">5,842</span>
+            <span class="market-chg up">+0.87%</span>
+          </div>
+          <div class="market-row">
+            <span class="market-name">Nasdaq</span>
+            <span class="market-val">18,963</span>
+            <span class="market-chg up">+1.24%</span>
+          </div>
+          <div class="market-row">
+            <span class="market-name">BTC / USD</span>
+            <span class="market-val">106,450</span>
+            <span class="market-chg up">+2.31%</span>
+          </div>
+          <div class="market-row">
+            <span class="market-name">Oro / XAU</span>
+            <span class="market-val">3,287</span>
+            <span class="market-chg down">-0.42%</span>
+          </div>
+          <div class="market-row">
+            <span class="market-name">USD / PEN</span>
+            <span class="market-val">3.71</span>
+            <span class="market-chg down">-0.18%</span>
+          </div>
+          <div class="market-row">
+            <span class="market-name">T-Bond 10Y</span>
+            <span class="market-val">4.52%</span>
+            <span class="market-chg up">+0.04%</span>
+          </div>
+        </div>
+      </div>
+      <div class="prop-card-sub">
+        <div>
+          <p style="font-size:0.72rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Reporte diario de mercados</p>
+          <p>Clientes Wealth reciben análisis diario con contexto macroeconómico y alertas de riesgo para sus posiciones — para preservar el capital en cualquier entorno de mercado.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERFILES -->
+<section id="perfiles">
+  <div class="fade-in" style="text-align:center;max-width:600px;margin:0 auto 0.5rem;">
+    <span class="section-tag">Perfiles de cliente</span>
+    <h2 class="section-title" style="margin:0 auto;">¿Para quién es <em>Estrategika Wealth</em>?</h2>
+    <p class="section-sub" style="margin:1rem auto 0;">Trabajamos con tres perfiles distintos, cada uno con necesidades patrimoniales específicas.</p>
+  </div>
+  <div class="perfiles-grid fade-in">
+    <div class="perfil-card">
+      <span class="perfil-icon">🏢</span>
+      <h3>Empresarios</h3>
+      <p>Dueños de empresa que han acumulado patrimonio en el negocio y necesitan diversificarlo internacionalmente. Protección ante riesgo concentración y planificación para la siguiente generación.</p>
+      <span class="perfil-ticket">Ticket típico: USD 1M – 5M+</span>
+    </div>
+    <div class="perfil-card">
+      <span class="perfil-icon">👔</span>
+      <h3>Ejecutivos Senior</h3>
+      <p>C-suite y directivos con ingresos altos que buscan dolarizar ahorros, optimizar su portafolio de inversión y planificar la transición hacia el retiro con un estilo de vida sin compromisos.</p>
+      <span class="perfil-ticket">Ticket típico: USD 1M – 3M</span>
+    </div>
+    <div class="perfil-card">
+      <span class="perfil-icon">👨‍👩‍👧‍👦</span>
+      <h3>Familias Patrimoniales</h3>
+      <p>Familias con patrimonio heredado o acumulado que buscan preservarlo, hacerlo crecer y transmitirlo a la siguiente generación con estructuras internacionales eficientes.</p>
+      <span class="perfil-ticket">Ticket típico: USD 2M – 10M+</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso">
+  <div class="fade-in" style="max-width:600px;margin:0 auto 0.5rem;text-align:center;">
+    <span class="section-tag">Cómo trabajamos</span>
+    <h2 class="section-title" style="margin:0 auto;">Un proceso <em>discreto</em> y a medida</h2>
+  </div>
+  <div class="proceso-steps fade-in">
+    <div class="proceso-step">
+      <div class="paso-num">01</div>
+      <h4>Reunión inicial</h4>
+      <p>Conversación privada para entender su situación patrimonial, objetivos y horizonte de inversión. Sin compromiso.</p>
+    </div>
+    <div class="proceso-step">
+      <div class="paso-num">02</div>
+      <h4>Diagnóstico</h4>
+      <p>Análisis de su cartera actual, exposición al riesgo, concentración y oportunidades de mejora.</p>
+    </div>
+    <div class="proceso-step">
+      <div class="paso-num">03</div>
+      <h4>Propuesta a medida</h4>
+      <p>Estrategia personalizada con instrumentos específicos, costos transparentes y proyecciones realistas.</p>
+    </div>
+    <div class="proceso-step">
+      <div class="paso-num">04</div>
+      <h4>Ejecución y seguimiento</h4>
+      <p>Implementación, monitoreo continuo y ajustes según cambian los mercados y su situación personal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MERCADOS PREVIEW -->
+<section id="mercados-preview">
+  <div class="mercados-inner fade-in">
+    <div>
+      <div class="mercados-badge"><span>Reporte diario · exclusivo clientes Wealth</span></div>
+      <span class="section-tag">Daily Market Report</span>
+      <h2 class="section-title">Cada mañana, el contexto que <em>necesita</em></h2>
+      <p class="section-sub">Nuestro reporte diario de mercados cubre los índices globales, movimientos de divisas, materias primas, macro y noticias relevantes para sus posiciones — redactado con criterio, no con algoritmos.</p>
+      <a href="#contacto-wealth" class="btn-gold">Acceder al reporte</a>
+    </div>
+    <div class="mercados-preview-card fade-in">
+      <div class="prev-header">
+        <span class="prev-title">Daily Market Report</span>
+        <span class="prev-date">Lunes 23 · Mayo 2026</span>
+      </div>
+      <p class="prev-excerpt">La semana arranca con el S&P 500 consolidando su octava semana consecutiva de ganancias. El foco macro está en el dato de inflación PCE del viernes y las minutas del FOMC. BTC supera los USD 106K con flujos institucionales sostenidos. El dólar cede terreno frente al yen ante señales de intervención del BoJ cerca del nivel 160...</p>
+      <div class="prev-topics">
+        <span class="prev-topic">S&P 500</span>
+        <span class="prev-topic">Fed · FOMC</span>
+        <span class="prev-topic">BTC</span>
+        <span class="prev-topic">USD/JPY</span>
+        <span class="prev-topic">Oro</span>
+        <span class="prev-topic">Perú Macro</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto-wealth">
+  <div class="contacto-inner fade-in">
+    <div class="contacto-left">
+      <span class="section-tag">Contacto privado</span>
+      <h2>Hablemos sobre <em>su patrimonio</em></h2>
+      <p>Una conversación confidencial. Sin formularios masivos, sin llamadas en frío. Solo una reunión honesta para entender si podemos añadir valor a su situación.</p>
+      <div class="contacto-detail">
+        <div>
+          <span class="detail-label">Email directo</span>
+          <span class="detail-val">werner@grupoestrategika.com</span>
+        </div>
+      </div>
+      <div class="contacto-detail">
+        <div>
+          <span class="detail-label">WhatsApp</span>
+          <span class="detail-val">+51 998 288 962</span>
+        </div>
+      </div>
+      <div class="contacto-detail">
+        <div>
+          <span class="detail-label">Respuesta</span>
+          <span class="detail-val">Dentro de 24 horas hábiles</span>
+        </div>
+      </div>
+    </div>
+    <form class="wealth-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <input type="text" placeholder="Juan Pérez" required/>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="juan@empresa.com" required/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>WhatsApp</label>
+          <input type="tel" placeholder="+51 9XX XXX XXX"/>
+        </div>
+        <div class="form-group">
+          <label>Patrimonio aproximado a preservar</label>
+          <select>
+            <option value="">Seleccione rango...</option>
+            <option>USD 1M – 2M</option>
+            <option>USD 2M – 5M</option>
+            <option>USD 5M+</option>
+            <option>Prefiero no indicar</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>¿Qué le trajo aquí? (opcional)</label>
+        <textarea placeholder="Cuéntenos brevemente su situación o lo que está buscando..."></textarea>
+      </div>
+      <div class="form-success" id="formSuccess">
+        ✓ Mensaje recibido. Werner le contactará personalmente dentro de las próximas 24 horas.
+      </div>
+      <button type="submit" class="form-submit">Solicitar reunión privada →</button>
+      <p class="form-note">Su información es completamente confidencial y nunca será compartida con terceros.</p>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">Estrategika <span>Wealth</span></div>
+  <div class="footer-center">© 2026 Grupo Estrategika · América Latina</div>
+  <div class="footer-right"><a href="index.html">← Volver al sitio principal</a></div>
+</footer>
+
+<script>
+window.addEventListener('load', function() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+});
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = 'Enviando...';
+  btn.disabled = true;
+  setTimeout(() => {
+    document.getElementById('formSuccess').style.display = 'block';
+    btn.style.display = 'none';
+  }, 800);
+}
+</script>
+</body>
+</html>
