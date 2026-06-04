@@ -219,7 +219,8 @@
   .pillars-visual { display:grid; grid-template-rows:1.4fr 1fr; padding:0; }
   .pillar-cell { display:flex; align-items:center; justify-content:center; text-decoration:none; transition:background 0.3s; position:relative; padding:1.5rem; }
   .pillars-bottom-row { display:grid; grid-template-columns:1fr 1fr; }
-  .pillar-wealth { background:rgba(30,58,95,0.06); border-bottom:1px solid var(--border); }
+  .pillars-bottom-row .pillar-cell { align-items:flex-end; padding-bottom:2.6rem; }
+  .pillar-wealth { background:rgba(30,58,95,0.06); border-bottom:1px solid var(--border); align-items:flex-start; padding-top:2.4rem; }
   .pillar-wealth:hover { background:rgba(30,58,95,0.13); }
   .pillar-wealth .quad-name { color:var(--wealth); font-size:1.7rem; }
   .pillar-health { background:rgba(92,58,95,0.06); border-right:1px solid var(--border); }
