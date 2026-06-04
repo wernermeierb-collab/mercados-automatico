@@ -19,9 +19,9 @@
 
   /* NAV */
   nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1.4rem 4rem; background:rgba(247,243,238,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
-  .nav-logo { font-family:'Cormorant Garamond',serif; font-size:1.45rem; font-weight:500; letter-spacing:0.04em; color:var(--ink); text-decoration:none; }
+  .nav-logo { font-family:'Cormorant Garamond',serif; font-size:1.65rem; font-weight:500; letter-spacing:0.04em; color:var(--ink); text-decoration:none; }
   .nav-logo span { color:var(--gold); }
-  .nav-tagline { font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); display:block; margin-top:0.1rem; }
+  .nav-tagline { font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); display:block; margin-top:0.15rem; }
   .nav-links { display:flex; gap:2.2rem; list-style:none; }
   .nav-links a { font-size:0.78rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
   .nav-links a:hover { color:var(--gold); }
@@ -268,7 +268,8 @@
   .reason-num { font-family:'Cormorant Garamond',serif; font-size:3.5rem; font-weight:300; color:rgba(184,154,106,0.2); line-height:1; margin-bottom:1rem; }
   .reason-card h4 { font-family:'Cormorant Garamond',serif; font-size:1.25rem; font-weight:500; color:var(--white); margin-bottom:0.8rem; }
   .reason-card p { font-size:0.85rem; color:rgba(255,255,255,0.55); line-height:1.7; }
-  .nosotros-cta { display:flex; justify-content:center; margin-top:3.5rem; }
+  .nosotros-cta { display:flex; flex-direction:column; align-items:center; gap:1.5rem; margin-top:3.5rem; }
+  .nosotros-tagline { font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:400; font-style:italic; color:var(--gold-light); text-align:center; max-width:640px; line-height:1.5; letter-spacing:0.005em; }
   @media (max-width:900px) {
     .nosotros-header { grid-template-columns:1fr; gap:2rem; }
     .nosotros-quote-visual { height:200px; }
@@ -378,9 +379,9 @@
   <div>
     <span class="hero-eyebrow">Wealth · Health · Life</span>
     <h1>Tres pilares. Un patrimonio <em>integral</em>.</h1>
-    <p>Wealth — creación, preservación y transferencia de patrimonio. Health — salud internacional sin fronteras. Life — protección financiera y continuidad. Para familias de alto patrimonio e instituciones en toda América Latina.</p>
+    <p><strong>Wealth</strong> para construir, preservar y transferir patrimonio. <strong>Health</strong> para acceder a la mejor medicina del mundo. <strong>Life</strong> para proteger a la familia y asegurar continuidad financiera. Una estrategia integral para familias e instituciones de América Latina.</p>
     <div>
-      <a href="#contacto" class="btn-primary">Solicitar una estrategia personalizada →</a>
+      <a href="#contacto" class="btn-primary">Coordinar una consulta privada →</a>
       <a href="#ecosystem" class="btn-outline">Nuestras soluciones</a>
     </div>
   </div>
@@ -644,7 +645,8 @@
     <div class="reason-card"><div class="reason-num">06</div><h4>Contexto latinoamericano</h4><p>Entendemos el entorno donde usted opera — moneda, tributación, riesgo político y planificación patrimonial — con acceso a soluciones internacionales.</p></div>
   </div>
   <div class="nosotros-cta fade-in">
-    <a href="#contacto" class="btn-primary">Hablemos sobre su estrategia →</a>
+    <p class="nosotros-tagline">Preservamos, protegemos y proyectamos el patrimonio de familias e instituciones.</p>
+    <a href="#contacto" class="btn-primary">Coordinar una consulta privada →</a>
   </div>
 </section>
 
