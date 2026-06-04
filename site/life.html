@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Estrategika Life · Protección Patrimonial Familiar</title>
+<title>Estrategika Life · El Seguro de Vida como Herramienta Financiera</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 :root {
@@ -43,12 +43,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 
 /* HERO RIGHT */
 .hero-right{display:flex;flex-direction:column;gap:1rem;}
-.protection-card{background:var(--warm);border:1px solid var(--border);padding:1.8rem 2rem;position:relative;overflow:hidden;transition:transform 0.2s;}
+.protection-card{background:var(--warm);border:1px solid var(--border);padding:1.8rem 2rem;position:relative;overflow:hidden;transition:transform 0.2s;text-decoration:none;color:inherit;display:block;}
 .protection-card:hover{transform:translateY(-3px);}
 .protection-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--care);}
+.protection-link:hover{box-shadow:0 8px 24px rgba(92,58,95,0.08);}
 .card-icon{font-size:1.4rem;margin-bottom:0.8rem;}
 .protection-card h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;margin-bottom:0.4rem;}
 .protection-card p{font-size:0.8rem;color:var(--muted);line-height:1.6;}
+
+/* SCROLL CUE */
+.scroll-cue{position:absolute;bottom:1.8rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;text-decoration:none;color:var(--care);animation:scrollPulse 2.2s ease-in-out infinite;}
+.scroll-cue-text{font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;}
+.scroll-cue-arrow{font-size:1.2rem;line-height:1;}
+@keyframes scrollPulse{0%,100%{transform:translateX(-50%) translateY(0);opacity:0.7;}50%{transform:translateX(-50%) translateY(6px);opacity:1;}}
 
 /* STATS */
 .stats-bar{background:var(--care);padding:2.5rem 4rem;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center;}
@@ -80,20 +87,28 @@ section{padding:6rem 4rem;}
 .ole-stat .num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold-light);display:block;}
 .ole-stat .lbl{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);}
 
-/* PRODUCTOS */
-#productos{background:var(--white);}
-.productos-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem;}
-.producto-card{border:1px solid var(--border);padding:2.5rem;position:relative;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;}
-.producto-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.08);}
-.producto-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--care);transform:scaleX(0);transition:transform 0.3s;transform-origin:left;}
-.producto-card:hover::after{transform:scaleX(1);}
-.prod-badge{display:inline-block;font-size:0.68rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--white);background:var(--care);padding:0.3rem 0.8rem;margin-bottom:1.2rem;}
-.producto-card h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:500;margin-bottom:0.6rem;}
-.producto-card .prod-sub{font-size:0.8rem;color:var(--muted);margin-bottom:1.2rem;font-style:italic;}
-.prod-features{list-style:none;border-top:1px solid var(--border);padding-top:1.2rem;}
-.prod-features li{font-size:0.82rem;color:var(--muted);padding:0.5rem 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:0.8rem;line-height:1.5;}
-.prod-features li:last-child{border-bottom:none;}
-.prod-features li::before{content:'✓';color:var(--care);font-weight:600;flex-shrink:0;margin-top:0.05rem;}
+/* APLICACIONES */
+#aplicaciones{background:var(--white);}
+.aplicaciones-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem;align-items:start;}
+@media (max-width:1100px){.aplicaciones-grid{grid-template-columns:1fr;}}
+.apl-card{border:1px solid var(--border);padding:2.2rem 2rem;background:var(--white);position:relative;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;}
+.apl-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(92,58,95,0.08);}
+.apl-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--care);}
+.apl-header{margin-bottom:1.5rem;border-bottom:1px solid var(--border);padding-bottom:1.2rem;}
+.apl-num{display:inline-block;font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:500;color:var(--care);background:var(--care-light);padding:0.2rem 0.7rem;margin-bottom:0.8rem;}
+.apl-header h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:500;line-height:1.2;margin-bottom:0.5rem;}
+.apl-desc{font-size:0.83rem;color:var(--muted);line-height:1.55;font-style:italic;}
+.apl-list{list-style:none;margin-bottom:1.5rem;}
+.apl-list li{font-size:0.82rem;color:var(--muted);padding:0.6rem 0;border-bottom:1px solid rgba(226,217,206,0.6);line-height:1.55;}
+.apl-list li:last-child{border-bottom:none;}
+.apl-list li strong{color:var(--ink);font-weight:600;}
+.apl-ideal{font-size:0.78rem;color:var(--muted);padding:1rem 1.1rem;background:var(--warm);border-left:2px solid var(--care);line-height:1.6;}
+.apl-ideal strong{color:var(--care);}
+
+/* POR QUÉ (single column ahora) */
+.porque-narrow{max-width:780px;margin:0 auto;}
+.porque-narrow .section-tag, .porque-narrow .section-title, .porque-narrow .section-sub{text-align:center;margin-left:auto;margin-right:auto;}
+.porque-narrow .section-sub{margin-bottom:3rem;}
 
 /* BENEFICIOS */
 #beneficios{background:var(--warm);}
@@ -166,8 +181,8 @@ footer{background:var(--ink);padding:2.5rem 4rem;display:flex;justify-content:sp
     <span class="nav-logo-main">Estrategika <span>Life</span></span>
   </a>
   <ul class="nav-links">
+    <li><a href="#aplicaciones">Aplicaciones</a></li>
     <li><a href="#porque">Por qué protegerse</a></li>
-    <li><a href="#productos">Productos</a></li>
     <li><a href="#digital">100% Digital</a></li>
     <li><a href="#contacto-life" class="nav-cta">Cotizar ahora</a></li>
   </ul>
@@ -176,136 +191,151 @@ footer{background:var(--ink);padding:2.5rem 4rem;display:flex;justify-content:sp
 <!-- HERO -->
 <section class="hero">
   <div>
-    <span class="hero-tag">Estrategika Life · Protección Patrimonial Familiar</span>
-    <h1>Proteja a su familia.<br>Hoy, no <em>mañana</em>.</h1>
-    <p class="hero-desc">Una herramienta financiera con dos usos distintos. Para quien construye patrimonio: protección familiar mientras Savings hace crecer su capital. Para el cliente HNW: amplificador de herencia, liquidez sucesoria y protección del negocio familiar — todo en dólares, 100% digital.</p>
+    <span class="hero-tag">Estrategika Life · Herramienta Financiera Multipropósito</span>
+    <h1>El seguro de vida<br>no es solo <em>protección</em>.</h1>
+    <p class="hero-desc">Es un instrumento financiero con múltiples aplicaciones a lo largo de cada etapa del ciclo patrimonial. Protege a la familia, asegura la continuidad de un negocio, y facilita la transferencia eficiente de patrimonio. Todo en dólares, 100% digital, con cobertura en +30 países.</p>
     <div class="hero-actions">
-      <a href="#contacto-life" class="btn-primary">Cotizar ahora →</a>
-      <a href="#productos" class="btn-outline">Ver productos</a>
+      <a href="#aplicaciones" class="btn-primary">Ver aplicaciones →</a>
+      <a href="#contacto-life" class="btn-outline">Cotizar ahora</a>
     </div>
   </div>
   <div class="hero-right">
-    <div class="protection-card">
-      <div class="card-icon">🏠</div>
-      <h4>Protección familiar completa</h4>
-      <p>Si algo le ocurre, su familia recibe el capital para mantener su estilo de vida — sin depender de nadie.</p>
-    </div>
-    <div class="protection-card">
-      <div class="card-icon">💵</div>
-      <h4>En dólares · desde Miami</h4>
-      <p>Prima fija en USD. Sin riesgo cambiario. Respaldado por OLÉ — primera aseguradora 100% digital en LATAM.</p>
-    </div>
-    <div class="protection-card">
-      <div class="card-icon">🌎</div>
-      <h4>Cobertura en +30 países</h4>
-      <p>LATAM y el Caribe. Sin importar dónde esté usted o su familia, la cobertura viaja con usted.</p>
-    </div>
-    <div class="protection-card">
+    <a href="#aplicaciones" class="protection-card protection-link">
+      <div class="card-icon">👨‍👩‍👧‍👦</div>
+      <h4>Protección personal y familiar</h4>
+      <p>Reemplazo de ingreso, protección hipotecaria, cobertura de hijos, anticipo ante enfermedad crítica.</p>
+    </a>
+    <a href="#aplicaciones" class="protection-card protection-link">
+      <div class="card-icon">🏢</div>
+      <h4>Protección empresarial</h4>
+      <p>Buy-Sell entre socios, key-person, financiación de planes ejecutivos. Continuidad asegurada.</p>
+    </a>
+    <a href="#aplicaciones" class="protection-card protection-link">
+      <div class="card-icon">🏛️</div>
+      <h4>Planificación patrimonial</h4>
+      <p>Liquidez sucesoria, multiplicador de herencia, cross-border, trusts y vehículos sucesorios.</p>
+    </a>
+    <a href="#aplicaciones" class="protection-card protection-link">
       <div class="card-icon">💻</div>
-      <h4>100% digital · sin papeles</h4>
-      <p>Cotice, contrate y gestione su póliza completamente en línea. Evaluación simplificada — sin exámenes médicos en la mayoría de casos.</p>
-    </div>
+      <h4>100% digital · en dólares</h4>
+      <p>Cotice, contrate y gestione en línea. Sin exámenes médicos en la mayoría de casos. Cobertura en +30 países.</p>
+    </a>
   </div>
+  <a href="#aplicaciones" class="scroll-cue" aria-label="Ver más abajo">
+    <span class="scroll-cue-text">Ver las 13 aplicaciones del seguro de vida</span>
+    <span class="scroll-cue-arrow">↓</span>
+  </a>
 </section>
 
 <!-- STATS -->
 <div class="stats-bar">
-  <div><span class="stat-num">+30</span><span class="stat-label">Países de cobertura</span></div>
-  <div><span class="stat-num">+30</span><span class="stat-label">Años de experiencia OLÉ</span></div>
+  <div><span class="stat-num">13</span><span class="stat-label">Aplicaciones del seguro de vida</span></div>
+  <div><span class="stat-num">+30</span><span class="stat-label">Países de cobertura LATAM</span></div>
   <div><span class="stat-num">USD</span><span class="stat-label">Prima fija en dólares</span></div>
   <div><span class="stat-num">100%</span><span class="stat-label">Digital · sin papeles</span></div>
 </div>
 
+<!-- APLICACIONES (replaces old PRODUCTOS) -->
+<section id="aplicaciones">
+  <div class="fade-in" style="text-align:center;max-width:680px;margin:0 auto 0.5rem;">
+    <span class="section-tag">Aplicaciones del seguro de vida</span>
+    <h2 class="section-title" style="margin:0 auto;">Tres categorías. <em>Trece aplicaciones.</em></h2>
+    <p class="section-sub" style="margin:1rem auto 2rem;">El seguro de vida no es solo protección ante fallecimiento — es un instrumento multipropósito que se adapta a cada etapa del ciclo financiero y patrimonial.</p>
+  </div>
+
+  <div class="aplicaciones-grid fade-in">
+
+    <!-- CAT 1: PERSONAL & FAMILIAR -->
+    <div class="apl-card">
+      <div class="apl-header">
+        <span class="apl-num">01</span>
+        <h3>Protección personal y familiar</h3>
+        <p class="apl-desc">La base — proteger a quienes dependen de su ingreso y de su patrimonio activo.</p>
+      </div>
+      <ul class="apl-list">
+        <li><strong>Reemplazo del ingreso familiar</strong> ante fallecimiento del proveedor principal — su familia mantiene su nivel de vida sin liquidar activos</li>
+        <li><strong>Protección hipotecaria</strong> — cubre el saldo del crédito y la familia no pierde la casa</li>
+        <li><strong>Living Benefits</strong> — anticipo del beneficio (72 hrs) ante enfermedad crítica, crónica o terminal</li>
+        <li><strong>Cobertura de hijos</strong> (Children's Rider) bajo la misma póliza, sin trámite adicional</li>
+        <li><strong>Exención de prima por incapacidad</strong> — si no puede trabajar, la cobertura sigue vigente sin pago</li>
+      </ul>
+      <div class="apl-ideal"><strong>Ideal para:</strong> familias con dependientes, dueños de hipoteca, profesionales jóvenes, ejecutivos con cargas familiares.</div>
+    </div>
+
+    <!-- CAT 2: EMPRESARIAL -->
+    <div class="apl-card">
+      <div class="apl-header">
+        <span class="apl-num">02</span>
+        <h3>Protección empresarial</h3>
+        <p class="apl-desc">El seguro de vida como instrumento de continuidad y estabilidad del negocio.</p>
+      </div>
+      <ul class="apl-list">
+        <li><strong>Buy-Sell entre socios</strong> — garantiza la compra de la participación del socio fallecido sin descapitalizar la empresa ni generar conflictos con herederos</li>
+        <li><strong>Key-person insurance</strong> — protege a la empresa o institución ante la pérdida de un colaborador clave (CEO, fundador, comercial estrella)</li>
+        <li><strong>Financiación de planes ejecutivos</strong> — beneficios diferidos para retener y compensar a altos directivos sin costo presente</li>
+      </ul>
+      <div class="apl-ideal"><strong>Ideal para:</strong> empresarios con socios, PYMES familiares, instituciones con key-personnel, dueños de negocios en crecimiento.</div>
+    </div>
+
+    <!-- CAT 3: PATRIMONIAL & SUCESORIO -->
+    <div class="apl-card">
+      <div class="apl-header">
+        <span class="apl-num">03</span>
+        <h3>Planificación patrimonial y sucesoria</h3>
+        <p class="apl-desc">El seguro de vida como vehículo de transferencia eficiente de patrimonio a la siguiente generación.</p>
+      </div>
+      <ul class="apl-list">
+        <li><strong>Liquidez sucesoria</strong> — pago de impuestos de herencia sin tener que liquidar activos productivos (negocios, inmuebles, portafolios)</li>
+        <li><strong>Multiplicador de herencia</strong> — la familia recibe más de lo que el cliente aportó, transferencia eficiente de patrimonio</li>
+        <li><strong>Cross-border / Foreign Nationals</strong> — clientes con patrimonio o residencia internacional, planificación entre jurisdicciones</li>
+        <li><strong>Trusts y vehículos sucesorios</strong> — la póliza dentro de estructuras patrimoniales para optimizar la transferencia</li>
+        <li><strong>Legados a causas</strong> — donaciones amplificadas vía póliza para fundaciones u obras filantrópicas</li>
+      </ul>
+      <div class="apl-ideal"><strong>Ideal para:</strong> clientes HNW y UHNW con planificación sucesoria activa, familias con activos ilíquidos, clientes con patrimonio cross-border, próximos al retiro.</div>
+    </div>
+
+  </div>
+</section>
+
 <!-- POR QUÉ -->
 <section id="porque">
-  <div class="porque-grid fade-in">
-    <div>
-      <span class="section-tag">Por qué protegerse hoy</span>
-      <h2 class="section-title">Su familia no puede <em>esperar</em></h2>
-      <p class="section-sub">Construir patrimonio es fundamental. Pero proteger a su familia mientras lo construye es igual de importante — o más.</p>
-      <div class="porque-items">
-        <div class="porque-item">
-          <span class="porque-icon">👨‍👩‍👧‍👦</span>
-          <div>
-            <h4>Si algo le ocurre, ¿quién sostiene a su familia?</h4>
-            <p>Un seguro de vida garantiza que su familia mantenga su nivel de vida — sin liquidar activos, sin deudas, sin depender de terceros.</p>
-          </div>
-        </div>
-        <div class="porque-item">
-          <span class="porque-icon">📈</span>
-          <div>
-            <h4>Para quien construye: protección pura</h4>
-            <p>Si tiene Savings, no necesita un seguro con componente de ahorro — ese ahorro ya lo hace Savings más eficientemente. Un término puro le da máxima cobertura con prima mínima.</p>
-          </div>
-        </div>
-        <div class="porque-item">
-          <span class="porque-icon">🏛️</span>
-          <div>
-            <h4>Para el HNW: herramienta patrimonial</h4>
-            <p>El seguro de vida amplifica la herencia — su familia recibe más de lo que usted aportó. Crea liquidez inmediata para pagar impuestos sucesorios sin liquidar activos como el negocio o los inmuebles.</p>
-          </div>
-        </div>
-        <div class="porque-item">
-          <span class="porque-icon">🏢</span>
-          <div>
-            <h4>Protección del negocio familiar</h4>
-            <p>Si usted falta, ¿qué pasa con su empresa? Life puede financiar la compra de su participación por los socios restantes, protegiendo la continuidad del negocio y la estabilidad de su familia.</p>
-          </div>
+  <div class="porque-narrow fade-in">
+    <span class="section-tag">Por qué actuar hoy</span>
+    <h2 class="section-title">Cada etapa <em>requiere protección</em></h2>
+    <p class="section-sub">Construir patrimonio es fundamental. Protegerlo en el camino, igual de importante. El seguro de vida cambia de rol según la etapa del cliente — pero nunca deja de ser pieza clave.</p>
+    <div class="porque-items">
+      <div class="porque-item">
+        <span class="porque-icon">👨‍👩‍👧‍👦</span>
+        <div>
+          <h4>Si algo le ocurre, ¿quién sostiene a su familia?</h4>
+          <p>Un seguro de vida garantiza que su familia mantenga su nivel de vida — sin liquidar activos, sin deudas, sin depender de terceros.</p>
         </div>
       </div>
-    </div>
-    <div class="ole-card fade-in">
-      <div class="ole-badge">
-        <span>Powered by OLÉ · Miami, FL</span>
+      <div class="porque-item">
+        <span class="porque-icon">📈</span>
+        <div>
+          <h4>Mientras construye patrimonio: protección pura</h4>
+          <p>En etapa de acumulación, lo que vale es máxima cobertura con prima mínima. Un seguro de término puro hace exactamente eso.</p>
+        </div>
       </div>
-      <h3>La primera aseguradora 100% digital de LATAM</h3>
-      <p>OLÉ nació en 2022 como evolución de más de 30 años de experiencia en seguros internacionales para América Latina. Fundada por Michael Carricarte — ex presidente de Pan-American Life para LATAM — es la única aseguradora digital nativa de la región.</p>
-      <div class="ole-stats">
-        <div class="ole-stat"><span class="num">1986</span><span class="lbl">Fundación Amedex</span></div>
-        <div class="ole-stat"><span class="num">+30</span><span class="lbl">Años de experiencia</span></div>
-        <div class="ole-stat"><span class="num">+30</span><span class="lbl">Países LATAM</span></div>
-        <div class="ole-stat"><span class="num">2022</span><span class="lbl">Lanzamiento OLÉ</span></div>
+      <div class="porque-item">
+        <span class="porque-icon">🏛️</span>
+        <div>
+          <h4>Para el HNW: herramienta patrimonial</h4>
+          <p>El seguro de vida amplifica la herencia — su familia recibe más de lo aportado. Crea liquidez inmediata para pagar impuestos sucesorios sin liquidar activos como el negocio o los inmuebles.</p>
+        </div>
+      </div>
+      <div class="porque-item">
+        <span class="porque-icon">🏢</span>
+        <div>
+          <h4>Protección del negocio familiar</h4>
+          <p>Si usted falta, ¿qué pasa con su empresa? Life puede financiar la compra de su participación por los socios restantes, protegiendo la continuidad del negocio y la estabilidad de su familia.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRODUCTOS -->
-<section id="productos">
-  <div class="fade-in" style="text-align:center;max-width:580px;margin:0 auto 0.5rem;">
-    <span class="section-tag">Nuestros productos</span>
-    <h2 class="section-title" style="margin:0 auto;">Dos soluciones para <em>cada etapa</em></h2>
-    <p class="section-sub" style="margin:1rem auto 0;">Ambas en dólares, 100% digitales, con cobertura en +30 países de LATAM.</p>
-  </div>
-  <div class="productos-grid fade-in">
-    <div class="producto-card">
-      <span class="prod-badge">Para clientes Savings · Affluent</span>
-      <h3>Easy Term</h3>
-      <div class="prod-sub">Protección pura · máxima cobertura · prima mínima</div>
-      <ul class="prod-features">
-        <li>Cobertura de vida en caso de fallecimiento</li>
-        <li>Prima fija en dólares — sin sorpresas</li>
-        <li>Sin componente de ahorro — su Savings es más eficiente para eso</li>
-        <li>Contratación 100% digital · sin exámenes en la mayoría de casos</li>
-        <li>Cobertura en +30 países de LATAM y Caribe</li>
-        <li>Ideal mientras construye su patrimonio con Savings</li>
-      </ul>
-    </div>
-    <div class="producto-card">
-      <span class="prod-badge">Para clientes HNW · Wealth</span>
-      <h3>Master Term</h3>
-      <div class="prod-sub">Herramienta patrimonial · herencia · planificación sucesoria</div>
-      <ul class="prod-features">
-        <li>Amplifica la herencia — su familia recibe más de lo aportado</li>
-        <li>Liquidez inmediata para impuestos sucesorios sin liquidar activos</li>
-        <li>Protección del negocio familiar ante fallecimiento del socio</li>
-        <li>Devolución de prima al vencimiento</li>
-        <li>Anticipo por enfermedad terminal · cáncer · enfermedades críticas</li>
-        <li>Equalización entre herederos con activos ilíquidos</li>
-      </ul>
-    </div>
-  </div>
-</section>
 
 <!-- BENEFICIOS -->
 <section id="beneficios">
@@ -385,21 +415,21 @@ footer{background:var(--ink);padding:2.5rem 4rem;display:flex;justify-content:sp
   <div class="eco-grid fade-in">
     <div class="eco-card">
       <span class="eco-dot" style="background:#2C4A3E;"></span>
-      <h4>Estrategika Savings</h4>
-      <p>Mientras su familia crece su capital mes a mes con Dominion MSS, Life garantiza que ese plan no se interrumpa si usted falta.</p>
-      <a href="simulador.html" class="eco-link" style="color:#2C4A3E;border-color:#2C4A3E;">Simular plan de ahorro →</a>
+      <h4>Wealth · Creation</h4>
+      <p>Mientras su familia construye capital mes a mes, Life garantiza que ese plan no se interrumpa si usted falta.</p>
+      <a href="simulador.html" class="eco-link" style="color:#2C4A3E;border-color:#2C4A3E;">Construir patrimonio →</a>
     </div>
     <div class="eco-card">
       <span class="eco-dot" style="background:#1E3A5F;"></span>
-      <h4>Estrategika Wealth</h4>
-      <p>Su patrimonio está protegido internacionalmente. Life asegura que ese patrimonio llegue íntegro a su familia cuando lo necesiten.</p>
+      <h4>Wealth · Preservation</h4>
+      <p>Su patrimonio gestionado internacionalmente. Life asegura que llegue íntegro a su familia cuando lo necesiten.</p>
       <a href="wealth.html" class="eco-link" style="color:#1E3A5F;border-color:#1E3A5F;">Conocer Wealth →</a>
     </div>
     <div class="eco-card">
       <span class="eco-dot" style="background:#5C3A5F;"></span>
-      <h4>Estrategika Global Care</h4>
-      <p>Cobertura médica internacional para que usted y su familia accedan a la mejor medicina en cualquier país del mundo.</p>
-      <a href="index.html#ecosystem" class="eco-link" style="color:#5C3A5F;border-color:#5C3A5F;">Conocer Global Care →</a>
+      <h4>Health · Global Care</h4>
+      <p>Cobertura médica internacional para que usted y su familia accedan a la mejor medicina del mundo.</p>
+      <a href="globalcare.html" class="eco-link" style="color:#5C3A5F;border-color:#5C3A5F;">Conocer Global Care →</a>
     </div>
   </div>
 </section>
@@ -424,8 +454,8 @@ footer{background:var(--ink);padding:2.5rem 4rem;display:flex;justify-content:sp
         <span class="c-val">+30 países · LATAM y Caribe</span>
       </div>
       <div class="c-detail">
-        <span class="c-label">Producto</span>
-        <span class="c-val">OLÉ · Miami, FL</span>
+        <span class="c-label">Modalidad</span>
+        <span class="c-val">100% digital · en dólares</span>
       </div>
     </div>
     <form class="life-form" onsubmit="handleSubmit(event)">
@@ -458,11 +488,12 @@ footer{background:var(--ink);padding:2.5rem 4rem;display:flex;justify-content:sp
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Producto de interés</label>
+          <label>Aplicación de interés</label>
           <select>
             <option value="">Seleccione...</option>
-            <option>Easy Term</option>
-            <option>Master Term</option>
+            <option>Protección personal y familiar</option>
+            <option>Protección empresarial (Buy-Sell, Key-person)</option>
+            <option>Planificación patrimonial y sucesoria</option>
             <option>No sé — necesito orientación</option>
           </select>
         </div>
@@ -499,7 +530,7 @@ footer{background:var(--ink);padding:2.5rem 4rem;display:flex;justify-content:sp
 
 <footer>
   <div class="footer-logo">Estrategika <span>Life</span></div>
-  <div class="footer-copy">© 2026 Grupo Estrategika · Powered by OLÉ · Miami, FL</div>
+  <div class="footer-copy">© 2026 Grupo Estrategika · 100% digital · en dólares · +30 países LATAM</div>
   <a href="index.html" class="footer-link">← Sitio principal</a>
 </footer>
 
