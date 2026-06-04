@@ -3,13 +3,15 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Grupo Estrategika – Private Wealth · Protection · Global Access</title>
+<title>Grupo Estrategika – Wealth · Health · Life</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
   :root {
     --ink: #1A1814; --warm: #F7F3EE; --gold: #B89A6A; --gold-light: #D4B896;
     --muted: #7A7063; --border: #E2D9CE; --white: #FFFFFF; --accent: #2C4A3E;
     --wealth: #1E3A5F; --savings: #2C4A3E; --care: #5C3A5F;
+    --creation: #2C4A3E; --preservation: #1E3A5F; --legacy: #8B6F3A;
+    --health: #5C3A5F; --life: #8B3A4A;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior:smooth; }
@@ -82,6 +84,23 @@
   .hero-brand-card:nth-child(2) { animation-delay:0.15s; }
   .hero-brand-card:nth-child(3) { animation-delay:0.3s; }
   .hero-brand-card:nth-child(4) { animation-delay:0.45s; }
+  /* THREE-PILLAR HERO */
+  .hero-pillars { display:flex; flex-direction:column; gap:1.1rem; align-items:stretch; }
+  .hero-pillar { background:var(--white); border:1px solid var(--border); padding:1.6rem 1.8rem; position:relative; animation:fadeUp 0.6s ease both; transition:transform 0.25s,box-shadow 0.25s; text-decoration:none; color:inherit; display:block; }
+  .hero-pillar:nth-child(2) { animation-delay:0.15s; }
+  .hero-pillar:nth-child(3) { animation-delay:0.3s; }
+  .hero-pillar-link:hover { transform:translateY(-3px); box-shadow:0 10px 30px rgba(0,0,0,0.07); }
+  .hero-pillar h3 { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:500; letter-spacing:0.01em; }
+  .hero-pillar .brand-sub { font-size:0.68rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); margin-top:0.15rem; }
+  .hero-pillar p { font-size:0.82rem; color:var(--muted); line-height:1.6; margin-top:0.7rem; }
+  .wealth-pillar { padding-bottom:0.4rem; }
+  .sub-pillars { display:grid; grid-template-columns:1fr; gap:0; margin-top:0.9rem; border-top:1px solid var(--border); }
+  .sub-pillar { display:grid; grid-template-columns:auto 1fr; column-gap:0.7rem; align-items:baseline; padding:0.7rem 0; border-bottom:1px solid var(--border); text-decoration:none; color:inherit; transition:background 0.2s; }
+  .sub-pillar:last-child { border-bottom:none; }
+  .sub-pillar:hover { background:rgba(184,154,106,0.06); }
+  .sub-dot { width:7px; height:7px; border-radius:50%; align-self:center; }
+  .sub-name { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:500; color:var(--ink); }
+  .sub-desc { grid-column:2; font-size:0.72rem; color:var(--muted); letter-spacing:0.02em; margin-top:0.15rem; }
   @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
   .brand-card-top { display:flex; align-items:center; gap:0.8rem; margin-bottom:0.6rem; }
   .brand-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
@@ -154,6 +173,23 @@
   .brand-top-bar.savings { background:var(--savings); }
   .brand-top-bar.care { background:var(--care); }
   .brand-client { font-size:0.75rem; color:var(--muted); margin-top:1rem; font-style:italic; }
+  /* PILLAR SECTIONS */
+  .pillar-section { margin-bottom:2.5rem; }
+  .pillar-section-header { max-width:720px; margin:0 auto 2rem; text-align:center; }
+  .pillar-label { font-size:0.7rem; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; display:block; margin-bottom:0.6rem; }
+  .pillar-section-title { font-family:'Cormorant Garamond',serif; font-size:1.9rem; font-weight:400; color:var(--ink); margin-bottom:0.8rem; }
+  .pillar-section-sub { font-size:0.9rem; color:var(--muted); line-height:1.65; max-width:600px; margin:0 auto; }
+  .brands-grid-3 { grid-template-columns:repeat(3,1fr); }
+  .brands-grid-2 { grid-template-columns:repeat(2,1fr); align-items:start; }
+  @media (max-width:900px) { .brands-grid-3, .brands-grid-2 { grid-template-columns:1fr; } }
+  /* USE CASES (Life card) */
+  .usecases { display:flex; flex-direction:column; gap:1.4rem; margin:1.2rem 0 0.6rem; }
+  .usecase-group { border-left:2px solid var(--border); padding:0.3rem 0 0.3rem 1rem; }
+  .usecase-label { font-size:0.66rem; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; display:block; margin-bottom:0.6rem; }
+  .usecase-group ul { list-style:none; padding:0; margin:0; }
+  .usecase-group li { font-size:0.8rem; color:var(--muted); line-height:1.55; padding:0.3rem 0; border-bottom:1px solid rgba(226,217,206,0.5); }
+  .usecase-group li:last-child { border-bottom:none; }
+  .usecase-group li strong { color:var(--ink); font-weight:600; }
 
   /* CIRCLE ECOSYSTEM */
   .circle-ecosystem { display:flex; justify-content:center; padding:2rem 0 3rem; }
@@ -179,6 +215,24 @@
   .circle-center { text-align:center; }
   .circle-ge { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:500; color:var(--ink); display:block; line-height:1; }
   .circle-ge-sub { font-size:0.5rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); display:block; margin-top:0.3rem; }
+  /* THREE-PILLAR VISUAL */
+  .pillars-visual { display:grid; grid-template-rows:1.4fr 1fr; padding:0; }
+  .pillar-cell { display:flex; align-items:center; justify-content:center; text-decoration:none; transition:background 0.3s; position:relative; padding:1.5rem; }
+  .pillars-bottom-row { display:grid; grid-template-columns:1fr 1fr; }
+  .pillar-wealth { background:rgba(30,58,95,0.06); border-bottom:1px solid var(--border); }
+  .pillar-wealth:hover { background:rgba(30,58,95,0.13); }
+  .pillar-wealth .quad-name { color:var(--wealth); font-size:1.7rem; }
+  .pillar-health { background:rgba(92,58,95,0.06); border-right:1px solid var(--border); }
+  .pillar-health:hover { background:rgba(92,58,95,0.13); }
+  .pillar-health .quad-name { color:var(--health); }
+  .pillar-life { background:rgba(139,58,74,0.06); }
+  .pillar-life:hover { background:rgba(139,58,74,0.13); }
+  .pillar-life .quad-name { color:var(--life); }
+  .pillar-sub-tags { display:flex; justify-content:center; gap:0.5rem; margin-top:0.8rem; flex-wrap:wrap; }
+  .pillar-sub-tags span { font-size:0.62rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--wealth); padding:0.25rem 0.6rem; border:1px solid rgba(30,58,95,0.25); }
+  .pillar-sub-tags span:nth-child(1) { color:var(--creation); border-color:rgba(44,74,62,0.3); }
+  .pillar-sub-tags span:nth-child(2) { color:var(--preservation); border-color:rgba(30,58,95,0.3); }
+  .pillar-sub-tags span:nth-child(3) { color:var(--legacy); border-color:rgba(139,111,58,0.3); }
 
   /* FUNNEL */
   .funnel-wrapper { background:var(--ink); padding:3.5rem 4rem; position:relative; overflow:hidden; }
@@ -197,16 +251,29 @@
   .funnel-arrow { font-size:1.2rem; color:rgba(184,154,106,0.4); padding:0 0.5rem; flex-shrink:0; }
   .funnel-note { text-align:center; margin-top:2rem; font-size:0.78rem; color:rgba(255,255,255,0.35); font-style:italic; }
 
-  /* PORQUE */
-  #porque { background:var(--ink); color:var(--white); }
-  #porque .section-title { color:var(--white); }
-  #porque .section-subtitle { color:rgba(255,255,255,0.55); }
-  .reasons-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin-top:3rem; }
+  /* NOSOTROS (merged section) */
+  #nosotros { background:var(--ink); color:var(--white); }
+  #nosotros .section-title { color:var(--white); }
+  #nosotros .section-subtitle { color:rgba(255,255,255,0.6); }
+  .nosotros-header { display:grid; grid-template-columns:0.85fr 1.15fr; gap:4rem; align-items:center; margin-bottom:3rem; }
+  .nosotros-quote-visual { position:relative; height:300px; }
+  .nosotros-quote-block { position:absolute; inset:0; background:var(--gold); display:flex; align-items:center; justify-content:center; padding:2rem; }
+  .nosotros-quote-block::before { content:''; position:absolute; top:-20px; left:-20px; right:30px; bottom:30px; border:1px solid rgba(184,154,106,0.35); z-index:-1; }
+  .nosotros-quote { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:400; font-style:italic; color:var(--ink); line-height:1.4; text-align:center; }
+  .nosotros-intro h2 { margin-bottom:1.3rem; }
+  .nosotros-intro p { line-height:1.75; }
+  .reasons-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin-top:2rem; }
   .reason-card { padding:2rem; border:1px solid rgba(255,255,255,0.1); transition:border-color 0.3s; }
   .reason-card:hover { border-color:var(--gold); }
   .reason-num { font-family:'Cormorant Garamond',serif; font-size:3.5rem; font-weight:300; color:rgba(184,154,106,0.2); line-height:1; margin-bottom:1rem; }
   .reason-card h4 { font-family:'Cormorant Garamond',serif; font-size:1.25rem; font-weight:500; color:var(--white); margin-bottom:0.8rem; }
   .reason-card p { font-size:0.85rem; color:rgba(255,255,255,0.55); line-height:1.7; }
+  .nosotros-cta { display:flex; justify-content:center; margin-top:3.5rem; }
+  @media (max-width:900px) {
+    .nosotros-header { grid-template-columns:1fr; gap:2rem; }
+    .nosotros-quote-visual { height:200px; }
+    .nosotros-quote { font-size:1.2rem; }
+  }
 
   /* CONTACTO */
   #contacto { background:var(--white); }
@@ -239,6 +306,7 @@
   .footer-brand-dot.wealth::before { background:var(--wealth); }
   .footer-brand-dot.savings::before { background:var(--savings); }
   .footer-brand-dot.care::before { background:var(--care); }
+  .footer-brand-dot[style*="--c"]::before { background:var(--c); }
   .footer-copy { font-size:0.78rem; color:rgba(255,255,255,0.25); }
 
   .fade-in { opacity:1; transform:translateY(0); transition:opacity 0.7s ease,transform 0.7s ease; }
@@ -250,32 +318,38 @@
 <nav>
   <a href="#" class="nav-logo">
     Grupo <span>Estrategika</span>
-    <span class="nav-tagline">Private Wealth · Protection · Global Access</span>
+    <span class="nav-tagline">Wealth · Health · Life</span>
   </a>
   <ul class="nav-links">
     <li class="nav-dropdown">
-      <a href="#quienes">Nosotros</a>
+      <a href="#nosotros">Nosotros</a>
       <div class="nav-dropdown-menu">
-        <a href="#quienes">Quiénes somos</a>
+        <a href="#nosotros">Quiénes somos</a>
         <a href="como-trabajamos.html">Cómo trabajamos</a>
       </div>
     </li>
     <li class="nav-dropdown">
       <a href="#">Clientes</a>
       <div class="nav-dropdown-menu">
-        <a href="https://app.dominion-cs.com/es/login" target="_blank">📊 Portal Dominion MSS</a>
-        <a href="https://vulcan.stonex.com/l/" target="_blank">📈 Portal StoneX</a>
+        <a href="https://app.dominion-cs.com/es/login" target="_blank">📊 Portal · Wealth Creation</a>
+        <a href="https://vulcan.stonex.com/l/" target="_blank">📈 Portal · Wealth Preservation</a>
         <a href="mercados.html">📰 Reporte Diario de Mercados</a>
       </div>
     </li>
     <li class="nav-dropdown">
-      <a href="#">Servicios</a>
+      <a href="#">Wealth</a>
       <div class="nav-dropdown-menu">
-        <a href="wealth.html">💼 Estrategika Wealth (1M+)</a>
-        <a href="wealth-affluent.html">📈 Estrategika Wealth (100K+)</a>
-        <a href="simulador.html">💰 Estrategika Savings</a>
-        <a href="globalcare.html">🏥 Estrategika Global Care</a>
-        <a href="life.html">🛡️ Estrategika Life</a>
+        <a href="simulador.html">🌱 Wealth Creation (desde $250/mes)</a>
+        <a href="wealth-affluent.html">📈 Wealth Preservation (desde $100K)</a>
+        <a href="wealth.html">💼 Wealth Preservation (desde $1M+)</a>
+        <a href="#contacto">🏛️ Wealth Legacy (Anualidades · IUL)</a>
+      </div>
+    </li>
+    <li class="nav-dropdown">
+      <a href="#">Health &amp; Life</a>
+      <div class="nav-dropdown-menu">
+        <a href="globalcare.html">🏥 Health · Global Care</a>
+        <a href="life.html">🛡️ Life · Protección Financiera</a>
       </div>
     </li>
     <li class="nav-dropdown">
@@ -303,235 +377,291 @@
 
 <section class="hero">
   <div>
-    <span class="hero-eyebrow">Private Wealth · Protection · Global Access</span>
-    <h1>Un ecosistema completo para su <em>patrimonio</em></h1>
-    <p>Cuatro soluciones integradas que acompañan cada etapa de su vida financiera — desde el ahorro disciplinado hasta la gestión patrimonial, la salud internacional y la protección de vida.</p>
+    <span class="hero-eyebrow">Wealth · Health · Life</span>
+    <h1>Tres pilares. Un patrimonio <em>integral</em>.</h1>
+    <p>Wealth — creación, preservación y transferencia de patrimonio. Health — salud internacional sin fronteras. Life — protección financiera y continuidad. Para familias de alto patrimonio e instituciones en toda América Latina.</p>
     <div>
       <a href="#contacto" class="btn-primary">Solicitar una estrategia personalizada →</a>
       <a href="#ecosystem" class="btn-outline">Nuestras soluciones</a>
     </div>
   </div>
-  <div class="hero-right">
-    <div class="hero-brand-card">
-      <div class="card-stripe wealth"></div>
-      <div class="brand-card-top"><div class="brand-dot wealth"></div>
-        <div><h3>Estrategika Wealth</h3><div class="brand-sub">Gestión de Patrimonio</div></div>
+  <div class="hero-right hero-pillars">
+    <!-- WEALTH (umbrella card with 3 sub-pillars) -->
+    <div class="hero-pillar wealth-pillar">
+      <div class="card-stripe" style="background:var(--wealth);"></div>
+      <div class="brand-card-top"><div class="brand-dot" style="background:var(--wealth);"></div>
+        <div><h3>Wealth</h3><div class="brand-sub">Patrimonio</div></div>
       </div>
-      <p>Acceso institucional a mercados globales y estrategias patrimoniales para clientes HNW y UHNW.</p>
-    </div>
-    <div class="hero-brand-card">
-      <div class="card-stripe savings"></div>
-      <div class="brand-card-top"><div class="brand-dot savings"></div>
-        <div><h3>Estrategika Savings</h3><div class="brand-sub">Construcción Patrimonial</div></div>
+      <div class="sub-pillars">
+        <a href="simulador.html" class="sub-pillar">
+          <span class="sub-dot" style="background:var(--creation);"></span>
+          <span class="sub-name">Creation</span>
+          <span class="sub-desc">Construcción · Ahorro disciplinado en USD</span>
+        </a>
+        <a href="wealth.html" class="sub-pillar">
+          <span class="sub-dot" style="background:var(--preservation);"></span>
+          <span class="sub-name">Preservation</span>
+          <span class="sub-desc">Gestión patrimonial · Mercados globales</span>
+        </a>
+        <a href="#contacto" class="sub-pillar">
+          <span class="sub-dot" style="background:var(--legacy);"></span>
+          <span class="sub-name">Legacy</span>
+          <span class="sub-desc">Anualidades · IUL · Planificación sucesoria</span>
+        </a>
       </div>
-      <p>Construcción patrimonial automatizada en dólares mediante estrategias disciplinadas de largo plazo.</p>
     </div>
-    <div class="hero-brand-card">
-      <div class="card-stripe care"></div>
-      <div class="brand-card-top"><div class="brand-dot care"></div>
-        <div><h3>Estrategika Global Care</h3><div class="brand-sub">Salud Internacional</div></div>
+    <!-- HEALTH -->
+    <a href="globalcare.html" class="hero-pillar hero-pillar-link">
+      <div class="card-stripe" style="background:var(--health);"></div>
+      <div class="brand-card-top"><div class="brand-dot" style="background:var(--health);"></div>
+        <div><h3>Health</h3><div class="brand-sub">Salud Internacional</div></div>
       </div>
-      <p>Cobertura médica global para familias, empresarios y ejecutivos internacionales.</p>
-    </div>
-    <div class="hero-brand-card">
-      <div class="card-stripe" style="background:#5C3A5F;"></div>
-      <div class="brand-card-top"><div class="brand-dot" style="background:#5C3A5F;"></div>
-        <div><h3>Estrategika Life</h3><div class="brand-sub">Protección Patrimonial Familiar</div></div>
+      <p>Cobertura médica global respaldada por uno de los aseguradores más grandes del mundo. Acceso sin fronteras a la mejor medicina.</p>
+    </a>
+    <!-- LIFE -->
+    <a href="life.html" class="hero-pillar hero-pillar-link">
+      <div class="card-stripe" style="background:var(--life);"></div>
+      <div class="brand-card-top"><div class="brand-dot" style="background:var(--life);"></div>
+        <div><h3>Life</h3><div class="brand-sub">Protección Financiera</div></div>
       </div>
-      <p>Protección financiera mientras construye patrimonio, asegurando continuidad para quienes más importan.</p>
-    </div>
+      <p>Protección del ingreso y del patrimonio ante eventos críticos. Continuidad asegurada en cualquier circunstancia.</p>
+    </a>
   </div>
 </section>
 
 <div class="stats-bar">
-  <div><span class="stat-num">4</span><span class="stat-label">Soluciones integradas</span></div>
+  <div><span class="stat-num">3</span><span class="stat-label">Pilares · Wealth · Health · Life</span></div>
   <div><span class="stat-num">100%</span><span class="stat-label">Digital · Apertura y gestión en línea</span></div>
   <div><span class="stat-num">100%</span><span class="stat-label">Independientes · Sin conflicto</span></div>
-  <div><span class="stat-num">100%</span><span class="stat-label">Gestión independiente</span></div>
+  <div><span class="stat-num">100%</span><span class="stat-label">Regulado · Guernsey · FCA · EE.UU.</span></div>
 </div>
-
-<section id="quienes">
-  <div class="quienes-visual fade-in">
-    <div class="quienes-bg-block"></div>
-    <div class="quienes-inner-block">
-      <p class="quienes-quote">"Cada familia es única. Su estrategia también debe serlo."</p>
-    </div>
-  </div>
-  <div class="fade-in">
-    <span class="section-tag">Quiénes somos</span>
-    <h2 class="section-title">Asesoría independiente construida sobre confianza</h2>
-    <p class="section-subtitle">Grupo Estrategika es una firma internacional especializada en soluciones de ahorro, inversión, cobertura médica y protección de vida para familias de alto patrimonio e instituciones financieras en toda América Latina.</p>
-    <div class="values-list">
-      <div class="value-item"><div class="value-dot"></div><p><strong>Independencia real:</strong> No trabajamos para ningún banco. Nuestro único interés es el suyo.</p></div>
-      <div class="value-item"><div class="value-dot"></div><p><strong>Acceso institucional:</strong> Traemos productos de nivel institucional al alcance del cliente individual.</p></div>
-      <div class="value-item"><div class="value-dot"></div><p><strong>Transparencia total:</strong> Costos claros, estructuras explicadas y rendición de cuentas continua.</p></div>
-    </div>
-  </div>
-</section>
 
 <section id="ecosystem">
   <div class="ecosystem-header fade-in">
     <span class="section-tag">Nuestras soluciones</span>
-    <h2 class="section-title" style="margin:0 auto 1rem;">Un ecosistema patrimonial <em style="font-style:italic;color:var(--gold)">completo</em></h2>
-    <p class="section-subtitle" style="margin:0 auto;">Cuatro soluciones diseñadas para trabajar juntas — desde el primer ahorro hasta la gestión patrimonial, la salud internacional y la protección de vida.</p>
+    <h2 class="section-title" style="margin:0 auto 1rem;">Tres pilares. <em style="font-style:italic;color:var(--gold)">Una estrategia.</em></h2>
+    <p class="section-subtitle" style="margin:0 auto;">Wealth, Health y Life — diseñados para trabajar juntos. Wealth se despliega en tres etapas: creación, preservación y legado. Cada solución funciona también de forma independiente.</p>
   </div>
 
-  <!-- CIRCLE -->
+  <!-- THREE-PILLAR VISUAL -->
   <div class="circle-ecosystem fade-in">
-    <div class="circle-outer">
-      <div class="quad-row">
-        <a href="wealth.html" class="quad q-wealth">
-          <div class="quad-inner"><span class="quad-name">Wealth</span><span class="quad-sub">Gestión de Patrimonio</span></div>
-        </a>
-        <a href="simulador.html" class="quad q-savings">
-          <div class="quad-inner"><span class="quad-name">Savings</span><span class="quad-sub">Construcción Patrimonial</span></div>
-        </a>
-      </div>
+    <div class="circle-outer pillars-visual">
+      <a href="#wealth-section" class="pillar-cell pillar-wealth">
+        <div class="quad-inner">
+          <span class="quad-name">Wealth</span>
+          <span class="quad-sub">Patrimonio</span>
+          <div class="pillar-sub-tags">
+            <span>Creation</span>
+            <span>Preservation</span>
+            <span>Legacy</span>
+          </div>
+        </div>
+      </a>
       <div class="circle-center-ring">
         <div class="circle-center"><span class="circle-ge">GE</span><span class="circle-ge-sub">Grupo Estrategika</span></div>
       </div>
-      <div class="quad-row">
-        <a href="life.html" class="quad q-life">
-          <div class="quad-inner"><span class="quad-name">Life</span><span class="quad-sub">Protección · Familia</span></div>
+      <div class="pillars-bottom-row">
+        <a href="globalcare.html" class="pillar-cell pillar-health">
+          <div class="quad-inner"><span class="quad-name">Health</span><span class="quad-sub">Salud Internacional</span></div>
         </a>
-        <a href="globalcare.html" class="quad q-care">
-          <div class="quad-inner"><span class="quad-name">Global Care</span><span class="quad-sub">Salud Internacional</span></div>
+        <a href="life.html" class="pillar-cell pillar-life">
+          <div class="quad-inner"><span class="quad-name">Life</span><span class="quad-sub">Protección Familiar</span></div>
         </a>
       </div>
     </div>
   </div>
 
-  <div class="brands-grid fade-in">
-    <!-- WEALTH -->
-    <div class="brand-card">
-      <div class="brand-top-bar wealth"></div>
-      <div class="brand-header"><span class="brand-name-label wealth">Estrategika</span><h3>Wealth</h3><div class="brand-tagline">Gestión de Patrimonio Internacional</div></div>
-      <span class="brand-platform wealth">via StoneX</span>
-      <p>Acceso institucional a mercados globales, estrategias patrimoniales y soluciones internacionales para clientes de alto y muy alto patrimonio.</p>
-      <ul class="brand-features">
-        <li class="wealth">Brokerage institucional global</li>
-        <li class="wealth">Acciones, ETFs UCITS, divisas, commodities</li>
-        <li class="wealth">Estrategias de patrimonio internacional</li>
-        <li class="wealth">Protección patrimonial y planificación</li>
-        <li class="wealth">Clientes HNW / UHNW</li>
-      </ul>
-      <p class="brand-client">Ideal para: Empresarios, ejecutivos senior, familias patrimoniales.</p>
-      <div class="brand-values"><span class="brand-value-tag">Protección</span><span class="brand-value-tag">Crecimiento</span><span class="brand-value-tag">Legado</span></div>
-      <div style="display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap;">
-        <a href="wealth-affluent.html" style="font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--wealth);text-decoration:none;border-bottom:1px solid var(--wealth);padding-bottom:0.2rem;">Desde USD 100K →</a>
-        <a href="wealth.html" style="font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--wealth);text-decoration:none;border-bottom:1px solid var(--wealth);padding-bottom:0.2rem;">Desde USD 1M+ →</a>
+  <!-- WEALTH SECTION -->
+  <div id="wealth-section" class="pillar-section fade-in">
+    <div class="pillar-section-header">
+      <span class="pillar-label" style="color:var(--wealth);">Pilar 01</span>
+      <h3 class="pillar-section-title">Wealth · Patrimonio</h3>
+      <p class="pillar-section-sub">Tres etapas del ciclo patrimonial: la creación disciplinada, la preservación inteligente y la transferencia eficiente a la siguiente generación.</p>
+    </div>
+    <div class="brands-grid brands-grid-3">
+
+      <!-- CREATION -->
+      <div class="brand-card">
+        <div class="brand-top-bar" style="background:var(--creation);"></div>
+        <div class="brand-header"><span class="brand-name-label" style="color:var(--creation);">Wealth · Creation</span><h3>Estrategika Savings</h3><div class="brand-tagline">Construcción Patrimonial Automatizada</div></div>
+        <p>Acumulación disciplinada en dólares vía estrategias institucionales de largo plazo. La base del ciclo: convertir flujo en patrimonio.</p>
+        <ul class="brand-features">
+          <li class="savings">Aporte mensual desde USD 250</li>
+          <li class="savings">Custodia internacional de primer nivel</li>
+          <li class="savings">Acceso a los principales gestores globales</li>
+          <li class="savings">Regulación en Guernsey</li>
+          <li class="savings">Plazos 5 a 20 años</li>
+        </ul>
+        <p class="brand-client">Ideal para: profesionales, affluent, ejecutivos jóvenes.</p>
+        <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:0.6rem;">
+          <a href="simulador.html" style="font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--creation);text-decoration:none;border-bottom:1px solid var(--creation);padding-bottom:0.2rem;width:fit-content;">📈 Simular plan de ahorro →</a>
+          <a href="simulador-educacion.html" style="font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--creation);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:0.2rem;width:fit-content;">🎓 Simular fondo educación →</a>
+          <a href="simulador-jubilacion.html" style="font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--creation);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:0.2rem;width:fit-content;">🏖️ Simular plan de jubilación →</a>
+        </div>
       </div>
-    </div>
 
-    <!-- SAVINGS -->
-    <div class="brand-card">
-      <div class="brand-top-bar savings"></div>
-      <div class="brand-header"><span class="brand-name-label savings">Estrategika</span><h3>Savings</h3><div class="brand-tagline">Construcción Patrimonial Automatizada</div></div>
-      <span class="brand-platform savings">via Dominion Capital Strategies</span>
-      <p>Construcción patrimonial automatizada en dólares mediante estrategias disciplinadas de largo plazo, con acceso a fondos institucionales de primera línea.</p>
-      <ul class="brand-features">
-        <li class="savings">Ahorro mensual desde USD 250</li>
-        <li class="savings">Custodia BNY Mellon · Regulado Guernsey</li>
-        <li class="savings">Fondos: BlackRock, Vanguard, JPMorgan</li>
-        <li class="savings">Gestión: Pacific Asset Management (USD 22B+)</li>
-        <li class="savings">App en español · Plazos 5–20 años</li>
-      </ul>
-      <p class="brand-client">Ideal para: Profesionales, affluent, ejecutivos jóvenes.</p>
-      <div class="brand-values"><span class="brand-value-tag">Disciplina</span><span class="brand-value-tag">Automatización</span><span class="brand-value-tag">Crecimiento</span></div>
-      <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:0.6rem;">
-        <a href="simulador.html" style="font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--savings);text-decoration:none;border-bottom:1px solid var(--savings);padding-bottom:0.2rem;width:fit-content;">📈 Simular plan de ahorro →</a>
-        <a href="simulador-educacion.html" style="font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--savings);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:0.2rem;width:fit-content;">🎓 Simular fondo educación →</a>
-        <a href="simulador-jubilacion.html" style="font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--savings);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:0.2rem;width:fit-content;">🏖️ Simular plan de jubilación →</a>
-        <a href="life.html" style="font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--care);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:0.2rem;width:fit-content;">🛡️ Proteger a mi familia (Life) →</a>
+      <!-- PRESERVATION -->
+      <div class="brand-card">
+        <div class="brand-top-bar" style="background:var(--preservation);"></div>
+        <div class="brand-header"><span class="brand-name-label" style="color:var(--preservation);">Wealth · Preservation</span><h3>Estrategika Wealth</h3><div class="brand-tagline">Gestión Patrimonial Internacional</div></div>
+        <p>Acceso institucional a mercados globales para preservar el poder adquisitivo del patrimonio acumulado y hacerlo crecer con disciplina.</p>
+        <ul class="brand-features">
+          <li class="wealth">Brokerage institucional global</li>
+          <li class="wealth">Acciones, ETFs UCITS, divisas, commodities</li>
+          <li class="wealth">Estrategias multi-asset internacionales</li>
+          <li class="wealth">Reporte y custodia transparente</li>
+          <li class="wealth">Clientes affluent · HNW · UHNW</li>
+        </ul>
+        <p class="brand-client">Ideal para: empresarios, ejecutivos senior, familias patrimoniales.</p>
+        <div style="display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap;">
+          <a href="wealth-affluent.html" style="font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--preservation);text-decoration:none;border-bottom:1px solid var(--preservation);padding-bottom:0.2rem;">Desde USD 100K →</a>
+          <a href="wealth.html" style="font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--preservation);text-decoration:none;border-bottom:1px solid var(--preservation);padding-bottom:0.2rem;">Desde USD 1M+ →</a>
+        </div>
       </div>
-    </div>
 
-    <!-- GLOBAL CARE -->
-    <div class="brand-card">
-      <div class="brand-top-bar care"></div>
-      <div class="brand-header"><span class="brand-name-label care">Estrategika</span><h3>Global Care</h3><div class="brand-tagline">Salud Internacional</div></div>
-      <span class="brand-platform care">via Allianz International Health</span>
-      <p>Cobertura médica global para usted y su familia, respaldada por Allianz Group — una de las aseguradoras más grandes del mundo.</p>
-      <ul class="brand-features">
-        <li class="care">Cobertura médica internacional completa</li>
-        <li class="care">Red global de hospitales y especialistas</li>
-        <li class="care">Planes individuales, familiares y corporativos</li>
-        <li class="care">Ideal para expatriados y ejecutivos globales</li>
-        <li class="care">Respaldo Allianz Group · 97M clientes</li>
-      </ul>
-      <p class="brand-client">Ideal para: Empresarios, familias globales, ejecutivos internacionales.</p>
-      <div class="brand-values"><span class="brand-value-tag">Protección</span><span class="brand-value-tag">Acceso</span><span class="brand-value-tag">Tranquilidad</span></div>
-      <a href="globalcare.html" style="display:inline-block;margin-top:1.5rem;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--care);text-decoration:none;border-bottom:1px solid var(--care);padding-bottom:0.2rem;">Ver cobertura completa →</a>
-    </div>
+      <!-- LEGACY -->
+      <div class="brand-card">
+        <div class="brand-top-bar" style="background:var(--legacy);"></div>
+        <div class="brand-header"><span class="brand-name-label" style="color:var(--legacy);">Wealth · Legacy</span><h3>Estrategika Legacy</h3><div class="brand-tagline">Planificación Sucesoria y Anualidades</div></div>
+        <p>Transferencia eficiente del patrimonio a la siguiente generación, con instrumentos de renta garantizada e ingeniería sucesoria.</p>
+        <ul class="brand-features">
+          <li style="color:var(--muted);"><strong style="color:var(--ink);">Anualidades:</strong> renta garantizada en USD, ideal para no residentes US</li>
+          <li style="color:var(--muted);"><strong style="color:var(--ink);">IUL:</strong> acumulación con upside del mercado y protección a la baja</li>
+          <li style="color:var(--muted);"><strong style="color:var(--ink);">Buy-Sell:</strong> continuidad de empresas familiares</li>
+          <li style="color:var(--muted);">Liquidez sucesoria sin liquidar activos</li>
+          <li style="color:var(--muted);">Planificación cross-border</li>
+        </ul>
+        <p class="brand-client">Ideal para: empresarios con socios, HNW con planificación sucesoria activa, clientes próximos al retiro.</p>
+        <a href="#contacto" style="display:inline-block;margin-top:1.5rem;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--legacy);text-decoration:none;border-bottom:1px solid var(--legacy);padding-bottom:0.2rem;">Solicitar análisis sucesorio →</a>
+      </div>
 
-    <!-- LIFE -->
-    <div class="brand-card">
-      <div class="brand-top-bar" style="background:#5C3A5F;"></div>
-      <div class="brand-header"><span class="brand-name-label" style="color:#5C3A5F;">Estrategika</span><h3>Life</h3><div class="brand-tagline">Protección Patrimonial Familiar</div></div>
-      <span class="brand-platform" style="background:#5C3A5F;">via OLÉ · Miami, FL</span>
-      <p>Protección financiera mientras construye patrimonio, asegurando continuidad para quienes más importan. Para clientes Savings: término puro. Para HNW: herramienta patrimonial y sucesoria.</p>
-      <ul class="brand-features">
-        <li style="color:var(--muted);"><strong style="color:var(--ink);">Cliente Savings:</strong> término puro · prima baja · protección alta</li>
-        <li style="color:var(--muted);"><strong style="color:var(--ink);">Cliente HNW:</strong> amplifica herencia · liquidez sucesoria</li>
-        <li style="color:var(--muted);">Pago de impuestos sucesorios sin liquidar activos</li>
-        <li style="color:var(--muted);">100% digital · en dólares · +30 países LATAM</li>
-      </ul>
-      <p class="brand-client">Ideal para: Clientes en construcción de patrimonio y clientes HNW con planificación sucesoria.</p>
-      <div class="brand-values"><span class="brand-value-tag">Protección</span><span class="brand-value-tag">Herencia</span><span class="brand-value-tag">Legado</span></div>
-      <a href="life.html" style="display:inline-block;margin-top:1rem;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#5C3A5F;text-decoration:none;border-bottom:1px solid #5C3A5F;padding-bottom:0.2rem;">Ver productos Life →</a>
     </div>
   </div>
 
-  <!-- FUNNEL -->
+  <!-- HEALTH & LIFE SECTION -->
+  <div class="pillar-section fade-in">
+    <div class="pillar-section-header" style="margin-top:3rem;">
+      <span class="pillar-label" style="color:var(--health);">Pilares 02 &amp; 03</span>
+      <h3 class="pillar-section-title">Health &amp; Life · Protección</h3>
+      <p class="pillar-section-sub">Patrimonio sin salud ni continuidad familiar no es patrimonio. Las dos coberturas que blindan todo lo construido.</p>
+    </div>
+    <div class="brands-grid brands-grid-2">
+
+      <!-- HEALTH -->
+      <div class="brand-card">
+        <div class="brand-top-bar" style="background:var(--health);"></div>
+        <div class="brand-header"><span class="brand-name-label" style="color:var(--health);">Pilar · Health</span><h3>Estrategika Global Care</h3><div class="brand-tagline">Salud Internacional</div></div>
+        <p>Cobertura médica internacional respaldada por uno de los aseguradores más grandes del mundo. Acceso a la mejor medicina sin fronteras.</p>
+        <ul class="brand-features">
+          <li class="care">Cobertura médica internacional completa</li>
+          <li class="care">Red global de hospitales y especialistas</li>
+          <li class="care">Planes individuales, familiares y corporativos</li>
+          <li class="care">Ideal para expatriados y ejecutivos globales</li>
+          <li class="care">Respaldo institucional global</li>
+        </ul>
+        <p class="brand-client">Ideal para: empresarios, familias globales, ejecutivos internacionales, instituciones con personal expatriado.</p>
+        <a href="globalcare.html" style="display:inline-block;margin-top:1.5rem;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--health);text-decoration:none;border-bottom:1px solid var(--health);padding-bottom:0.2rem;">Ver cobertura completa →</a>
+      </div>
+
+      <!-- LIFE -->
+      <div class="brand-card">
+        <div class="brand-top-bar" style="background:var(--life);"></div>
+        <div class="brand-header"><span class="brand-name-label" style="color:var(--life);">Pilar · Life</span><h3>Estrategika Life</h3><div class="brand-tagline">El Seguro de Vida como Herramienta Financiera</div></div>
+        <p>El seguro de vida no es solo protección ante fallecimiento — es un instrumento multipropósito que se adapta a cada etapa del ciclo financiero. Estas son sus aplicaciones reales:</p>
+
+        <div class="usecases">
+          <div class="usecase-group">
+            <span class="usecase-label" style="color:var(--life);">Protección personal y familiar</span>
+            <ul>
+              <li><strong>Reemplazo del ingreso familiar</strong> ante fallecimiento del proveedor principal</li>
+              <li><strong>Protección hipotecaria</strong> — cubre el saldo del crédito sin afectar a la familia</li>
+              <li><strong>Living Benefits</strong> — anticipo del beneficio ante enfermedad crítica, crónica o terminal (72 hrs)</li>
+              <li><strong>Cobertura de hijos</strong> (Children's Rider) bajo la misma póliza</li>
+              <li><strong>Exención de prima por incapacidad</strong> — la cobertura sigue vigente sin pago</li>
+            </ul>
+          </div>
+
+          <div class="usecase-group">
+            <span class="usecase-label" style="color:var(--life);">Protección empresarial</span>
+            <ul>
+              <li><strong>Buy-Sell entre socios</strong> — garantiza continuidad y compra/venta de participación ante fallecimiento o incapacidad</li>
+              <li><strong>Key-person</strong> — protege a la empresa o institución ante la pérdida de personal clave</li>
+              <li><strong>Financiación de planes ejecutivos</strong> — beneficios diferidos para altos directivos</li>
+            </ul>
+          </div>
+
+          <div class="usecase-group">
+            <span class="usecase-label" style="color:var(--life);">Planificación patrimonial y sucesoria</span>
+            <ul>
+              <li><strong>Liquidez sucesoria</strong> — pago de impuestos de herencia sin liquidar activos productivos</li>
+              <li><strong>Multiplicador de herencia</strong> — transferencia eficiente de patrimonio a la siguiente generación</li>
+              <li><strong>Cross-border / Foreign Nationals</strong> — clientes con patrimonio o residencia internacional</li>
+              <li><strong>Trusts y vehículos sucesorios</strong> — póliza dentro de estructuras de planificación</li>
+              <li><strong>Legados a causas</strong> — donaciones amplificadas vía póliza</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="brand-client">Ideal para: familias con dependientes, empresarios con socios, dueños de hipoteca, clientes en planificación sucesoria, instituciones con personal clave.</p>
+        <a href="life.html" style="display:inline-block;margin-top:1rem;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--life);text-decoration:none;border-bottom:1px solid var(--life);padding-bottom:0.2rem;">Ver productos Life →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WEALTH LIFECYCLE FUNNEL -->
   <div class="funnel-wrapper fade-in">
-    <h3 class="funnel-title">El ecosistema patrimonial</h3>
-    <p class="funnel-sub">Cómo se conectan nuestras soluciones</p>
+    <h3 class="funnel-title">El ciclo patrimonial — <em style="font-style:italic;color:var(--gold);">Wealth</em></h3>
+    <p class="funnel-sub">Tres etapas que conectan</p>
     <div class="funnel-steps">
       <div class="funnel-step">
-        <div class="funnel-step-dot savings">1</div>
-        <h4>Construcción</h4>
-        <p>Estrategika Savings — acumulación patrimonial automatizada en dólares</p>
+        <div class="funnel-step-dot" style="background:var(--creation);">1</div>
+        <h4>Creation</h4>
+        <p>Construir patrimonio con disciplina · Savings</p>
         <div class="ticket">Desde USD 250/mes</div>
       </div>
       <div class="funnel-arrow">→</div>
       <div class="funnel-step">
-        <div class="funnel-step-dot" style="background:#5C3A5F;">2</div>
-        <h4>Protección</h4>
-        <p>Life + Global Care — continuidad familiar y salud internacional</p>
-        <div class="ticket">Protección permanente</div>
-      </div>
-      <div class="funnel-arrow">→</div>
-      <div class="funnel-step">
-        <div class="funnel-step-dot wealth">3</div>
-        <h4>Crecimiento</h4>
-        <p>Estrategika Wealth — acceso institucional a mercados globales</p>
+        <div class="funnel-step-dot" style="background:var(--preservation);">2</div>
+        <h4>Preservation</h4>
+        <p>Proteger y hacer crecer · Wealth</p>
         <div class="ticket">Desde USD 100K</div>
       </div>
       <div class="funnel-arrow">→</div>
       <div class="funnel-step">
-        <div class="funnel-step-dot" style="background:#B89A6A;">4</div>
-        <h4>Legado</h4>
-        <p>Continuidad patrimonial — herencia amplificada y planificación sucesoria</p>
-        <div class="ticket">Largo plazo</div>
+        <div class="funnel-step-dot" style="background:var(--legacy);">3</div>
+        <h4>Legacy</h4>
+        <p>Transferir eficientemente · Anualidades · IUL</p>
+        <div class="ticket">Planificación sucesoria</div>
       </div>
     </div>
-    <p class="funnel-note">Cada etapa refuerza la siguiente. Y cada solución funciona de forma independiente — el cliente entra por donde más lo necesita.</p>
+    <p class="funnel-note">A lo largo de las tres etapas, <strong style="color:var(--gold-light);">Health</strong> y <strong style="color:var(--gold-light);">Life</strong> protegen el plan ante imprevistos. Cada solución funciona de forma independiente — el cliente entra por donde más lo necesita.</p>
   </div>
 </section>
 
-<section id="porque">
-  <div style="max-width:600px">
-    <span class="section-tag" style="color:var(--gold-light)">Por qué elegirnos</span>
-    <h2 class="section-title" style="color:var(--white);">Lo que nos hace distintos</h2>
-    <p class="section-subtitle">En un mercado lleno de intermediarios con conflictos de interés, elegir al asesor correcto es la primera decisión patrimonial más importante.</p>
+<section id="nosotros">
+  <div class="nosotros-header fade-in">
+    <div class="nosotros-quote-visual">
+      <div class="nosotros-quote-block">
+        <p class="nosotros-quote">"Cada cliente es único.<br/>Su estrategia también debe serlo."</p>
+      </div>
+    </div>
+    <div class="nosotros-intro">
+      <span class="section-tag" style="color:var(--gold-light)">Nosotros</span>
+      <h2 class="section-title" style="color:var(--white);">Asesoría independiente <em style="color:var(--gold);font-style:italic;">construida sobre confianza</em></h2>
+      <p class="section-subtitle" style="color:rgba(255,255,255,0.6);">Grupo Estrategika es una firma internacional independiente que articula tres pilares — <strong style="color:#fff;">Wealth</strong> (creación, preservación y legado patrimonial), <strong style="color:#fff;">Health</strong> (salud internacional) y <strong style="color:#fff;">Life</strong> (protección financiera) — para familias de alto patrimonio, instituciones financieras, colegios y empresas en toda América Latina.</p>
+    </div>
   </div>
   <div class="reasons-grid fade-in">
-    <div class="reason-card"><div class="reason-num">01</div><h4>Sin conflictos de interés</h4><p>Somos distribuidores independientes. Le recomendamos lo que es mejor para usted, no lo que nos da mayor comisión.</p></div>
-    <div class="reason-card"><div class="reason-num">02</div><h4>Ecosistema integral</h4><p>Pocos asesores integran inversión, patrimonio, salud internacional y protección familiar en una sola relación continua. Nosotros sí.</p></div>
-    <div class="reason-card"><div class="reason-num">03</div><h4>Seguridad regulatoria</h4><p>Todos nuestros productos están regulados bajo jurisdicciones de primer nivel: Guernsey, FCA Londres y EE.UU.</p></div>
-    <div class="reason-card"><div class="reason-num">04</div><h4>Contexto latinoamericano</h4><p>Entendemos el entorno donde usted opera — moneda, tributación, riesgo político y planificación patrimonial — con acceso a soluciones internacionales de primer nivel.</p></div>
-    <div class="reason-card"><div class="reason-num">05</div><h4>Acompañamiento continuo</h4><p>No vendemos y desaparecemos. Revisamos su plan regularmente y lo ajustamos según sus circunstancias cambian.</p></div>
-    <div class="reason-card"><div class="reason-num">06</div><h4>Educación financiera real</h4><p>Le explicamos cada producto, cada costo y cada riesgo. Usted decide siempre con información completa y clara.</p></div>
+    <div class="reason-card"><div class="reason-num">01</div><h4>Independencia real</h4><p>No trabajamos para ningún banco. Somos distribuidores independientes. Nuestro único interés es el suyo, no la comisión más alta.</p></div>
+    <div class="reason-card"><div class="reason-num">02</div><h4>Acceso institucional</h4><p>Traemos productos de nivel institucional al alcance del cliente individual y de la institución. Lo que solo veían los bancos, ahora a su disposición.</p></div>
+    <div class="reason-card"><div class="reason-num">03</div><h4>Transparencia total</h4><p>Costos claros, estructuras explicadas y rendición de cuentas continua. Usted decide siempre con información completa.</p></div>
+    <div class="reason-card"><div class="reason-num">04</div><h4>Ecosistema integral</h4><p>Pocos asesores integran Wealth, Health y Life en una sola relación continua. Para individuos e instituciones. Nosotros sí.</p></div>
+    <div class="reason-card"><div class="reason-num">05</div><h4>Seguridad regulatoria</h4><p>Productos regulados bajo jurisdicciones de primer nivel: Guernsey, FCA Londres y EE.UU.</p></div>
+    <div class="reason-card"><div class="reason-num">06</div><h4>Contexto latinoamericano</h4><p>Entendemos el entorno donde usted opera — moneda, tributación, riesgo político y planificación patrimonial — con acceso a soluciones internacionales.</p></div>
+  </div>
+  <div class="nosotros-cta fade-in">
+    <a href="#contacto" class="btn-primary">Hablemos sobre su estrategia →</a>
   </div>
 </section>
 
@@ -560,11 +690,13 @@
           <label>Solución de interés</label>
           <select name="solucion">
             <option value="">Seleccione...</option>
-            <option>Estrategika Wealth (StoneX)</option>
-            <option>Estrategika Savings (Dominion MSS)</option>
-            <option>Estrategika Global Care (Allianz)</option>
-            <option>Estrategika Life (OLÉ)</option>
-            <option>Estrategia integral (varias soluciones)</option>
+            <option>Wealth · Creation (Construcción patrimonial)</option>
+            <option>Wealth · Preservation (Gestión patrimonial)</option>
+            <option>Wealth · Legacy (Sucesión · Anualidades · IUL)</option>
+            <option>Health (Salud internacional)</option>
+            <option>Life (Protección financiera)</option>
+            <option>Cliente institucional (banco · institución · colegio)</option>
+            <option>Estrategia integral (varios pilares)</option>
           </select>
         </div>
       </div>
@@ -578,9 +710,9 @@
 <footer>
   <div class="footer-logo">Grupo <span>Estrategika</span></div>
   <div class="footer-brands">
-    <span class="footer-brand-dot wealth">Wealth</span>
-    <span class="footer-brand-dot savings">Savings</span>
-    <span class="footer-brand-dot care">Global Care · Life</span>
+    <span class="footer-brand-dot" style="--c:var(--wealth);">Wealth</span>
+    <span class="footer-brand-dot" style="--c:var(--health);">Health</span>
+    <span class="footer-brand-dot" style="--c:var(--life);">Life</span>
   </div>
   <div class="footer-copy">© 2026 Grupo Estrategika. América Latina.</div>
 </footer>
