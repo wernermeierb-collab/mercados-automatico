@@ -179,7 +179,8 @@
   .pillar-label { font-size:0.7rem; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; display:block; margin-bottom:0.6rem; }
   .pillar-section-title { font-family:'Cormorant Garamond',serif; font-size:1.9rem; font-weight:400; color:var(--ink); margin-bottom:0.8rem; }
   .pillar-section-sub { font-size:0.9rem; color:var(--muted); line-height:1.65; max-width:600px; margin:0 auto; }
-  .brands-grid-3 { grid-template-columns:repeat(3,1fr); }
+  .brands-grid-3 { grid-template-columns:repeat(4,1fr); }
+  @media (max-width:1280px){.brands-grid-3{grid-template-columns:repeat(2,1fr);}}
   .brands-grid-2 { grid-template-columns:repeat(2,1fr); align-items:start; }
   @media (max-width:900px) { .brands-grid-3, .brands-grid-2 { grid-template-columns:1fr; } }
   /* USE CASES (Life card) */
@@ -229,11 +230,12 @@
   .pillar-life { background:rgba(139,58,74,0.06); }
   .pillar-life:hover { background:rgba(139,58,74,0.13); }
   .pillar-life .quad-name { color:var(--life); }
-  .pillar-sub-tags { display:flex; justify-content:center; gap:0.5rem; margin-top:0.8rem; flex-wrap:wrap; }
-  .pillar-sub-tags span { font-size:0.62rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--wealth); padding:0.25rem 0.6rem; border:1px solid rgba(30,58,95,0.25); }
+  .pillar-sub-tags { display:flex; justify-content:center; gap:0.4rem; margin-top:0.8rem; flex-wrap:wrap; }
+  .pillar-sub-tags span { font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--wealth); padding:0.22rem 0.5rem; border:1px solid rgba(30,58,95,0.25); }
   .pillar-sub-tags span:nth-child(1) { color:var(--creation); border-color:rgba(44,74,62,0.3); }
-  .pillar-sub-tags span:nth-child(2) { color:var(--preservation); border-color:rgba(30,58,95,0.3); }
-  .pillar-sub-tags span:nth-child(3) { color:var(--legacy); border-color:rgba(139,111,58,0.3); }
+  .pillar-sub-tags span:nth-child(2) { color:#3D6A52; border-color:rgba(61,106,82,0.3); }
+  .pillar-sub-tags span:nth-child(3) { color:var(--preservation); border-color:rgba(30,58,95,0.3); }
+  .pillar-sub-tags span:nth-child(4) { color:var(--legacy); border-color:rgba(139,111,58,0.3); }
 
   /* FUNNEL */
   .funnel-wrapper { background:var(--ink); padding:3.5rem 4rem; position:relative; overflow:hidden; }
@@ -342,7 +344,7 @@
       <a href="#">Wealth</a>
       <div class="nav-dropdown-menu">
         <a href="simulador.html">🌱 Wealth Creation (desde $250/mes)</a>
-        <a href="wealth-affluent.html">📈 Wealth Preservation (desde $100K)</a>
+        <a href="wealth-affluent.html">📈 Wealth Accumulation (desde $100K)</a>
         <a href="wealth.html">💼 Wealth Preservation (desde $1M+)</a>
         <a href="#contacto">🏛️ Wealth Legacy (Anualidades · IUL)</a>
       </div>
@@ -437,6 +439,7 @@
           <span class="quad-sub">Patrimonio</span>
           <div class="pillar-sub-tags">
             <span>Creation</span>
+            <span>Accumulation</span>
             <span>Preservation</span>
             <span>Legacy</span>
           </div>
@@ -485,23 +488,36 @@
         </div>
       </div>
 
+      <!-- ACCUMULATION -->
+      <div class="brand-card">
+        <div class="brand-top-bar" style="background:#3D6A52;"></div>
+        <div class="brand-header"><span class="brand-name-label" style="color:#3D6A52;">Wealth · Accumulation</span><h3>Estrategika Wealth Affluent</h3><div class="brand-tagline">Crecimiento con Disciplina</div></div>
+        <p>Para el cliente que ya formó capital. Estrategias de mid-career para hacer crecer patrimonio con acceso institucional y rigor disciplinado.</p>
+        <ul class="brand-features">
+          <li class="wealth">Brokerage internacional desde USD 100K</li>
+          <li class="wealth">Multi-asset · acciones, ETFs UCITS, bonos</li>
+          <li class="wealth">Estrategias de crecimiento medido</li>
+          <li class="wealth">Reporte y custodia transparente</li>
+          <li class="wealth">Clientes affluent en mid-career</li>
+        </ul>
+        <p class="brand-client">Ideal para: profesionales con capital ya formado, ejecutivos en ascenso, primer ticket en wealth management.</p>
+        <a href="wealth-affluent.html" style="display:inline-block;margin-top:1.5rem;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#3D6A52;text-decoration:none;border-bottom:1px solid #3D6A52;padding-bottom:0.2rem;">Desde USD 100K →</a>
+      </div>
+
       <!-- PRESERVATION -->
       <div class="brand-card">
         <div class="brand-top-bar" style="background:var(--preservation);"></div>
         <div class="brand-header"><span class="brand-name-label" style="color:var(--preservation);">Wealth · Preservation</span><h3>Estrategika Wealth</h3><div class="brand-tagline">Gestión Patrimonial Internacional</div></div>
-        <p>Acceso institucional a mercados globales para preservar el poder adquisitivo del patrimonio acumulado y hacerlo crecer con disciplina.</p>
+        <p>Para patrimonio consolidado. Acceso institucional a mercados globales para preservar el poder adquisitivo y proteger lo construido.</p>
         <ul class="brand-features">
           <li class="wealth">Brokerage institucional global</li>
-          <li class="wealth">Acciones, ETFs UCITS, divisas, commodities</li>
           <li class="wealth">Estrategias multi-asset internacionales</li>
-          <li class="wealth">Reporte y custodia transparente</li>
-          <li class="wealth">Clientes affluent · HNW · UHNW</li>
+          <li class="wealth">Reporte y custodia premium</li>
+          <li class="wealth">Asesoría dedicada</li>
+          <li class="wealth">Clientes HNW · UHNW</li>
         </ul>
-        <p class="brand-client">Ideal para: empresarios, ejecutivos senior, familias patrimoniales.</p>
-        <div style="display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap;">
-          <a href="wealth-affluent.html" style="font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--preservation);text-decoration:none;border-bottom:1px solid var(--preservation);padding-bottom:0.2rem;">Desde USD 100K →</a>
-          <a href="wealth.html" style="font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--preservation);text-decoration:none;border-bottom:1px solid var(--preservation);padding-bottom:0.2rem;">Desde USD 1M+ →</a>
-        </div>
+        <p class="brand-client">Ideal para: empresarios consolidados, familias patrimoniales, clientes priorizando preservación sobre crecimiento.</p>
+        <a href="wealth.html" style="display:inline-block;margin-top:1.5rem;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--preservation);text-decoration:none;border-bottom:1px solid var(--preservation);padding-bottom:0.2rem;">Desde USD 1M+ →</a>
       </div>
 
       <!-- LEGACY -->
@@ -597,30 +613,37 @@
   <!-- WEALTH LIFECYCLE FUNNEL -->
   <div class="funnel-wrapper fade-in">
     <h3 class="funnel-title">El ciclo patrimonial — <em style="font-style:italic;color:var(--gold);">Wealth</em></h3>
-    <p class="funnel-sub">Tres etapas que conectan</p>
+    <p class="funnel-sub">Cuatro etapas que conectan</p>
     <div class="funnel-steps">
       <div class="funnel-step">
         <div class="funnel-step-dot" style="background:var(--creation);">1</div>
         <h4>Creation</h4>
-        <p>Construir patrimonio con disciplina · Savings</p>
+        <p>Construir desde cero con disciplina</p>
         <div class="ticket">Desde USD 250/mes</div>
       </div>
       <div class="funnel-arrow">→</div>
       <div class="funnel-step">
-        <div class="funnel-step-dot" style="background:var(--preservation);">2</div>
-        <h4>Preservation</h4>
-        <p>Proteger y hacer crecer · Wealth</p>
+        <div class="funnel-step-dot" style="background:#3D6A52;">2</div>
+        <h4>Accumulation</h4>
+        <p>Hacer crecer el capital ya formado</p>
         <div class="ticket">Desde USD 100K</div>
       </div>
       <div class="funnel-arrow">→</div>
       <div class="funnel-step">
-        <div class="funnel-step-dot" style="background:var(--legacy);">3</div>
+        <div class="funnel-step-dot" style="background:var(--preservation);">3</div>
+        <h4>Preservation</h4>
+        <p>Proteger el patrimonio consolidado</p>
+        <div class="ticket">Desde USD 1M+</div>
+      </div>
+      <div class="funnel-arrow">→</div>
+      <div class="funnel-step">
+        <div class="funnel-step-dot" style="background:var(--legacy);">4</div>
         <h4>Legacy</h4>
         <p>Transferir eficientemente · Anualidades · IUL</p>
         <div class="ticket">Planificación sucesoria</div>
       </div>
     </div>
-    <p class="funnel-note">A lo largo de las tres etapas, <strong style="color:var(--gold-light);">Health</strong> y <strong style="color:var(--gold-light);">Life</strong> protegen el plan ante imprevistos. Cada solución funciona de forma independiente — el cliente entra por donde más lo necesita.</p>
+    <p class="funnel-note">A lo largo de las cuatro etapas, <strong style="color:var(--gold-light);">Health</strong> y <strong style="color:var(--gold-light);">Life</strong> protegen el plan ante imprevistos. Cada solución funciona de forma independiente — el cliente entra por donde más lo necesita.</p>
   </div>
 </section>
 
