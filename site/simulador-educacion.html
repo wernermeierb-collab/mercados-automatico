@@ -87,6 +87,44 @@ canvas{width:100%!important;max-height:200px;}
 .disclaimer{background:var(--ink);padding:2rem 4rem;font-size:0.72rem;color:rgba(255,255,255,0.25);line-height:1.7;text-align:center;border-top:1px solid rgba(255,255,255,0.06);}
 .fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
 .fade-in.visible{opacity:1;transform:translateY(0);}
+
+/* US UNIVERSITIES DEEP DIVE */
+.us-univ{margin-top:5rem;}
+.us-univ-header{text-align:center;max-width:680px;margin:0 auto 3rem;}
+.us-univ-header .hero-tag{color:var(--wealth);}
+.us-univ-header h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:400;line-height:1.2;margin-bottom:0.8rem;}
+.us-univ-header h2 em{font-style:italic;color:var(--gold);}
+.us-univ-header p{font-size:0.92rem;color:var(--muted);line-height:1.7;}
+.us-block{background:var(--white);border:1px solid var(--border);padding:2.5rem;margin-bottom:1.5rem;}
+.us-block h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:500;margin-bottom:0.4rem;}
+.us-block .block-sub{font-size:0.82rem;color:var(--muted);margin-bottom:1.5rem;font-style:italic;}
+.us-table{width:100%;border-collapse:collapse;font-size:0.85rem;}
+.us-table thead th{font-family:'DM Sans',sans-serif;font-weight:500;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--white);background:var(--ink);padding:0.8rem 1rem;text-align:left;}
+.us-table thead th:not(:first-child){text-align:right;}
+.us-table tbody td{padding:0.75rem 1rem;border-bottom:1px solid var(--border);color:var(--ink);}
+.us-table tbody td:first-child{font-weight:500;}
+.us-table tbody td:not(:first-child){text-align:right;color:var(--muted);font-variant-numeric:tabular-nums;}
+.us-table tbody tr:hover{background:var(--warm);}
+.us-table tbody tr:last-child td{border-bottom:none;}
+.us-table .total{background:rgba(184,154,106,0.06);font-weight:500;color:var(--ink)!important;}
+.programs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1rem;}
+@media(max-width:768px){.programs-grid{grid-template-columns:1fr;}}
+.program-card{padding:1.2rem 1.4rem;background:var(--warm);border-left:2px solid var(--wealth);}
+.program-card h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:500;margin-bottom:0.4rem;color:var(--wealth);}
+.program-card p{font-size:0.82rem;color:var(--muted);line-height:1.6;}
+.scenarios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem;}
+@media(max-width:900px){.scenarios-grid{grid-template-columns:1fr;}}
+.scenario-card{padding:1.8rem 1.5rem;text-align:center;background:var(--warm);border-top:3px solid var(--gold);}
+.scenario-card.s2{border-top-color:var(--wealth);background:rgba(30,58,95,0.04);}
+.scenario-card.s3{border-top-color:#C4756A;background:rgba(196,117,106,0.04);}
+.scenario-label{font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.8rem;}
+.scenario-card .amount{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;color:var(--ink);display:block;line-height:1.1;}
+.scenario-card .amount-sub{font-size:0.72rem;color:var(--muted);margin-top:0.3rem;}
+.scenario-card .breakdown{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);font-size:0.78rem;color:var(--muted);}
+.note-box{background:var(--warm);border:1px solid var(--border);border-left:3px solid var(--accent);padding:1.2rem 1.5rem;margin-top:2rem;}
+.note-box p{font-size:0.85rem;color:var(--ink);line-height:1.65;}
+.note-box strong{color:var(--accent);}
+.sources-line{font-size:0.72rem;color:var(--muted);margin-top:1.5rem;text-align:center;font-style:italic;}
 </style>
 </head>
 <body>
@@ -191,10 +229,10 @@ canvas{width:100%!important;max-height:200px;}
         <p>5 años de carrera. Incluye matrícula y gastos de vida. PUCP, UP, UPC, Pacífico.</p>
       </div>
       <div class="dest-card">
-        <span style="font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.5rem;">EE.UU.</span>
-        <h4>Universidad privada</h4>
-        <span class="cost">USD 180,000 – 320,000</span>
-        <p>4 años. Matrícula + alojamiento + vida. Boston, Miami, New York. La inflación educativa supera el 4% anual.</p>
+        <span style="font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.5rem;">EE.UU. · Top tier</span>
+        <h4>Harvard · MIT · Stanford</h4>
+        <span class="cost">USD 320,000 – 360,000</span>
+        <p>4 años en universidades de élite. Matrícula $56-64K + alojamiento $16-18K + gastos $4-8K = ~$85K/año. Inflación educativa 4-5% anual.</p>
       </div>
       <div class="dest-card">
         <span style="font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.5rem;">Europa · UK</span>
@@ -203,6 +241,129 @@ canvas{width:100%!important;max-height:200px;}
         <p>3–4 años. España, Países Bajos, UK. Excelente relación calidad-precio vs EE.UU. para programas en inglés.</p>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- US UNIVERSITIES DEEP DIVE -->
+<div class="wrapper us-univ">
+  <div class="us-univ-header fade-in">
+    <span class="hero-tag">Análisis · Universidades top EE.UU.</span>
+    <h2>Estudiar en una universidad de élite en <em>EE.UU.</em></h2>
+    <p>Costos reales, programas más prestigiosos, salarios de graduados y cuánto necesita ahorrar mensualmente para que sus hijos lleguen a Harvard, MIT, Stanford o Princeton.</p>
+  </div>
+
+  <!-- TABLE: PRIVATE UNIVERSITIES -->
+  <div class="us-block fade-in">
+    <h3>Universidades privadas top</h3>
+    <p class="block-sub">Costo anual total en USD — matrícula, alojamiento y otros gastos.</p>
+    <table class="us-table">
+      <thead><tr><th>Universidad</th><th>Matrícula</th><th>Alojamiento</th><th>Otros</th><th>Total estimado</th></tr></thead>
+      <tbody>
+        <tr><td>Harvard</td><td>$56,000</td><td>$18,000</td><td>$6,000</td><td class="total">$80,000</td></tr>
+        <tr><td>Stanford</td><td>$62,000</td><td>$17,000</td><td>$6,000</td><td class="total">$85,000</td></tr>
+        <tr><td>MIT</td><td>$61,000</td><td>$16,000</td><td>$8,000</td><td class="total">$85,000</td></tr>
+        <tr><td>Yale</td><td>$64,000</td><td>$17,500</td><td>$6,500</td><td class="total">$88,000</td></tr>
+        <tr><td>Princeton</td><td>$62,000</td><td>$16,500</td><td>$4,500</td><td class="total">$83,000</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TABLE: PUBLIC UNIVERSITIES -->
+  <div class="us-block fade-in">
+    <h3>Universidades públicas (estudiantes internacionales)</h3>
+    <p class="block-sub">Las universidades públicas top de EE.UU. son significativamente más accesibles para estudiantes internacionales.</p>
+    <table class="us-table">
+      <thead><tr><th>Universidad</th><th>Matrícula</th><th>Alojamiento</th><th>Otros</th><th>Total estimado</th></tr></thead>
+      <tbody>
+        <tr><td>UC Berkeley</td><td>$48,000</td><td>$16,000</td><td>$6,000</td><td class="total">$70,000</td></tr>
+        <tr><td>UM (Ann Arbor)</td><td>$56,000</td><td>$14,000</td><td>$5,000</td><td class="total">$75,000</td></tr>
+        <tr><td>UVA</td><td>$53,000</td><td>$13,500</td><td>$5,500</td><td class="total">$72,000</td></tr>
+        <tr><td>UNC</td><td>$47,000</td><td>$12,500</td><td>$5,500</td><td class="total">$65,000</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ACADEMIC PROGRAMS BY UNIVERSITY -->
+  <div class="us-block fade-in">
+    <h3>Programas más prestigiosos por universidad</h3>
+    <p class="block-sub">Cada institución sobresale en disciplinas específicas. Saber dónde está su hijo más alineado es parte de la decisión.</p>
+    <div class="programs-grid">
+      <div class="program-card"><h4>Harvard</h4><p>Economía, Ciencias Políticas, Derecho, Medicina, Ciencias Sociales.</p></div>
+      <div class="program-card"><h4>MIT</h4><p>Ingeniería (todas las ramas), Informática, Física, Matemáticas.</p></div>
+      <div class="program-card"><h4>Stanford</h4><p>Biología, Informática, Ingeniería, Negocios.</p></div>
+      <div class="program-card"><h4>Princeton</h4><p>Matemáticas, Ingeniería, Filosofía, Políticas Públicas.</p></div>
+      <div class="program-card"><h4>UC Berkeley</h4><p>Ingeniería Eléctrica, Ciencias Ambientales, Economía.</p></div>
+      <div class="program-card"><h4>Universidad de Chicago</h4><p>Economía, Ciencias Políticas, Filosofía, Biología.</p></div>
+      <div class="program-card"><h4>UCLA</h4><p>Cine y Medios de Comunicación, Psicología, Ingeniería Biomédica.</p></div>
+      <div class="program-card"><h4>Yale</h4><p>Derecho, Drama, Historia, Ciencias Políticas, Medicina.</p></div>
+    </div>
+  </div>
+
+  <!-- GRADUATE SALARIES -->
+  <div class="us-block fade-in">
+    <h3>Salarios de graduados (USD anuales)</h3>
+    <p class="block-sub">Un título de una universidad de primer nivel puede multiplicar significativamente el potencial de ingresos a lo largo de la carrera.</p>
+    <table class="us-table">
+      <thead><tr><th>Universidad</th><th>Salario inicial promedio</th><th>Salario a mitad de carrera</th></tr></thead>
+      <tbody>
+        <tr><td>MIT</td><td>$82,200</td><td class="total">$158,100</td></tr>
+        <tr><td>Harvard</td><td>$70,300</td><td class="total">$147,700</td></tr>
+        <tr><td>Stanford</td><td>$70,400</td><td class="total">$144,300</td></tr>
+        <tr><td>Princeton</td><td>$60,800</td><td class="total">$137,000</td></tr>
+        <tr><td>UC Berkeley</td><td>$66,500</td><td class="total">$112,000</td></tr>
+      </tbody>
+    </table>
+    <div class="note-box"><p>Los salarios varían según el campo. Los graduados en <strong>STEM</strong> (Ciencia, Tecnología, Ingeniería y Matemáticas), negocios y tecnología tienden a ganar salarios más altos al inicio de su carrera.</p></div>
+  </div>
+
+  <!-- 15-YEAR PROJECTION FOR 2 KIDS -->
+  <div class="us-block fade-in">
+    <h3>Costo previsto para 2 hijos en 15 años</h3>
+    <p class="block-sub">Proyección bajo tres escenarios de inflación educativa. Cada escenario incluye matrícula, alojamiento, comidas, libros, seguros y gastos personales.</p>
+    <div class="scenarios-grid">
+      <div class="scenario-card">
+        <span class="scenario-label">Sin inflación</span>
+        <span class="amount">USD 680,000</span>
+        <span class="amount-sub">para 2 hijos · 4 años cada uno</span>
+        <div class="breakdown">$85,000/año · $340,000 por estudiante</div>
+      </div>
+      <div class="scenario-card s2">
+        <span class="scenario-label">3% inflación anual</span>
+        <span class="amount">USD 1,059,418</span>
+        <span class="amount-sub">promedio histórico conservador</span>
+        <div class="breakdown">$132,427/año (año 15) · $529,709 por estudiante</div>
+      </div>
+      <div class="scenario-card s3">
+        <span class="scenario-label">4% inflación anual</span>
+        <span class="amount">USD 1,224,642</span>
+        <span class="amount-sub">tendencia real reciente</span>
+        <div class="breakdown">$153,080/año (año 15) · $612,321 por estudiante</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MONTHLY SAVINGS AT 7% -->
+  <div class="us-block fade-in">
+    <h3>Ahorro mensual necesario (rendimiento anual 7%)</h3>
+    <p class="block-sub">Lo que tendría que aportar todos los meses para llegar al objetivo, suponiendo un rendimiento anual del 7% — alcanzable con un portafolio disciplinado y diversificado.</p>
+    <table class="us-table">
+      <thead><tr><th>Escenario</th><th>Aporte mensual fijo</th><th>Con aumento anual del 5% en los aportes</th></tr></thead>
+      <tbody>
+        <tr><td>Sin inflación</td><td>$2,370</td><td class="total">—</td></tr>
+        <tr><td>3% inflación anual</td><td>$3,692</td><td class="total">$2,461 inicial</td></tr>
+        <tr><td>4% inflación anual</td><td>$4,268</td><td class="total">$2,845 inicial</td></tr>
+      </tbody>
+    </table>
+    <div class="note-box"><p>Aumentar gradualmente sus aportes cada año reduce significativamente la cantidad inicial requerida. <strong>Empezar 5 años antes</strong> tiene el mismo efecto financiero que duplicar el aporte mensual durante los últimos 10 años.</p></div>
+  </div>
+
+  <!-- FINAL NOTES -->
+  <div class="us-block fade-in">
+    <h3>Consideraciones finales</h3>
+    <p style="font-size:0.88rem;color:var(--ink);line-height:1.75;margin-bottom:1rem;">Estudiar en una universidad estadounidense de élite es una inversión importante — supera los <strong>USD 80,000 al año</strong>. Pero es rentable a largo plazo con oportunidades profesionales excepcionales, exposición internacional y una poderosa red de exalumnos.</p>
+    <p style="font-size:0.88rem;color:var(--ink);line-height:1.75;margin-bottom:1rem;">✅ Muchas universidades ofrecen <strong>ayudas económicas y becas</strong>, incluso para estudiantes internacionales.</p>
+    <p style="font-size:0.88rem;color:var(--ink);line-height:1.75;">✅ La <strong>planificación e investigación tempranas</strong> abren puertas a financiación y reducen significativamente la carga financiera familiar.</p>
+    <p class="sources-line">Fuentes: Infobae · Collegedunia · La Nación · Hotcourses Latinoamérica</p>
   </div>
 </div>
 
@@ -221,7 +382,7 @@ canvas{width:100%!important;max-height:200px;}
 const COSTOS = {
   peru:   { base: 55000,  label: 'Perú', inf: 0.03 },
   latam:  { base: 80000,  label: 'LATAM', inf: 0.04 },
-  usa:    { base: 250000, label: 'EE.UU.', inf: 0.05 },
+  usa:    { base: 340000, label: 'EE.UU. (top tier)', inf: 0.05 },
   europa: { base: 100000, label: 'Europa', inf: 0.04 },
   uk:     { base: 130000, label: 'Reino Unido', inf: 0.04 },
   canada: { base: 110000, label: 'Canadá', inf: 0.04 },
