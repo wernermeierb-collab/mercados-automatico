@@ -212,16 +212,16 @@
   .q-life .quad-name { color:#8B5A8B; }
   .q-care .quad-name { color:#5C3A5F; }
   .quad-sub { font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); display:block; }
-  .circle-center-ring { position:absolute; top:35%; left:50%; transform:translate(-50%,-50%); width:80px; height:80px; border-radius:50%; background:var(--white); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; z-index:10; box-shadow:0 0 0 5px var(--warm); }
+  .circle-center-ring { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:96px; height:96px; border-radius:50%; background:var(--white); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; z-index:10; box-shadow:0 0 0 6px var(--warm); }
   .circle-center { text-align:center; }
-  .circle-ge { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:500; color:var(--ink); display:block; line-height:1; }
-  .circle-ge-sub { font-size:0.4rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); display:block; margin-top:0.2rem; }
+  .circle-ge { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:500; color:var(--ink); display:block; line-height:1; }
+  .circle-ge-sub { font-size:0.42rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); display:block; margin-top:0.25rem; text-align:center; }
   /* THREE-PILLAR VISUAL */
   .pillars-visual { display:grid; grid-template-rows:1.4fr 1fr; padding:0; }
   .pillar-cell { display:flex; align-items:center; justify-content:center; text-decoration:none; transition:background 0.3s; position:relative; padding:1.5rem; }
   .pillars-bottom-row { display:grid; grid-template-columns:1fr 1fr; }
-  .pillars-bottom-row .pillar-cell { align-items:center; padding:2rem 1.5rem; }
-  .pillar-wealth { background:rgba(30,58,95,0.06); border-bottom:1px solid var(--border); align-items:center; padding:2.2rem 1.5rem; }
+  .pillars-bottom-row .pillar-cell { align-items:flex-end; padding:1.5rem 1.5rem 2.5rem; }
+  .pillar-wealth { background:rgba(30,58,95,0.06); border-bottom:1px solid var(--border); align-items:flex-start; padding:2.2rem 1.5rem 1.5rem; }
   .pillar-wealth:hover { background:rgba(30,58,95,0.13); }
   .pillar-wealth .quad-name { color:var(--wealth); font-size:1.7rem; }
   .pillar-health { background:rgba(92,58,95,0.06); border-right:1px solid var(--border); }
@@ -445,6 +445,9 @@
           </div>
         </div>
       </a>
+      <div class="circle-center-ring">
+        <div class="circle-center"><span class="circle-ge">GE</span><span class="circle-ge-sub">Grupo Estrategika</span></div>
+      </div>
       <div class="pillars-bottom-row">
         <a href="globalcare.html" class="pillar-cell pillar-health">
           <div class="quad-inner"><span class="quad-name">Health</span><span class="quad-sub">Salud Internacional</span></div>
