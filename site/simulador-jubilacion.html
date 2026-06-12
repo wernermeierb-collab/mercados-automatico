@@ -167,6 +167,14 @@ canvas{width:100%!important;max-height:200px;}
         </div>
 
         <div class="input-group">
+          <label style="display:flex;align-items:center;gap:0.6rem;cursor:pointer;">
+            <input type="checkbox" id="chkAfp" checked onchange="updateJub()" style="cursor:pointer;width:16px;height:16px;"/>
+            Tengo aportes en AFP (Perú) o sistema equivalente
+          </label>
+          <p style="font-size:0.72rem;color:var(--muted);margin-top:0.4rem;line-height:1.5;">Si tiene aportes activos en una AFP, los incluimos en el cálculo. Si no (extranjero, independiente, etc.), todo el capital provendrá de su plan Estrategika.</p>
+        </div>
+
+        <div class="input-group">
           <label>Esperanza de vida (años)</label>
           <div class="input-val"><span id="dispVida">90</span> años <span style="font-size:0.85rem;color:var(--muted);">→ <span id="dispVidaRetiro">25</span> años de retiro</span></div>
           <input type="range" id="sliderVida" min="75" max="100" step="1" value="90" oninput="updateJub()"/>
@@ -379,11 +387,15 @@ function updateJub() {
     capital = (gastoFuturo * 12) * (1 - Math.pow((1 + retiroInfl) / (1 + withdrawalRate), vidaRetiro)) / (withdrawalRate - retiroInfl);
   }
 
-  // AFP estimate
-  const salario = gasto * 1.5;
-  const aporteAfp = salario * 0.10;
-  const fondoAfp = calcFV(aporteAfp, anios, 0.05);
-  const pensionAfp = fondoAfp / (vidaRetiro * 12);
+  // AFP estimate (solo si el cliente tiene AFP)
+  const tieneAfp = document.getElementById('chkAfp').checked;
+  let salario = 0, aporteAfp = 0, fondoAfp = 0, pensionAfp = 0;
+  if (tieneAfp) {
+    salario = gasto * 1.5;
+    aporteAfp = salario * 0.10;
+    fondoAfp = calcFV(aporteAfp, anios, 0.05);
+    pensionAfp = fondoAfp / (vidaRetiro * 12);
+  }
 
   // Calcular el aporte mensual recomendado para cerrar la brecha exactamente
   // Target estrategika = capital - fondoAfp (lo que falta cubrir con plan privado)
@@ -440,18 +452,20 @@ function updateJub() {
   document.getElementById('resEstrategika').textContent = fmt(fondoEstrategikaD);
   document.getElementById('resAnios').textContent       = anios + ' años';
   document.getElementById('resBrecha').textContent      = brecha > 0 ? fmt(brechaD) : '✓ Cubierto';
-  document.getElementById('resAfp').textContent         = fmt(pensionAfpD) + '/mes';
+  document.getElementById('resAfp').textContent         = tieneAfp ? fmt(pensionAfpD) + '/mes' : '— sin AFP';
 
   // Gap box (tono positivo siempre)
   const gapBox = document.getElementById('gapBox');
   const gapText = document.getElementById('gapText');
   if(brecha === 0) {
     gapBox.className = 'gap-box positive';
-    gapText.innerHTML = `<strong style="color:#2C4A3E">✓ Plan completo.</strong> Con su aporte mensual de ${fmt(aporteActual)} más su AFP, cubre el capital necesario para jubilarse manteniendo USD ${gasto.toLocaleString()}/mes de estilo de vida.`;
+    const afpFrase = tieneAfp ? ' más su AFP' : '';
+    gapText.innerHTML = `<strong style="color:#2C4A3E">✓ Plan completo.</strong> Con su aporte mensual de ${fmt(aporteActual)}${afpFrase}, cubre el capital necesario para jubilarse manteniendo USD ${gasto.toLocaleString()}/mes de estilo de vida.`;
   } else {
     gapBox.className = 'gap-box negative';
     const aporteSugerido = aporteRecomendado;
-    gapText.innerHTML = `<strong style="color:var(--gold);">Para cerrar la meta:</strong> con un aporte mensual de <strong>${fmt(aporteSugerido)}</strong> (más su AFP) llega al capital necesario para mantener su estilo de vida. Lo acompañamos para diseñar un plan que se ajuste a sus posibilidades.`;
+    const afpFrase = tieneAfp ? ' (más su AFP)' : '';
+    gapText.innerHTML = `<strong style="color:var(--gold);">Para cerrar la meta:</strong> con un aporte mensual de <strong>${fmt(aporteSugerido)}</strong>${afpFrase} llega al capital necesario para mantener su estilo de vida. Lo acompañamos para diseñar un plan que se ajuste a sus posibilidades.`;
   }
 
   // Actualizar helpline del aporte
