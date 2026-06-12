@@ -1,6 +1,9 @@
 name: Publicar Sitio Grupo Estrategika
 
 on:
+  push:
+    branches: [main]
+    paths: ['site/**']
   schedule:
     - cron: '0 14 * * 1-5'
   workflow_dispatch:
