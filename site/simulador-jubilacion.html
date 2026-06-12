@@ -101,16 +101,16 @@ canvas{width:100%!important;max-height:200px;}
 
 <div class="hero">
   <span class="hero-tag">Estrategika Savings · Jubilación</span>
-  <h1>¿Podrá <em>mantener su estilo de vida</em> cuando se jubile?</h1>
-  <p>Ingrese su gasto deseado en valor de hoy. El simulador ajusta por inflación para mostrar el capital real que necesita al momento del retiro.</p>
+  <h1>Lo ayudamos a <em>mantener su estilo de vida</em> cuando se jubile</h1>
+  <p>Ingrese su gasto deseado en valor de hoy. Le calculamos el aporte mensual necesario para alcanzar el capital que su jubilación requiere — y usted ajusta según sus posibilidades.</p>
 </div>
 
 <div class="wrapper">
   <div class="calc-card fade-in">
     <div class="calc-grid">
       <div class="input-section">
-        <h2>Configure su situación</h2>
-        <p>Ingrese sus datos actuales y el estilo de vida que quiere mantener en retiro. El simulador calcula si su AFP alcanza — y qué brecha necesita cubrir.</p>
+        <h2>Configuremos su plan juntos</h2>
+        <p>Ingrese sus datos y el estilo de vida que quiere mantener en retiro. Le mostramos el aporte mensual recomendado para alcanzar la meta, y desde ahí usted ajusta según lo que puede o quiere aportar.</p>
 
         <div class="input-group">
           <label>Edad actual</label>
@@ -134,10 +134,36 @@ canvas{width:100%!important;max-height:200px;}
         </div>
 
         <div class="input-group">
-          <label>Aporte mensual adicional que puede hacer hoy (USD)</label>
+          <label>Su aporte mensual</label>
           <div class="input-val">USD <span id="dispAporte">500</span></div>
-          <input type="range" id="sliderAporte" min="250" max="5000" step="250" value="500" oninput="updateJub()"/>
-          <div class="range-labels"><span>USD 250</span><span>USD 5,000</span></div>
+          <input type="range" id="sliderAporte" min="250" max="10000" step="250" value="500" oninput="aporteToqued = true; updateJub()"/>
+          <div class="range-labels"><span>USD 250</span><span>USD 10,000</span></div>
+          <p style="font-size:0.72rem;color:var(--gold);margin-top:0.4rem;line-height:1.5;" id="aporteHelpline">El aporte arranca en el monto recomendado para cumplir su meta. Ajústelo según lo que pueda o quiera aportar.</p>
+        </div>
+
+        <div class="input-group">
+          <label>Capital inicial ya ahorrado (opcional)</label>
+          <div class="input-val">USD <span id="dispInicial">0</span></div>
+          <input type="range" id="sliderInicial" min="0" max="500000" step="10000" value="0" oninput="updateJub()"/>
+          <div class="range-labels"><span>USD 0</span><span>USD 500K</span></div>
+          <p style="font-size:0.72rem;color:var(--muted);margin-top:0.4rem;line-height:1.5;">Patrimonio ya destinado al retiro (inmuebles líquidos, fondos, AFP voluntaria). Crecerá compuesto al perfil elegido.</p>
+        </div>
+
+        <div class="input-group">
+          <label>Incremento anual del aporte (step-up)</label>
+          <div class="input-val"><span id="dispStepup">0</span>%</div>
+          <input type="range" id="sliderStepup" min="0" max="10" step="1" value="0" oninput="updateJub()"/>
+          <div class="range-labels"><span>0%</span><span>10%</span></div>
+          <p style="font-size:0.72rem;color:var(--muted);margin-top:0.4rem;line-height:1.5;">Si su sueldo sube año a año, subir el aporte 5% anual reduce el aporte inicial necesario en ~30%.</p>
+        </div>
+
+        <div class="input-group">
+          <label>Perfil de inversión del plan Estrategika</label>
+          <div class="dest-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.6rem;">
+            <button class="dest-btn" onclick="setPerfil('cons',this)">Conservador<br/><small style="opacity:0.7;">5%</small></button>
+            <button class="dest-btn active" onclick="setPerfil('mod',this)">Moderado<br/><small style="opacity:0.7;">8%</small></button>
+            <button class="dest-btn" onclick="setPerfil('agr',this)">Agresivo<br/><small style="opacity:0.7;">10%</small></button>
+          </div>
         </div>
 
         <div class="input-group">
@@ -145,6 +171,14 @@ canvas{width:100%!important;max-height:200px;}
           <div class="input-val"><span id="dispVida">90</span> años <span style="font-size:0.85rem;color:var(--muted);">→ <span id="dispVidaRetiro">25</span> años de retiro</span></div>
           <input type="range" id="sliderVida" min="75" max="100" step="1" value="90" oninput="updateJub()"/>
           <div class="range-labels"><span>75 años</span><span>100 años</span></div>
+        </div>
+
+        <div class="input-group">
+          <label style="display:flex;align-items:center;gap:0.6rem;cursor:pointer;">
+            <input type="checkbox" id="chkReal" onchange="updateJub()" style="cursor:pointer;width:16px;height:16px;"/>
+            Mostrar valores ajustados por inflación (real)
+          </label>
+          <p style="font-size:0.72rem;color:var(--muted);margin-top:0.4rem;line-height:1.5;">USD 1M en 30 años no compra lo mismo que hoy. Esta opción ajusta todos los montos al poder adquisitivo de hoy (descontando 3% anual).</p>
         </div>
       </div>
 
@@ -268,16 +302,50 @@ function updateSlider(el) {
   el.style.setProperty('--pct',((val-min)/(max-min)*100)+'%');
 }
 
+const PERFILES_JUB = { cons: 0.05, mod: 0.08, agr: 0.10 };
+let currentPerfilJub = 'mod';
+let aporteToqued = false; // marca si el usuario movió el slider de aporte manualmente
+function setPerfil(p, btn) {
+  currentPerfilJub = p;
+  document.querySelectorAll('.dest-btn').forEach(b => {
+    if (b.textContent.match(/Conservador|Moderado|Agresivo/)) b.classList.remove('active');
+  });
+  btn.classList.add('active');
+  updateJub();
+}
+
+// FV con aporte step-up: cada año el aporte sube stepupPct
+function calcFVStepup(monthly, years, rate, initial, stepupPct) {
+  const r = rate / 12;
+  let fv = initial;
+  let aporte = monthly;
+  for (let y = 0; y < years; y++) {
+    for (let m = 0; m < 12; m++) fv = (fv + aporte) * (1 + r);
+    aporte *= (1 + stepupPct);
+  }
+  return fv;
+}
+
+function toReal(nominalFV, years, inflation) {
+  return nominalFV / Math.pow(1 + inflation, years);
+}
+
 function updateJub() {
   const edad   = parseInt(document.getElementById('sliderEdad').value);
   const retiro = parseInt(document.getElementById('sliderRetiro').value);
   const gasto  = parseInt(document.getElementById('sliderGasto').value);
   const aporte = parseInt(document.getElementById('sliderAporte').value);
+  const inicial = parseInt(document.getElementById('sliderInicial').value);
+  const stepup = parseInt(document.getElementById('sliderStepup').value) / 100;
+  const showReal = document.getElementById('chkReal').checked;
+  const rate = PERFILES_JUB[currentPerfilJub];
 
   updateSlider(document.getElementById('sliderEdad'));
   updateSlider(document.getElementById('sliderRetiro'));
   updateSlider(document.getElementById('sliderGasto'));
   updateSlider(document.getElementById('sliderAporte'));
+  updateSlider(document.getElementById('sliderInicial'));
+  updateSlider(document.getElementById('sliderStepup'));
 
   const vida   = parseInt(document.getElementById('sliderVida').value);
   const anios = Math.max(retiro - edad, 1);
@@ -291,6 +359,8 @@ function updateJub() {
   document.getElementById('dispRetiro').textContent = retiro;
   document.getElementById('dispGasto').textContent  = gasto.toLocaleString('en-US');
   document.getElementById('dispAporte').textContent = aporte.toLocaleString('en-US');
+  document.getElementById('dispInicial').textContent = inicial.toLocaleString('en-US');
+  document.getElementById('dispStepup').textContent = (stepup*100).toFixed(0);
 
   // Adjust desired spending for inflation at retirement
   const gastoFuturo = gasto * Math.pow(1 + inflacion, anios);
@@ -315,8 +385,41 @@ function updateJub() {
   const fondoAfp = calcFV(aporteAfp, anios, 0.05);
   const pensionAfp = fondoAfp / (vidaRetiro * 12);
 
-  // Estrategika plan
-  const fondoEstrategika = calcFV(aporte, anios, 0.08);
+  // Calcular el aporte mensual recomendado para cerrar la brecha exactamente
+  // Target estrategika = capital - fondoAfp (lo que falta cubrir con plan privado)
+  const targetEstrategika = Math.max(capital - fondoAfp, 0);
+  // Resto: lo que falta después del crecimiento del capital inicial
+  const fvInitialFut = inicial * Math.pow(1 + rate, anios);
+  const remainingTarget = Math.max(targetEstrategika - fvInitialFut, 0);
+  // Búsqueda iterativa para hallar el aporte mensual con step-up que llegue a remainingTarget
+  let aporteRecomendado = 0;
+  if (remainingTarget > 0) {
+    const r = rate / 12;
+    aporteRecomendado = remainingTarget / (anios * 12);
+    for (let iter = 0; iter < 40; iter++) {
+      let fv = 0, ap = aporteRecomendado;
+      for (let y = 0; y < anios; y++) {
+        for (let m = 0; m < 12; m++) fv = (fv + ap) * (1 + r);
+        ap *= (1 + stepup);
+      }
+      if (Math.abs(remainingTarget - fv) < 1) break;
+      aporteRecomendado *= (remainingTarget / fv);
+    }
+    aporteRecomendado = Math.round(aporteRecomendado / 50) * 50; // redondear a 50
+  }
+
+  // Si el usuario aún no movió el slider, fijar el slider al aporte recomendado
+  if (!aporteToqued) {
+    const sliderEl = document.getElementById('sliderAporte');
+    const recCapped = Math.min(Math.max(aporteRecomendado, parseInt(sliderEl.min)), parseInt(sliderEl.max));
+    sliderEl.value = recCapped;
+    document.getElementById('dispAporte').textContent = recCapped.toLocaleString('en-US');
+    updateSlider(sliderEl);
+  }
+  const aporteActual = parseInt(document.getElementById('sliderAporte').value);
+
+  // Estrategika plan (con capital inicial, perfil seleccionado y step-up)
+  const fondoEstrategika = calcFVStepup(aporteActual, anios, rate, inicial, stepup);
   const pensionEstrategika = fondoEstrategika / (vidaRetiro * 12);
 
   // Total
@@ -328,21 +431,39 @@ function updateJub() {
   document.getElementById('resRetiroSub').textContent = 
     'Hoy: USD ' + gasto.toLocaleString('en-US') + '/mes  →  Al retiro: USD ' + Math.round(gastoFuturo).toLocaleString('en-US') + '/mes (inflación 3% anual)';
 
-  document.getElementById('resCapital').textContent     = fmt(capital);
-  document.getElementById('resEstrategika').textContent = fmt(fondoEstrategika);
+  // Display values (ajustados por inflación si showReal)
+  const capitalD = showReal ? toReal(capital, anios, inflacion) : capital;
+  const fondoEstrategikaD = showReal ? toReal(fondoEstrategika, anios, inflacion) : fondoEstrategika;
+  const brechaD = showReal ? toReal(brecha, anios, inflacion) : brecha;
+  const pensionAfpD = showReal ? toReal(pensionAfp, anios, inflacion) : pensionAfp;
+  document.getElementById('resCapital').textContent     = fmt(capitalD) + (showReal ? ' (real)' : '');
+  document.getElementById('resEstrategika').textContent = fmt(fondoEstrategikaD);
   document.getElementById('resAnios').textContent       = anios + ' años';
-  document.getElementById('resBrecha').textContent      = brecha > 0 ? fmt(brecha) : '✓ Cubierto';
-  document.getElementById('resAfp').textContent         = fmt(pensionAfp) + '/mes';
+  document.getElementById('resBrecha').textContent      = brecha > 0 ? fmt(brechaD) : '✓ Cubierto';
+  document.getElementById('resAfp').textContent         = fmt(pensionAfpD) + '/mes';
 
-  // Gap box
+  // Gap box (tono positivo siempre)
   const gapBox = document.getElementById('gapBox');
   const gapText = document.getElementById('gapText');
   if(brecha === 0) {
     gapBox.className = 'gap-box positive';
-    gapText.innerHTML = `<strong style="color:#2C4A3E">✓ Plan suficiente.</strong> Con su aporte mensual de ${fmt(aporte)} más la AFP, cubre el capital necesario para jubilarse con USD ${gasto.toLocaleString()}/mes.`;
+    gapText.innerHTML = `<strong style="color:#2C4A3E">✓ Plan completo.</strong> Con su aporte mensual de ${fmt(aporteActual)} más su AFP, cubre el capital necesario para jubilarse manteniendo USD ${gasto.toLocaleString()}/mes de estilo de vida.`;
   } else {
     gapBox.className = 'gap-box negative';
-    gapText.innerHTML = `<strong style="color:#C04040">Brecha de ${fmt(brecha)}.</strong> Su AFP sola cubre solo ${Math.round(pensionAfp/gasto*100)}% de su gasto deseado. El plan Estrategika reduce significativamente esa brecha.`;
+    const aporteSugerido = aporteRecomendado;
+    gapText.innerHTML = `<strong style="color:var(--gold);">Para cerrar la meta:</strong> con un aporte mensual de <strong>${fmt(aporteSugerido)}</strong> (más su AFP) llega al capital necesario para mantener su estilo de vida. Lo acompañamos para diseñar un plan que se ajuste a sus posibilidades.`;
+  }
+
+  // Actualizar helpline del aporte
+  const helpline = document.getElementById('aporteHelpline');
+  if (helpline && aporteRecomendado > 0) {
+    if (aporteActual >= aporteRecomendado) {
+      helpline.innerHTML = `✓ Aporte suficiente para alcanzar su meta. Recomendado: <strong>${fmt(aporteRecomendado)}/mes</strong>.`;
+      helpline.style.color = '#2C4A3E';
+    } else {
+      helpline.innerHTML = `Aporte recomendado para cumplir su meta: <strong>${fmt(aporteRecomendado)}/mes</strong>. Ajuste el slider según lo que pueda aportar.`;
+      helpline.style.color = 'var(--gold)';
+    }
   }
 
   // Inflation table
@@ -368,11 +489,11 @@ function updateJub() {
   }
   inflTableBody.innerHTML = tableHTML;
 
-  // Chart
+  // Chart (con step-up + capital inicial)
   const labels = [], dataEst = [], dataAfp = [], dataMeta = [];
   for(let y=1; y<=anios; y++) {
     labels.push('Año '+y);
-    dataEst.push(Math.round(calcFV(aporte, y, 0.08)));
+    dataEst.push(Math.round(calcFVStepup(aporte, y, rate, inicial, stepup)));
     dataAfp.push(Math.round(calcFV(aporteAfp, y, 0.05)));
     dataMeta.push(Math.round(capital));
   }

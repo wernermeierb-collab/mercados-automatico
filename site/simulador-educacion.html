@@ -136,16 +136,16 @@ canvas{width:100%!important;max-height:200px;}
 
 <div class="hero">
   <span class="hero-tag">Estrategika Savings · Educación</span>
-  <h1>El mejor regalo para su hijo es <em>empezar hoy</em></h1>
-  <p>Calcule cuánto necesita ahorrar mensualmente para financiar la educación universitaria de su hijo — en la universidad que elija, en cualquier país.</p>
+  <h1>Lo acompañamos a darle a su hijo <em>la mejor educación</em></h1>
+  <p>Lo ayudamos a calcular cuánto necesita ahorrar mensualmente para financiar la educación universitaria de su hijo — en la universidad que elija, en cualquier país.</p>
 </div>
 
 <div class="wrapper">
   <div class="calc-card fade-in">
     <div class="calc-grid">
       <div class="input-section">
-        <h2>Configure el plan</h2>
-        <p>Ingrese la edad de su hijo y el destino universitario. El simulador calcula el aporte mensual necesario hoy para cubrir el costo total.</p>
+        <h2>Configuremos el plan juntos</h2>
+        <p>Ingrese la edad de su hijo y el destino universitario. Le mostramos el aporte mensual que necesita para alcanzar la meta, y luego usted ajusta según lo que puede aportar.</p>
 
         <div class="input-group">
           <label>Edad actual del hijo</label>
@@ -167,10 +167,43 @@ canvas{width:100%!important;max-height:200px;}
         </div>
 
         <div class="input-group">
+          <label>Capital inicial ya ahorrado (opcional)</label>
+          <div class="input-val">USD <span id="dispInicial">0</span></div>
+          <input type="range" id="sliderInicial" min="0" max="200000" step="5000" value="0" oninput="updateEdu()"/>
+          <div class="range-labels"><span>USD 0</span><span>USD 200K</span></div>
+          <p style="font-size:0.72rem;color:var(--muted);margin-top:0.4rem;line-height:1.5;">Si ya tiene algún ahorro destinado a este objetivo, ingréselo aquí — crecerá compuesto junto con sus aportes mensuales.</p>
+        </div>
+
+        <div class="input-group">
+          <label>Perfil de inversión del plan</label>
+          <div class="dest-grid" style="grid-template-columns:repeat(3,1fr);">
+            <button class="dest-btn" onclick="setPerfil('cons',this)">Conservador<br/><small style="opacity:0.7;">5%</small></button>
+            <button class="dest-btn active" onclick="setPerfil('mod',this)">Moderado<br/><small style="opacity:0.7;">8%</small></button>
+            <button class="dest-btn" onclick="setPerfil('agr',this)">Agresivo<br/><small style="opacity:0.7;">10%</small></button>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Incremento anual del aporte (opcional)</label>
+          <div class="input-val"><span id="dispStepup">0</span>%</div>
+          <input type="range" id="sliderStepup" min="0" max="10" step="1" value="0" oninput="updateEdu()"/>
+          <div class="range-labels"><span>0%</span><span>10%</span></div>
+          <p style="font-size:0.72rem;color:var(--muted);margin-top:0.4rem;line-height:1.5;">Si sus ingresos crecen año a año, puede aumentar el aporte. Un step-up del 5% anual puede reducir el aporte inicial necesario hasta un 30%.</p>
+        </div>
+
+        <div class="input-group">
           <label>Duración de la carrera</label>
           <div class="input-val"><span id="dispCarrera">5</span> años</div>
           <input type="range" id="sliderCarrera" min="3" max="6" step="1" value="5" oninput="updateEdu()"/>
           <div class="range-labels"><span>3 años</span><span>6 años</span></div>
+        </div>
+
+        <div class="input-group">
+          <label style="display:flex;align-items:center;gap:0.6rem;cursor:pointer;">
+            <input type="checkbox" id="chkReal" onchange="updateEdu()" style="cursor:pointer;width:16px;height:16px;"/>
+            Mostrar valores ajustados por inflación (real, no nominal)
+          </label>
+          <p style="font-size:0.72rem;color:var(--muted);margin-top:0.4rem;line-height:1.5;">USD 500K en 17 años no compra lo mismo que hoy. Esta opción ajusta todos los montos al poder adquisitivo de hoy (descontando 3% anual).</p>
         </div>
       </div>
 
@@ -395,6 +428,56 @@ function fmt(n) {
   return 'USD ' + Math.round(n).toLocaleString('en-US');
 }
 
+const PERFILES = { cons: 0.05, mod: 0.08, agr: 0.10 };
+let currentPerfil = 'mod';
+function setPerfil(p, btn) {
+  currentPerfil = p;
+  document.querySelectorAll('.dest-btn').forEach(b => {
+    if (b.textContent.match(/Conservador|Moderado|Agresivo/)) b.classList.remove('active');
+  });
+  btn.classList.add('active');
+  updateEdu();
+}
+
+function calcMonthlyWithInitial(target, years, rate, initial) {
+  // Valor futuro del capital inicial
+  const fvInitial = initial * Math.pow(1 + rate, years);
+  // Lo que falta cubrir con aportes mensuales
+  const remaining = Math.max(target - fvInitial, 0);
+  if (remaining === 0) return 0;
+  return calcMonthly(remaining, years, rate);
+}
+
+// Cálculo con step-up: aporte mensual sube cada año por stepupPct
+// Usa búsqueda iterativa para encontrar el aporte inicial que llega a la meta
+function calcMonthlyWithStepup(target, years, rate, initial, stepupPct) {
+  if (stepupPct === 0) return calcMonthlyWithInitial(target, years, rate, initial);
+  const fvInitial = initial * Math.pow(1 + rate, years);
+  const remaining = Math.max(target - fvInitial, 0);
+  if (remaining === 0) return 0;
+  // Resolver: encontrar A0 tal que sum de aportes con stepup llegue a 'remaining'
+  // Aproximación: itero ajustando A0
+  const r = rate / 12;
+  let A0 = remaining / (years * 12); // estimación inicial
+  for (let iter = 0; iter < 50; iter++) {
+    let fv = 0;
+    let aporte = A0;
+    for (let y = 0; y < years; y++) {
+      for (let m = 0; m < 12; m++) fv = (fv + aporte) * (1 + r);
+      aporte *= (1 + stepupPct);
+    }
+    const diff = remaining - fv;
+    if (Math.abs(diff) < 1) break;
+    A0 *= (remaining / fv);
+  }
+  return A0;
+}
+
+// Convierte un valor nominal futuro a valor real (poder adquisitivo de hoy)
+function toReal(nominalFV, years, inflation) {
+  return nominalFV / Math.pow(1 + inflation, years);
+}
+
 function calcMonthly(target, years, rate) {
   if(years <= 0) return target;
   const r = rate / 12;
@@ -416,9 +499,17 @@ function updateSlider(el) {
 function updateEdu() {
   const edad   = parseInt(document.getElementById('sliderEdad').value);
   const carrera= parseInt(document.getElementById('sliderCarrera').value);
+  const inicial = parseInt(document.getElementById('sliderInicial').value);
+  const stepup = parseInt(document.getElementById('sliderStepup').value) / 100;
+  const showReal = document.getElementById('chkReal').checked;
   const dest   = COSTOS[currentDest];
   const anios  = Math.max(18 - edad, 1);
-  const rate   = 0.08;
+  const rate   = PERFILES[currentPerfil];
+  const INFLATION = 0.03;
+  document.getElementById('dispInicial').textContent = inicial.toLocaleString('en-US');
+  document.getElementById('dispStepup').textContent = (stepup*100).toFixed(0);
+  updateSlider(document.getElementById('sliderInicial'));
+  updateSlider(document.getElementById('sliderStepup'));
 
   updateSlider(document.getElementById('sliderEdad'));
   updateSlider(document.getElementById('sliderCarrera'));
@@ -428,31 +519,37 @@ function updateEdu() {
 
   // Future cost with education inflation
   const costoFuturo = dest.base * (carrera/5) * Math.pow(1+dest.inf, anios);
-  const mensual     = calcMonthly(costoFuturo, anios, rate);
+  const mensual     = calcMonthlyWithStepup(costoFuturo, anios, rate, inicial, stepup);
+  // Si showReal está activo, mostrar valores en USD de hoy (descontados por inflación)
+  const costoDisplay = showReal ? toReal(costoFuturo, anios, INFLATION) : costoFuturo;
+  const mensualDisplay = mensual; // El aporte mensual hoy ya está en USD de hoy
 
   document.getElementById('resAporte').textContent  = fmt(mensual) + '/mes';
-  document.getElementById('resCosto').textContent   = fmt(costoFuturo);
+  document.getElementById('resCosto').textContent   = fmt(costoDisplay) + (showReal ? ' (real)' : '');
   document.getElementById('resAnios').textContent   = anios + ' años';
   document.getElementById('resDest').textContent    = dest.label;
+  document.getElementById('resSub').textContent     = showReal ? 'Valor real (poder adquisitivo de hoy)' : 'Para cubrir matrícula, vida y gastos';
 
   // Insight
   const insight = document.getElementById('insightText');
   if(edad <= 3) {
-    insight.innerHTML = `<strong>Momento ideal.</strong> Con ${anios} años por delante, el interés compuesto trabaja a su favor. El aporte mensual es el más bajo posible.`;
+    insight.innerHTML = `<strong>Momento ideal.</strong> Con ${anios} años por delante, el interés compuesto trabaja a su favor. Lo acompañamos para que el aporte mensual sea el más cómodo posible.`;
   } else if(edad <= 8) {
-    insight.innerHTML = `<strong>Buen momento para empezar.</strong> Todavía tiene ${anios} años. Cada año que espera aumenta el aporte mensual necesario en ~15%.`;
+    insight.innerHTML = `<strong>Excelente momento para empezar.</strong> Todavía tiene ${anios} años para hacer crecer el plan. Le ayudamos a aprovecharlos al máximo.`;
   } else if(edad <= 13) {
-    insight.innerHTML = `<strong>Es momento de actuar.</strong> Con ${anios} años disponibles, el margen se reduce. El costo de esperar un año más es significativo.`;
+    insight.innerHTML = `<strong>Aún hay tiempo para construir.</strong> Con ${anios} años disponibles, podemos diseñar un plan que llegue a la meta. Le mostramos las opciones.`;
   } else {
-    insight.innerHTML = `<strong>Urgente.</strong> Con solo ${anios} años, el aporte mensual es alto. Considere complementar con un capital inicial para reducirlo.`;
+    insight.innerHTML = `<strong>Lo ayudamos a llegar.</strong> Con ${anios} años, el plan requiere foco. Un capital inicial o aumento gradual del aporte facilita alcanzar la meta — le mostramos cómo.`;
   }
 
   // Chart
   const labels = [], data = [];
   for(let y = 1; y <= anios; y++) {
     labels.push('Año ' + y);
-    let fv = 0, r = rate/12;
-    for(let m = 1; m <= y*12; m++) fv = (fv + mensual) * (1+r);
+    let fvMonthly = 0, r = rate/12;
+    for(let m = 1; m <= y*12; m++) fvMonthly = (fvMonthly + mensual) * (1+r);
+    const fvInitial = inicial * Math.pow(1+rate, y);
+    const fv = fvMonthly + fvInitial;
     data.push(Math.round(fv));
   }
   // Add target line
@@ -479,7 +576,7 @@ function updateEdu() {
     }
   });
 
-  // Urgency
+  // Urgency: comparativa de cuándo empezar (usa todos los inputs nuevos)
   const grid = document.getElementById('urgencyGrid');
   const scenarios = [
     { label:'Empieza hoy', extra:0, cls:'now' },
@@ -489,7 +586,7 @@ function updateEdu() {
   grid.innerHTML = scenarios.map(s => {
     const a2 = Math.max(anios - s.extra, 1);
     const c2 = dest.base * (carrera/5) * Math.pow(1+dest.inf, anios);
-    const m2 = calcMonthly(c2, a2, rate);
+    const m2 = calcMonthlyWithStepup(c2, a2, rate, inicial, stepup);
     const diff = m2 - mensual;
     return `<div class="urg-card ${s.cls}">
       <span class="urg-label">${s.label}</span>
