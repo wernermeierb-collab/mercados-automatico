@@ -331,6 +331,7 @@
       <div class="nav-dropdown-menu">
         <a href="#nosotros">Quiénes somos</a>
         <a href="como-trabajamos.html">Cómo trabajamos</a>
+        <a href="#equipo">Carreras</a>
       </div>
     </li>
     <li class="nav-dropdown">
@@ -675,6 +676,86 @@
   </div>
 </section>
 
+<style>
+  #equipo { background:var(--white); }
+  #equipo .equipo-cols { display:grid; grid-template-columns:1fr 1fr; gap:4rem; margin-top:1rem; }
+  #equipo .equipo-colhead { font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:500; color:var(--ink); margin-bottom:1.2rem; padding-bottom:0.6rem; border-bottom:1px solid var(--border); }
+  #equipo .equipo-perfil { max-width:760px; margin:3.5rem auto 0; text-align:center; padding:2.2rem; border:1px solid var(--gold-light); background:var(--warm); }
+  #equipo .equipo-perfil p { font-family:'Cormorant Garamond',serif; font-size:1.35rem; font-style:italic; color:var(--ink); line-height:1.5; margin-top:0.5rem; }
+  #equipo .form-q { font-size:0.74rem !important; color:var(--ink) !important; font-weight:600; text-transform:none !important; letter-spacing:0 !important; line-height:1.4; }
+  @media (max-width:900px){ #equipo .equipo-cols { grid-template-columns:1fr; gap:2.5rem; } }
+</style>
+<section id="equipo">
+  <div class="fade-in" style="text-align:center;max-width:680px;margin:0 auto 2.5rem;">
+    <span class="section-tag">Carreras</span>
+    <h2 class="section-title" style="margin:0 auto;">¿Quieres formar parte de nuestro equipo?</h2>
+    <p class="section-subtitle" style="margin:1rem auto 1.8rem;">Buscamos profesionales con mentalidad emprendedora, ética impecable y vocación de servicio para acompañar a nuestros clientes en la construcción y protección de su patrimonio.</p>
+    <a href="#postular" class="btn-primary">Postular ahora →</a>
+  </div>
+  <div class="equipo-cols fade-in">
+    <div>
+      <h3 class="equipo-colhead">Lo que valoramos</h3>
+      <div class="values-list">
+        <div class="value-item"><div class="value-dot"></div><p>Mentalidad empresarial y orientación a resultados.</p></div>
+        <div class="value-item"><div class="value-dot"></div><p>Excelentes habilidades de comunicación.</p></div>
+        <div class="value-item"><div class="value-dot"></div><p>Compromiso con la ética profesional.</p></div>
+        <div class="value-item"><div class="value-dot"></div><p>Deseo de crecimiento personal y financiero.</p></div>
+        <div class="value-item"><div class="value-dot"></div><p>Capacidad para construir relaciones de largo plazo.</p></div>
+      </div>
+    </div>
+    <div>
+      <h3 class="equipo-colhead">Lo que ofrecemos</h3>
+      <div class="values-list">
+        <div class="value-item"><div class="value-dot"></div><p>Modelo de ingresos basado en desempeño.</p></div>
+        <div class="value-item"><div class="value-dot"></div><p>Capacitación continua.</p></div>
+        <div class="value-item"><div class="value-dot"></div><p>Acceso a soluciones internacionales de Wealth, Health &amp; Life.</p></div>
+        <div class="value-item"><div class="value-dot"></div><p>Desarrollo profesional dentro de una firma en crecimiento.</p></div>
+        <div class="value-item"><div class="value-dot"></div><p>Flexibilidad y autonomía.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="equipo-perfil fade-in">
+    <span class="section-tag" style="color:var(--gold)">Perfil ideal</span>
+    <p>No buscamos empleados tradicionales. Buscamos profesionales que quieran ganar de acuerdo a su producción, sin límites.</p>
+  </div>
+  <div id="postular" class="contact-grid fade-in" style="margin-top:4rem;">
+    <div class="contact-info">
+      <h3>Postula a<br>nuestro equipo.</h3>
+      <p>Tómate tu tiempo con las tres preguntas finales: nos dicen más de ti que un CV. Si tu perfil encaja, te contactamos para conversar.</p>
+      <div class="contact-detail"><div class="detail-icon">✉</div><div><span class="detail-label">Email</span><span class="detail-value">talento@grupoestrategika.com</span></div></div>
+      <div class="contact-detail"><div class="detail-icon">✓</div><div><span class="detail-label">Modalidad</span><span class="detail-value">Carrera por resultados, no salario fijo</span></div></div>
+      <div class="contact-detail"><div class="detail-icon">✓</div><div><span class="detail-label">Te damos</span><span class="detail-value">Producto, marca, capacitación y autonomía</span></div></div>
+      <div class="contact-detail"><div class="detail-icon">✓</div><div><span class="detail-label">Respuesta</span><span class="detail-value">Revisamos cada postulación personalmente</span></div></div>
+    </div>
+    <form class="contact-form" onsubmit="handleSubmit(event)" action="https://formspree.io/f/xlgvanae" method="POST">
+      <input type="hidden" name="_subject" value="Nueva postulación — Equipo Estrategika"/>
+      <input type="hidden" name="tipo" value="Postulación al equipo"/>
+      <div class="form-row">
+        <div class="form-group"><label>Nombre completo</label><input type="text" name="nombre" placeholder="Juan Pérez" required/></div>
+        <div class="form-group"><label>Correo electrónico</label><input type="email" name="email" placeholder="juan@email.com" required/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Teléfono</label><input type="tel" name="telefono" placeholder="+51 9XX XXX XXX" required/></div>
+        <div class="form-group"><label>Ciudad</label><input type="text" name="ciudad" placeholder="Lima, Perú" required/></div>
+      </div>
+      <div class="form-group"><label>LinkedIn (opcional)</label><input type="url" name="linkedin" placeholder="https://linkedin.com/in/..."/></div>
+      <div class="form-group"><label class="form-q">1 · ¿Por qué te interesa formar parte de Grupo Estrategika?</label><textarea name="pregunta_1" required></textarea></div>
+      <div class="form-group"><label class="form-q">2 · Describe una situación en la que hayas alcanzado una meta difícil por iniciativa propia.</label><textarea name="pregunta_2" required></textarea></div>
+      <div class="form-group"><label class="form-q">3 · ¿Qué significa para ti actuar con ética cuando los intereses económicos están en juego?</label><textarea name="pregunta_3" required></textarea></div>
+      <div class="form-group">
+        <label>¿Qué tipo de posición buscas?</label>
+        <select name="tipo_posicion" required>
+          <option value="">Seleccione...</option>
+          <option>Una carrera basada en resultados y crecimiento profesional</option>
+          <option>Una posición con salario fijo</option>
+        </select>
+      </div>
+      <div class="form-success">✓ ¡Postulación recibida! Revisaremos tus respuestas y te contactaremos si tu perfil encaja.</div>
+      <button type="submit" class="form-submit">Postular ahora →</button>
+    </form>
+  </div>
+</section>
+
 <section id="contacto">
   <div class="fade-in" style="text-align:center;max-width:600px;margin:0 auto 0.5rem;">
     <span class="section-tag">Contacto</span>
@@ -685,7 +766,7 @@
     <div class="contact-info">
       <h3>Presencia en toda<br>América Latina.</h3>
       <p>Puede contactarnos directamente o dejarnos sus datos y le respondemos en menos de 24 horas hábiles.</p>
-      <div class="contact-detail"><div class="detail-icon">✉</div><div><span class="detail-label">Email</span><span class="detail-value">werner@grupoestrategika.com</span></div></div>
+      <div class="contact-detail"><div class="detail-icon">✉</div><div><span class="detail-label">Email</span><span class="detail-value">info@grupoestrategika.com</span></div></div>
       <div class="contact-detail"><div class="detail-icon">📍</div><div><span class="detail-label">Cobertura</span><span class="detail-value">América Latina</span></div></div>
       <div class="contact-detail"><div class="detail-icon">🌐</div><div><span class="detail-label">Plataformas</span><span class="detail-value">Guernsey · Londres · EE.UU.</span></div></div>
     </div>
@@ -787,13 +868,14 @@ function handleSubmit(e) {
   const btn = form.querySelector('.form-submit');
   btn.textContent = 'Enviando...';
   btn.disabled = true;
-  fetch('https://formspree.io/f/xlgvanae', {
+  fetch(form.action, {
     method: 'POST',
     body: new FormData(form),
     headers: { 'Accept': 'application/json' }
   }).then(r => {
     if (r.ok) {
-      document.getElementById('formSuccess').style.display = 'block';
+      const ok = form.querySelector('.form-success');
+      if (ok) ok.style.display = 'block';
       btn.style.display = 'none';
       form.reset();
     } else {
